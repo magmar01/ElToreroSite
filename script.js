@@ -9,12 +9,10 @@ let num = 1;
 
 ham.addEventListener('click', function() {
 	ham.classList.add('ham-open');
-	menu.style.marginLeft = '50px';
 })
 
 menuClose.addEventListener('click', function() {
 	ham.classList.remove('ham-open');
-	menu.style.marginLeft = '-700px';
 })
 
 leftArrow.addEventListener('click', function() {
