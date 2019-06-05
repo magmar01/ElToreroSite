@@ -1314,15 +1314,14 @@ a:hover {
 	}
 
 	.menu {
-    	top: 41px;
+    	top: 36px;
     	width: 93%;
 	}
 
 	nav i {
 		right: -25px;
-		color: #56ff47;
-		right: 10px;
-		top: 5px;
+		right: 0;
+		top: -33px;
 	}
 }
 
@@ -2179,16 +2178,15 @@ a:hover {
 
 	.menu-section h1 {
 	    font-size: 6rem;
-	}
-
-	.menu-section h1 {
-	    left: 32px;
+	    left: 50%;
+	    margin-left: -133.5px;
 	    top: 10px;
 	}
 
 	.menu-line {
-	    left: 33px;
-	    width: 274px;
+	    left: 50%;
+	    margin-left: -133px;
+	    width: 266px;
 	    top: 123px;
 	}
 }

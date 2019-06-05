@@ -4,8 +4,14 @@ const menuClose = document.querySelector('#menu-close');
 const leftArrow = document.querySelector('#left');
 const rightArrow = document.querySelector('#right');
 const img = document.querySelector('.image-slider');
+const menuLinks = document.querySelectorAll('.menu a');
 let num = 1;
 
+menuLinks.forEach((node) => {
+	node.addEventListener('click', function() {
+		ham.classList.remove('ham-open');
+	})
+})
 
 ham.addEventListener('click', function() {
 	ham.classList.add('ham-open');
@@ -39,82 +45,3 @@ rightArrow.addEventListener('click', function() {
 	}	
 })
 
-// window.sr = ScrollReveal();
-
-// sr.reveal('.logo-wrap', {
-// 	duration: 2000
-// });
-
-// sr.reveal('.w1', {
-// 	duration: 2000,
-// 	origin: 'bottom'
-// });
-
-// sr.reveal('.w2', {
-// 	duration: 3000,
-// 	origin: 'bottom'
-// });
-
-// sr.reveal('.w3', {
-// 	duration: 4000,
-// 	origin: 'bottom'
-// });
-
-// sr.reveal('.hours-line-left', {
-// 	duration: 1000,
-// 	origin: 'left',
-// 	distance: '200px'
-// });
-
-// sr.reveal('.hours-line-right', {
-// 	duration: 1000,
-// 	origin: 'right',
-// 	distance: '200px'
-// });
-
-// sr.reveal('.contact-line', {
-// 	duration: 1000,
-// 	origin: 'bottom',
-// 	distance: '250px'
-// });
-
-// sr.reveal('.burrito', {
-// 	duration: 1000,
-// 	origin: 'right',
-// 	distance: '250px'
-// });
-
-// sr.reveal('.taco', {
-// 	duration: 1000,
-// 	origin: 'right',
-// 	distance: '250px'
-// });
-
-// sr.reveal('.guac', {
-// 	duration: 1000,
-// 	origin: 'right',
-// 	distance: '250px'
-// });
-
-// sr.reveal('.nachos', {
-// 	duration: 1000,
-// 	origin: 'bottom',
-// 	distance: '250px'
-// });
-
-// sr.reveal('.hot', {
-// 	duration: 1000,
-// 	origin: 'left',
-// 	distance: '250px'
-// });
-
-// sr.reveal('.back-to-top', {
-// 	duration: 1000,
-// 	origin: 'bottom',
-// });
-
-// sr.reveal('.btp-arrow', {
-// 	duration: 1500,
-// 	origin: 'top',
-// 	distance: '250px'
-// });
