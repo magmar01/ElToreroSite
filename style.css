@@ -556,6 +556,7 @@ a:hover {
 	margin-top: -155px;
 	clip-path: polygon(0% 5%, 4.8% 0%, 95% 0%, 100% 4.8%, 100% 100%, 0% 100%);
 	position: relative;
+	padding-bottom: 100px;
 }
 
 .hours-section h1 {
@@ -592,7 +593,7 @@ a:hover {
 .hours-wrap {
 	display: flex;
 	justify-content: center;
-	padding-bottom: 100px;
+	position: relative;
 }
 
 .hours {
@@ -630,8 +631,11 @@ a:hover {
 
 .design-wrap-left-side {
 	position: absolute;
-	left: 0;
-	top: 29.8%;
+    left: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    height: 472px;
 }
 
 .hex-left {
@@ -686,19 +690,28 @@ a:hover {
 .design-wrap-right-side {
 	transform: rotate(180deg);
 	position: absolute;
-	right: 0;
-	bottom: 19.4%;
+    right: 0;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    height: 472px;
 }
 
 .hours-wrap .design-wrap-left {
 	transform: rotate(180deg);
-	position: relative;
-	top: -80px;
+    position: relative;
+    top: 0;
+    height: 472px;
+    bottom: 0;
+    margin: auto 0
 }
 
 .hours-wrap .design-wrap-right {
-	position: relative;
-	top: 80px;
+    position: relative;
+    top: 0;
+    height: 472px;
+    bottom: 0;
+    margin: auto 0
 }
 
 .design-wrap-left .arrow-top, 
@@ -2262,21 +2275,21 @@ a:hover {
 	    left: 50px;
 	}
 
-	.design-wrap-left-side {;
-    	top: 30.25%;
-	}
 
 	.design-wrap-right-side {
-    	bottom: 22.8%;
+    	height: 400px
+	}
+
+	.design-wrap-left-side {
+    	height: 400px
 	}
 
 	.hours-wrap .design-wrap-left {
-	    top: -95px;
+	    height: 400px
 	}
 
 	.hours-wrap .design-wrap-right {
-	    position: relative;
-	    top: 92px;
+		   height: 400px
 	}
 
 	.hex-left, .hex-right {
@@ -2322,22 +2335,6 @@ a:hover {
 	.hours div div {
     	font-size: 2.3rem;
 	}
-
-	.hours-wrap .design-wrap-right {
-    	top: 72px;
-	}
-
-	.hours-wrap .design-wrap-left {
-    	top: -75px;
-	}
-
-	.design-wrap-left-side {
-    	top: 29.25%;
-	}
-
-	.design-wrap-right-side {
-    	bottom: 21.5%;
-	}
 }
 
 @media screen and (max-width: 1350px) {
@@ -2361,22 +2358,6 @@ a:hover {
 
 	.hours div div {
    		font-size: 2rem;
-	}
-
-	.hours-wrap .design-wrap-left {
-	    top: -58px;
-	}
-
-	.hours-wrap .design-wrap-right {
-	    top: 52px;
-	}
-
-	.design-wrap-left-side {
-    	top: 26.65%;
-	}
-
-	.design-wrap-right-side {
-    	bottom: 20.5%;
 	}
 }
 
@@ -2408,11 +2389,11 @@ a:hover {
 	}
 
 	.hours-wrap .design-wrap-left {
-	    top: -81px;
+	    height: 330px
 	}
 
 	.hours-wrap .design-wrap-right {
-	    top: 77px;
+	    height: 330px
 	}
 
 	.hex-left, .hex-right {
@@ -2441,11 +2422,11 @@ a:hover {
 	}
 
 	.design-wrap-left-side {
-	    top: 29.5%;
+	    height: 330px
 	}
 
 	.design-wrap-right-side {
-	    bottom: 25.01%;
+	    height: 330px
 	}
 }
 
@@ -2495,14 +2476,6 @@ a:hover {
 	    font-size: 1.6rem;
 	}
 
-	.hours-wrap .design-wrap-left {
-	    top: -67px;
-	}
-
-	.hours-wrap .design-wrap-right {
-	    top: 66px;
-	}
-
 	.btp-arrow {
 	    font-size: 2.5rem;
 	    margin-left: -20px;
@@ -2528,11 +2501,11 @@ a:hover {
 	}
 
 	.hours-wrap .design-wrap-left {
-	    top: -104px;
+	    height: 250px;	
 	}
 
 	.hours-wrap .design-wrap-right {
-	    top: 104px;
+	    height: 250px;
 	}
 
 	.hours-line-left, .hours-line-right {
