@@ -922,22 +922,7 @@
 						<div class="arrow-right"></div>
 					</div>
 
-					<div id="hex-left" style="-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);
-						width: 165px;
-						height: 165px;
-						background-color: limegreen;
-						top: 152px;
-						left: -16.5px;
-						position: absolute;"><div id="hex-inner" style="-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);
-												width: 135px;
-												height: 135px;
-												background-color: #17a832;
-												position: absolute;
-												left: 0;
-												right: 0;
-												bottom: 0;
-												top: 0;
-												margin: auto; "></div></div>
+					<div class="hex-left"><div class="hex-inner"></div></div>
 
 					<div class="bottom-middle">
 						<div class="hex-arrow-left"></div>
@@ -987,22 +972,7 @@
 						<div class="arrow-right"></div>
 					</div>
 
-					<div id="hex-right" style="-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);
-						width: 165px;
-						height: 165px;
-						background-color: limegreen;
-						top: 152px;
-						left: -16.5px;
-						position: absolute;"><div id="hex-inner" style="-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);
-												width: 135px;
-												height: 135px;
-												background-color: #17a832;
-												position: absolute;
-												left: 0;
-												right: 0;
-												bottom: 0;
-												top: 0;
-												margin: auto; "></div></div>
+					<div class="hex-right"><div class="hex-inner"></div></div>
 
 					<div class="bottom-middle">
 						<div class="hex-arrow-right"></div>
@@ -1108,31 +1078,13 @@
 				</div>
 			</div>
 
-			<div id="hex" style="-webkit-clip-path: polygon(25% 60%, 75% 60%, 100% 100%, 0% 100%);
-				background-color: #17a832;
-				transform: rotate(180deg);
-				width: 300px;
-				height: 150px;
-				margin: 0 auto;
-				position: absolute;
-				top: 0;
-				right: 0;
-				left: 0;
-				bottom: 0;
-				z-index: 2;">
-				<div class="back-to-top">Back to Top</div>
+			<div class="hex">
+				<svg viewbox="0, 50, 100, 100">
+					<polygon points="25 80, 75 80, 100 100, 0 100" style="fill:#17a832;"/>
+				</svg>
 			</div>
-			<div class="rhombus" style="-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-				background-color: #17a832;
-				width: 80px;
-				height: 80px;
-				position: absolute;
-				margin: 0 auto;
-				top: 60px;
-				right: 0;
-				left: 0;
-				bottom: 0;
-				z-index: 2;"></div>
+			<div class="back-to-top">Back to Top</div>
+			<div class="rhombus"></div>
 
 			<div class="contact" id="contact">
 				<h1>Contact</h1>
