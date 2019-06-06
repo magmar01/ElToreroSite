@@ -791,6 +791,11 @@ a:hover {
 	z-index: 2;
 }
 
+.svg {
+	position: relative;
+    top: -150px;
+}
+
 .rhombus {
 	/*-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
 	background-color: #17a832;*/
@@ -2395,7 +2400,9 @@ a:hover {
 	.hex-left, .hex-right {
 	    width: 107px;
 	    height: 107px;
-	    background-color: limegreen;
+
+
+
 	    top: 112px;
 	    left: -10px;
 	    position: absolute;
