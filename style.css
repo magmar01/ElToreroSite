@@ -634,7 +634,7 @@ a:hover {
 	top: 29.8%;
 }
 
-.hex-left, .hex-right {
+#hex-left, #hex-right {
 	-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);
 	width: 165px;
 	height: 165px;
@@ -644,12 +644,12 @@ a:hover {
 	position: absolute;
 }
 
-.hex-right {
+#hex-right {
 	top: 152px;
 	right: -16.5px;
 }
 
-.hex-inner {
+#hex-inner {
 	-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);
 	width: 135px;
 	height: 135px;
@@ -753,7 +753,7 @@ a:hover {
 	font-size: 7rem;
 }
 
-.hex {
+#hex {
 	-webkit-clip-path: polygon(25% 60%, 75% 60%, 100% 100%, 0% 100%);
 	background-color: #17a832;
 	transform: rotate(180deg);
