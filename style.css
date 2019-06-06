@@ -634,11 +634,21 @@ a:hover {
 	top: 29.8%;
 }
 
-.hex-left, .hex-right {
-	-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);
+.hex-left {
+	/*-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);*/
 	width: 165px;
 	height: 165px;
-	background-color: limegreen;
+	/*background-color: limegreen;*/
+	top: 152px;
+	left: -16.5px;
+	position: absolute;
+}
+
+.hex-right {
+	/*-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);*/
+	width: 165px;
+	height: 165px;
+	/*background-color: limegreen;*/
 	top: 152px;
 	left: -16.5px;
 	position: absolute;
@@ -650,10 +660,10 @@ a:hover {
 }
 
 .hex-inner {
-	-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);
+	/*-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);*/
 	width: 135px;
 	height: 135px;
-	background-color: #17a832;
+	/*background-color: #17a832;*/
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -769,8 +779,8 @@ a:hover {
 }
 
 .rhombus {
-	-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-	background-color: #17a832;
+	/*-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+	background-color: #17a832;*/
 	width: 80px;
 	height: 80px;
 	position: absolute;
@@ -2699,12 +2709,6 @@ a:hover {
 		right: 47px;
 	}
 
-	.back-to-top {
-		left: -55px;
-		font-size: 2.2rem;
-		top: 105px;
-	}
-
 	.links i {
 		font-size: 2.3rem;
 		margin-right: 7px;
@@ -2712,10 +2716,6 @@ a:hover {
 
 	.links p {
 		margin-right: 20px;
-	}
-
-	.btp-arrow {
-		bottom: 30px; 
 	}
 
 	.contact h1, .location h1 {
@@ -2746,20 +2746,20 @@ a:hover {
 	}
 
 	.back-to-top {
-	    left: -47px;
 	    font-size: 1.8rem;
-	    top: 90px;
+	    margin-left: -76.48px;
 	}
 
 	.hex {
 		width: 250px;
     	height: 130px;
+    	top: -5px;
 	}
 
 	.rhombus {
 	    width: 70px;
 	    height: 70px;
-	    top: 53px;	
+	    top: 50px;	
 	}
 
 	.contact {
@@ -2970,12 +2970,13 @@ a:hover {
 	}
 
 	.back-to-top {
-	    left: -38px;
+	    margin-left: -63.73px;
 	    font-size: 1.5rem;
-	    top: 79px;
+	    top: 0px;
 	}
 
 	.hex {
+		top: -7px;
 	    width: 207px;
 	    height: 110px;
 	}
@@ -3194,9 +3195,8 @@ a:hover {
 	}
 
 	.back-to-top {
-	    left: -30px;
+	    margin-left: -55.23px;
 	    font-size: 1.3rem;
-	    top: 63px;
 	}
 
 	.rhombus {
