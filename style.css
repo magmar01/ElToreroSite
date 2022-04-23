@@ -58,17 +58,17 @@ nav i:hover {
 	width: 70px;
 	height: 8.5px;
 	border-radius: 5px;
-	background-color: #fff;
+	background-color: #000000;
 	margin-bottom: 10px;
 	transition: all .15s ease;
 }
 
 .b1 {
-	background-color: #56ff47;
+	background-color: #000000;
 }
 
 .b3 {
-	background-color: #ff4c4c;
+	background-color: #000000;
 }
 
 .ham-open .b1 {
