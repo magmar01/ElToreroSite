@@ -1,3 +1,4 @@
+@import url(//db.onlinewebfonts.com/c/f630824edd3bdddda5ddeb3a849db35c?family=ITCSouvenirW01-Demi);
 html, body {
 	margin: 0;
 	padding: 0;
@@ -6,15 +7,15 @@ html, body {
 }
 
 body {
-	background: #595959;
+	background: white;
 }
 
 .header {
-	background: url(img/DuluthLogo.jpg);
-	width: 100%;
+	background: url(img/eltorero.jpg);
+	width: auto;
 	height: 70vh;
-	background-size: cover;
-	background-attachment: fixed;
+	background-size:contain ;
+	background-attachment: scroll;
 	background-position: center;
 	position: relative;
 	background-repeat: no-repeat;
@@ -22,7 +23,7 @@ body {
 
 .header:after {
 	content: '';
-	background-color: black;
+	background-color:grey;
 	position: absolute;
 	left: 0;
 	right: 0;
@@ -74,7 +75,7 @@ nav i:hover {
 .ham-open .b1 {
 	width: 70px;
 	height: 8.5px;
-	background-color: #56ff47;
+	background-color: #000000;
 	transform: translateY(100px);
 	position: relative;
 	z-index: 1;
@@ -90,7 +91,7 @@ nav i:hover {
 }
 
 .ham-open .b3 {
-	background-color: #ff4c4c;
+	background-color: #000000;
 	transform: translateY(63px);
 	width: 140px;
 	height: 8.5px;
@@ -105,7 +106,7 @@ nav i:hover {
 
 .menu {
 	display: flex;
-	border-left: 8px solid #56ff47;
+	border-left: 8px solid white;
 	flex-direction: column;
 	background-color: #fff;
 	margin-left: -700px;
@@ -121,8 +122,8 @@ nav i:hover {
 
 .menu a {
 	text-decoration: none;
-	color: limegreen;
-	font-family: 'Kumar One Outline';
+	color: #EE2E22;
+	font-family: 'Souvenir-Demi';
 	font-size: 2.3rem;
 	text-align: center;
 	margin-top: 12px;
@@ -135,7 +136,7 @@ a:hover {
 }
 
 .info {
-	font-family: 'Cedarville Cursive';
+	font-family: 'Souvenir-Demi';
 	color: white;
 	font-weight: bold;
 	font-size: 4.5rem;
@@ -151,7 +152,7 @@ a:hover {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: absolute;
+	position: static;
 	left: 0;
 	right: 0;
 	top: 0;
@@ -160,7 +161,7 @@ a:hover {
 
 .logo-wrap {
 	position: relative;
-	z-index: 1;
+	z-index: 0;
 	left: 5px;
 }
 
@@ -175,17 +176,15 @@ a:hover {
 
 .logo-wrap div {
 	font-family: 'Staatliches';
-	color: white;
-	font-size: 13rem;
-	font-weight: bold;
+	color: black;
+	font-size: 5rem;
+	font-weight: lighter;
 	letter-spacing: 10px;
-	margin-bottom: -5rem;
+	margin-top: 85%;
 	position: relative;
-	margin-left: auto;
-	margin-right: auto;
 }
 
-.point-left {
+/* .point-left {
 	top: 50%;
 	left: -40px;
 	margin-top: -15px;
@@ -195,7 +194,7 @@ a:hover {
 	top: 50%;
 	margin-top: -15px;
 	right: -30px;
-}
+} */
 
 
 
@@ -255,9 +254,9 @@ a:hover {
 
 .image-slider {
 	width: 75%;
-	height: 100%;
+	height: 75%;
 	background-image: url(img/fam-1.jpeg);
-	background-position: center;
+	background-position: left;
 	background-size: cover;
 	background-repeat: no-repeat;
 	border-radius: 13px;
@@ -356,16 +355,108 @@ a:hover {
 /*---------------MENU---------------*/
 
 
+ul.leaders {
+	column-count: 2;
+	max-height: fit-content;
+	column-rule: 1px double #EE2E22;
+	column-width:auto;
+	width: 850px;
 
+	max-lines: none;
+	padding-top: 0px;
+	padding: 0px;
+	overflow-x: hidden;
+	list-style: none
+  }
+  ul.drinks {
+	column-count: 1;
+	max-height: fit-content;
+	column-rule: 1px double #EE2E22;
+	column-width:auto;
+	width: 800px;
+
+	max-lines: none;
+	padding-top: 0px;
+	padding: 0px;
+	overflow-x: hidden;
+	list-style: none
+  }
+
+
+  ul.leaders li:before {
+	float:left;
+	width: 0;
+	white-space: nowrap;
+	overflow: 0;
+	content: ". . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . . . . . . ."
+}
+
+  ul.leaders span:first-child {
+	padding-right: 0.33em;
+	background: white
+  }
+  
+  ul.leaders span+span {
+	float: right;
+	padding-left: 0.33em;
+	background: white
+  }
+
+  ul.drinks li:before {
+	float:left;
+	width: 0;
+	white-space: nowrap;
+	overflow: 0;
+	content: ". . . . . . . . . . . . . . . . . . . . " ". . . . . . . . . . . . . . . . . . . . . . . . . . . . . ."
+}
+
+  ul.drinks span:first-child {
+	padding-right: 0.33em;
+	background: white
+  }
+  
+  ul.drinks span+span {
+	float: right;
+	padding-left: 0.33em;
+	background: white
+  }
+  
+  li {
+	height: fit-content;
+	padding: 0.25cm;
+	margin-bottom: 0.em;
+  }
+  
+  .name {
+	font-weight: 550;
+  }
+  .name2 {
+	font-weight: 600;
+	padding-left: 15%;
+  }
+  .name3 {
+	font-weight: 600;
+	padding-left: 35%;
+	color:#EE2E22;
+  }
+  .name4 {
+	font-weight: 600;
+	padding-left: 23%;
+	color:#EE2E22;
+  }
+  .desc {
+	width: 105%;
+	display:flex;
+  }
 
 .menu-section {
 	background-color: #FFFFFF;
-	display: flex;
-	width: 100%;
-	top: -100px;
-	position: relative;
-	clip-path: polygon(0% 0%, 100% 3%, 100% 100%, 0% 100%);
-	/*background-image: linear-gradient(4deg, #edb12f 92%, #17a832 92%, #17a832);*/
+	display:inline-flex;
+	height: fit-content;
+	max-width: fit-content;
+	top: 0px;
+	background-size:100px;
+	position:relative;
 }
 
 .menu-section h1 {
@@ -375,29 +466,30 @@ a:hover {
 	left: 230px;
 	margin-top: -30px;
 	padding-top: 15px;
-	color: white;
-	font-family: 'Cedarville Cursive';
+	color: #EE2E22;
+	font-family: 'Souvenir-Demi';
 	font-weight: bold;	
 }
 
 .menu-line {
 	width: 450px;
 	height: 5px;
-	background-color: #17a832;
+	background-color: #000000;
 	border-radius: 4px;
-	position: absolute;
-	top: 220px;
-	left: 225px;
+	position:absolute;
+	margin-top: -1%;
+	margin-left: -0.5%;
 
 }
 
 .column-new {
 	display: none;
+	max-width: fit-content;
 }
 
 .column-left, .column-right, .column-middle {
 	flex-basis: 33.33%;
-	margin-top: 230px;
+	margin-top: 190px;
 	padding-bottom: 120px;
 }
 
@@ -408,10 +500,10 @@ a:hover {
 
 .column-left #combo-platter:after {
 	display: block;
-	content: "beans and rice included";
-	color: white;
+ 	content: "askdjfl;asdjf";
+	color: red;
 	font-size: 1.5rem;
-	font-family: 'Josefin Sans';
+	font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	margin-top: -25px;
 }
 
@@ -420,9 +512,9 @@ a:hover {
 	display: block;
 	width: 100%;
 	height: 2px;
-	background-color: white;
-	border-radius: 3px;
-	margin-top: -21px;
+	background-color: black;
+	border-radius: 5px;
+	margin-top: 0px;
 }
 
 .column-middle {
@@ -446,8 +538,8 @@ a:hover {
 .column h2 {
 	display: inline-block;
 	align-self: center;
-	font-family: 'Cedarville Cursive';
-	color: #17a832;
+	font-family:'souvenir-demi' ;
+	color: #EE2E22;
 	font-size: 3rem;
 }
 
@@ -490,25 +582,9 @@ a:hover {
 	transform: rotate(180deg);
 }
 
-.arrow-right {
-    width: 0; 
-    height: 0; 
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent; 
-    border-left: 60px solid green;
- 	position: relative;
- 	top: -10px;
-}
 
-.arrow-left {
-  width: 0; 
-  height: 0; 
-  border-top: 30px solid transparent;
-  border-bottom: 30px solid transparent;  
-  border-right:60px solid limegreen;
-  position: relative;
-  top: 20px; 
-}
+
+
 
 .arrow-top {
     width: 0; 
@@ -552,9 +628,9 @@ a:hover {
 
 
 .hours-section {
-	background-color: #17a832;
-	margin-top: -155px;
-	clip-path: polygon(0% 5%, 4.8% 0%, 95% 0%, 100% 4.8%, 100% 100%, 0% 100%);
+	background-color: grey;
+	width: auto;
+	margin-top: -15px;
 	position: relative;
 	padding-bottom: 100px;
 }
@@ -566,7 +642,7 @@ a:hover {
 	margin-bottom: 30px;
 	padding-top: 15px;
 	color: white;
-	font-family: 'Cedarville Cursive';
+	font-family: 'Josefin Sans';
 	font-weight: bold;
 }
 
@@ -574,7 +650,7 @@ a:hover {
 	width: 40%;
 	height: 10px;
 	border-radius: 4px;
-	background-color: #ff4c4c;
+	background-color: #006847;
 	position: absolute;
 	top: 10%;
 	left: 50px;
@@ -584,7 +660,7 @@ a:hover {
 	width: 40%;
 	height: 10px;
 	border-radius: 4px;
-	background-color: #56ff47;
+	background-color: #CE1125;
 	position: absolute;
 	top: 10%;
 	right: 50px;
@@ -598,8 +674,8 @@ a:hover {
 
 .hours {
 	display: flex;
-	border: 7px solid green;
-	padding: 25px;
+	border: 10px solid #006847;
+	padding: 20px;
 }
 
 .hours div div {
@@ -609,7 +685,7 @@ a:hover {
 	padding: 8px;
 	font-size: 3rem;
 	font-family: 'Josefin Sans';
-	border-right: 10px solid #56ff47;
+	border-right: 10px solid #CE1125;
 }
 
 .hours div div:last-child {
@@ -638,105 +714,13 @@ a:hover {
     height: 472px;
 }
 
-.hex-left {
-	/*-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);*/
-	width: 165px;
-	height: 165px;
-	/*background-color: limegreen;*/
-	top: 152px;
-	left: -16.5px;
-	position: absolute;
-}
 
-.hex-right {
-	/*-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);*/
-	width: 165px;
-	height: 165px;
-	/*background-color: limegreen;*/
-	top: 152px;
-	left: -16.5px;
-	position: absolute;
-}
 
-.hex-right {
-	top: 152px;
-	right: -16.5px;
-}
 
-.hex-inner {
-	/*-webkit-clip-path: polygon(47% 5%, 87% 24%, 87% 76%, 47% 95%, 10% 76%, 10% 24%);*/
-	width: 135px;
-	height: 135px;
-	/*background-color: #17a832;*/
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	top: 0;
-	margin: auto; 
-}
 
-.hex-arrow-left, .hex-arrow-right {
-    width: 0; 
-    height: 0; 
-    border-top: 35px solid transparent;
-    border-bottom: 35px solid transparent; 
-    border-left: 70px solid limegreen;
- 	position: absolute;
- 	top: 200px;
- 	right: -150px;
-}
 
-.design-wrap-right-side {
-	transform: rotate(180deg);
-	position: absolute;
-    right: 0;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    height: 472px;
-}
 
-.hours-wrap .design-wrap-left {
-	transform: rotate(180deg);
-    position: relative;
-    top: 0;
-    height: 472px;
-    bottom: 0;
-    margin: auto 0
-}
 
-.hours-wrap .design-wrap-right {
-    position: relative;
-    top: 0;
-    height: 472px;
-    bottom: 0;
-    margin: auto 0
-}
-
-.design-wrap-left .arrow-top, 
-.design-wrap-right .arrow-top, 
-.design-wrap-left-side .arrow-top,
-.design-wrap-right-side .arrow-top {
-	width: 0; 
-    height: 0; 
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent; 
-    border-left: 60px solid limegreen;
- 	position: relative;
- 	top: -100px;
- 	left: 60px;
-}
-
-.change-color {
-    width: 0; 
-    height: 0; 
-    border-top: 30px solid transparent;
-    border-bottom: 30px solid transparent; 
-    border-left: 60px solid #6acc66;
- 	position: absolute;
- 	top: -10px;
-}
 
 
 
@@ -747,14 +731,15 @@ a:hover {
 
 
 .contact-section-background {
-	background-color: #666;
+	
 	height: 300px;
-	clip-path: polygon(0% 0%, 10% 30%, 90% 30%, 100% 0%, 100% 100%, 0% 100%);
+
 	margin-top: -100px;
 }
 
 .contact-section {
 	display: flex;
+	width: auto;
 	background-color: #595959;
 	margin-top: -225px;
 	position: relative;
@@ -770,15 +755,13 @@ a:hover {
 }
 
 .contact h1, .location h1 {
-	margin: 0;
-	font-family: 'Cedarville Cursive';
-	color: white;
+	margin: 2;
+	font-family: 'Josefin Sans';
+	color: black;
 	font-size: 7rem;
 }
 
 .hex {
-	/*-webkit-clip-path: polygon(25% 60%, 75% 60%, 100% 100%, 0% 100%);*/
-	/*background-color: #17a832;*/
 	transform: rotate(180deg);
 	width: 300px;
 	height: 150px;
@@ -797,8 +780,6 @@ a:hover {
 }
 
 .rhombus {
-	/*-webkit-clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
-	background-color: #17a832;*/
 	width: 80px;
 	height: 80px;
 	position: absolute;
@@ -811,7 +792,8 @@ a:hover {
 }
 
 .back-to-top {
-	color: #595959;
+	color: black;
+	bottom: 90;
 	font-size: 2.5rem;
 	left: -45px;
 	position: absolute;
@@ -824,9 +806,12 @@ a:hover {
 #hidden-arrow {
 	display: none;
 }
-
+#page-container
+{
+   background-color: white;
+}
 .btp-arrow {
-	color: #595959;
+	color: black;
 	font-size: 3rem;
 	position: absolute;
 	left: 50%;
@@ -836,7 +821,7 @@ a:hover {
 }
 
 .btp-arrow:hover {
-	color: #ddae1a;
+	color: #EE2E22;
 	cursor: pointer;
 	transform: scale(1.1);
 }
@@ -896,7 +881,7 @@ a:hover {
 	width: 5px;
 	border-radius: 3px;
 	height: 350px;
-	background: #ddae1a;
+	background: #EE2E22;
 	position: relative;
 }
 
@@ -982,17 +967,17 @@ a:hover {
 
 .map {
 	position: relative;
-	top: 50px;
+	top: -50px;
 }
 
-.map i {
+/* .map i {
 	position: absolute;
 	color: #ddae1a;
 	font-size: 4rem;
 	left: 50%;
 	margin-left: -24px;
 
-}
+} */
 
 .location .map .street-1 {
     width: 300px;
@@ -1056,9 +1041,9 @@ a:hover {
 .copyright {
 	position: absolute;
 	bottom: 0;
-	left: 50%;
+	left: 45%;
 	font-family: 'Josefin Sans';
-	color: #a8a3a3;
+	color: white;
 	font-size: 1.8rem;
 	padding-bottom: 5px;
 	margin: 0 0 0 -253.89px;
@@ -1071,9 +1056,9 @@ a:hover {
 }
 
 
-/** {
+/* * {
 	outline: 1px solid red;
-}*/
+} */
 
 
 /*---------------MEDIA QUERIES---------------*/
@@ -1510,7 +1495,7 @@ a:hover {
 /*----MENU-SECTION----*/
 
 
-@media screen and (max-width: 1700px) {
+@media screen and (max-width: 100%) {
 	.arrow-right {
 	    width: 0; 
 	    height: 0; 
@@ -1691,21 +1676,21 @@ a:hover {
 	}
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1100000px) {
 	.menu-section h1 {
     	left: 110px;
     	font-size: 7rem;
 	}
 
 	.menu-line {
-	    width: 340px;
+	    width: 280px;
 	    left: 110px;
-	    top: 170px;
+	    top: 135px;
 	}
 
 	.guac {
 		width: 200px;
-		height: 200px;
+		height: 190px;
 		bottom: -130px;
 	}
 
@@ -1743,7 +1728,7 @@ a:hover {
 	}
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 9999px) {
 	.column-left #combo-platter:after {
 	    font-size: 1.3rem;
 	    margin-top: -20px;
@@ -1759,25 +1744,9 @@ a:hover {
 		top: 153px;
 	}
 
-	.arrow-right {
-	    width: 0; 
-	    height: 0; 
-	    border-top: 20px solid transparent;
-	    border-bottom: 20px solid transparent; 
-	    border-left: 40px solid green;
-	 	position: relative;
-	 	top: 0px;
-	}
 
-	.arrow-left {
-	    width: 0; 
-	    height: 0; 
-	    border-top: 20px solid transparent;
-	    border-bottom: 20px solid transparent;  
-	    border-right:40px solid limegreen;
-	    position: relative;
-	    top: 20px; 
-	}
+
+
 
 	.arrow-top {
 	    width: 0; 
@@ -1819,7 +1788,7 @@ a:hover {
 	}
 
 	.column {
-		min-width: 350px;
+		min-width: 375px;
 	}
 
 	.column h2 {
@@ -1864,7 +1833,7 @@ a:hover {
 	}
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 999px) {
 	.row div p {
     	font-size: 1.1rem;
 	}
@@ -1874,14 +1843,14 @@ a:hover {
 	}
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 999px) {
 	.column {
 	    margin-left: 10px;
 	    margin-right: 10px;
 	}
 }
 
-@media screen and (max-width: 825px) {
+@media screen and (max-width: 9999px) {
 	.menu-section h1 {
 		font-size: 5.5rem;
 		left: 70px;
@@ -1978,7 +1947,7 @@ a:hover {
 	}
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 999px) {
 	.column-left .column, .column-right .column {
 		margin-right: 8px;
 	}
@@ -2008,7 +1977,7 @@ a:hover {
     .menu-line {
     	left: 36px;
 	    width: 229px;
-    	top: 120px;
+    	top: 10px;
     	height: 4px;
 	}
 
@@ -2269,18 +2238,6 @@ a:hover {
 	    top: -5px;
 	}
 
-	.design-wrap-left .arrow-top,
-	.design-wrap-left-side .arrow-top,
-	.design-wrap-right .arrow-top,
-	.design-wrap-right-side .arrow-top {
-	    border-top: 25px solid transparent;
-	    border-bottom: 25px solid transparent;
-	    border-left: 50px solid limegreen;
-	    top: -80px;
-	    left: 50px;
-	}
-
-
 	.design-wrap-right-side {
     	height: 400px
 	}
@@ -2324,7 +2281,7 @@ a:hover {
 	    border-left: 65px solid limegreen;
 	    position: absolute;
 	    top: 171px;
-	    right: -131px;
+	  
 	}
 }
 
@@ -2381,13 +2338,7 @@ a:hover {
 	    top: -0px;
 	}
 
-	.design-wrap-left .arrow-top, .design-wrap-left-side .arrow-top, .design-wrap-right .arrow-top, .design-wrap-right-side .arrow-top {
-	    border-top: 20px solid transparent;
-	    border-bottom: 20px solid transparent;
-	    border-left: 40px solid limegreen;
-	    top: -60px;
-	    left: 40px;
-	}
+	
 
 	.hours-wrap .design-wrap-left {
 	    height: 330px
@@ -3004,9 +2955,6 @@ a:hover {
     	height: 10px;
 	}
 
-	.location .map .street-2 {
-
-	}
 
 	.location .map .street-1 {
     	left: 36px;
@@ -3207,44 +3155,6 @@ a:hover {
     	left: 48%;
 	}
 
-
-	/*.hex, .rhombus, .contact-line {
-		display: none;
-	}
-
-	.btp-arrow {
-	    bottom: 40px;
-	}
-
-	.contact-section {
-		flex-direction: column;
-	}
-
-	.contact h1 {
-	    left: 0px;
-	    font-size: 4rem;
-	    top: -10px;
-	}
-
-	.contact h1:before, .contact h1:after {
-		display: block;
-		content: "";
-		width: 100%;
-		height: 4px;
-		border-radius: 3px;
-		background-color: #ddae1a;;
-		position: absolute;
-	}
-
-	.contact h1:before {
-		top: 40%;
-		left: 110%;
-	}
-
-	.contact h1:after {
-		top: 40%;
-		right: 110%;
-	}*/
 }
 
 @media screen and (max-width: 615px) {
@@ -3311,6 +3221,7 @@ a:hover {
 	    width: 100px;
 	    height: 142px;
 	    top: -20px;
+		
 	}
 
 	.location h1 {
