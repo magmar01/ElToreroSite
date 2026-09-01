@@ -1,3 +1,4 @@
 /* Responsive wrapper: preserve the original design, then apply mobile/tablet fixes. */
 @import url("legacy-style.css");
 @import url("responsive.css?v=20260901-2");
+@import url("mobile-overrides.css?v=20260901-1");
