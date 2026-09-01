@@ -1,6 +1,6 @@
 @import url("legacy-style.css");
 @import url("responsive.css?v=20260901-4");
-@import url("desktop-responsive.css?v=20260901-2");
+@import url("desktop-responsive.css?v=20260901-3");
 
 html, body { width:100% !important; max-width:100% !important; overflow-x:hidden !important; }
 *, *::before, *::after { box-sizing:border-box !important; }
@@ -16,7 +16,7 @@ html, body { width:100% !important; max-width:100% !important; overflow-x:hidden
   .logo-wrap div { display:block !important; width:100% !important; margin:0 !important; padding:0 10px !important; font-size:clamp(1.7rem,7vw,2.8rem) !important; line-height:1 !important; letter-spacing:2px !important; text-align:center !important; white-space:normal !important; }
   .menu-section { display:flex !important; flex-direction:column !important; align-items:stretch !important; width:100% !important; max-width:100% !important; min-width:0 !important; overflow:hidden !important; position:relative !important; }
   .menu-section h1 { position:relative !important; left:auto !important; right:auto !important; top:auto !important; width:100% !important; margin:0 !important; padding:20px 0 0 !important; text-align:center !important; font-size:clamp(2.8rem,13vw,4.5rem) !important; line-height:1 !important; }
-  .menu-line { position:relative !important; left:auto !important; right:auto !important; top:auto !important; width:60vw !important; max-width:300px !important; margin:8px auto 18px !important; }
+  .menu-line { position:relative !important; left:auto !important; right:auto !important; width:60vw !important; max-width:300px !important; margin:8px auto 18px !important; }
   .column-left,.column-middle,.column-right,.column-new { display:block !important; width:100% !important; max-width:100% !important; min-width:0 !important; margin:0 !important; padding:8px 5% 30px !important; flex:none !important; }
   .column { display:flex !important; flex-direction:column !important; width:100% !important; max-width:720px !important; min-width:0 !important; margin:0 auto !important; padding:0 !important; overflow:visible !important; }
   .column h2 { display:block !important; width:100% !important; max-width:100% !important; margin:0 0 14px !important; font-size:clamp(1.55rem,5vw,2rem) !important; line-height:1.1 !important; text-align:center !important; overflow-wrap:anywhere !important; }
