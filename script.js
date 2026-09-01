@@ -42,6 +42,37 @@ rightArrow.addEventListener('click', function() {
 });
 
 /* ---------------------------------------------------------
+   Repair a few malformed legacy menu tags before layout/pricing
+   code runs. These were literal /span> strings in the HTML and
+   caused descriptions to become nested inside price/name spans.
+--------------------------------------------------------- */
+function repairMenuMarkup() {
+  document.querySelectorAll('.menu-section li').forEach((li) => {
+    const nameEl = li.querySelector('.name');
+    const priceEl = li.querySelector('.price');
+    const descEl = li.querySelector('.desc');
+
+    if (nameEl) {
+      nameEl.textContent = nameEl.textContent.replace(/\s*\/span>\s*$/i, '').trim();
+    }
+
+    if (priceEl) {
+      /* If the malformed price span swallowed the description,
+         move the description back out before cleaning the price. */
+      if (descEl && priceEl.contains(descEl)) {
+        const priceText = priceEl.childNodes[0]?.textContent || '';
+        priceEl.textContent = priceText.replace(/\s*\/span>\s*$/i, '').trim();
+        li.appendChild(descEl);
+      } else {
+        priceEl.textContent = priceEl.textContent.replace(/\s*\/span>\s*$/i, '').trim();
+      }
+    }
+  });
+}
+
+repairMenuMarkup();
+
+/* ---------------------------------------------------------
    CENTRALIZED MENU PRICING
    Prices can now be changed in menu-prices.js only.
    The original HTML prices remain the fallback.
