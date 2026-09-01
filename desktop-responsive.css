@@ -1,62 +1,16 @@
-/* Desktop/laptop responsiveness: remove legacy fixed-width assumptions on normal screens. */
+/* Desktop/laptop responsiveness: use two full-width menu columns and no horizontal scrolling. */
 
-@media screen and (min-width: 901px) and (max-width: 1600px) {
+@media screen and (min-width: 901px) {
   .menu-section {
     display: flex !important;
+    flex-wrap: wrap !important;
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
     overflow-x: hidden !important;
   }
 
-  .column-left, .column-middle, .column-right {
-    flex: 1 1 33.333% !important;
-    width: 33.333% !important;
-    min-width: 0 !important;
-    max-width: 33.333% !important;
-    margin-top: 190px !important;
-    padding-left: 2.5% !important;
-    padding-right: 2.5% !important;
-  }
-
-  .column {
-    width: 100% !important;
-    min-width: 0 !important;
-    max-width: 100% !important;
-    overflow: visible !important;
-  }
-
-  ul.leaders, ul.drinks {
-    width: 100% !important;
-    max-width: 100% !important;
-    min-width: 0 !important;
-    column-count: 2 !important;
-    column-width: auto !important;
-  }
-
-  ul.drinks { column-count: 1 !important; }
-
-  .desc {
-    width: 100% !important;
-    max-width: 100% !important;
-    overflow-wrap: break-word !important;
-  }
-
-  .name, .price {
-    font-size: clamp(.82rem, 1.05vw, 1.05rem) !important;
-  }
-
-  .desc {
-    font-size: clamp(.72rem, .85vw, .9rem) !important;
-    line-height: 1.25 !important;
-  }
-
-  .column h2 {
-    font-size: clamp(1.8rem, 2.7vw, 3rem) !important;
-    max-width: 100% !important;
-    text-align: center !important;
-  }
-
+  /* Keep the menu title across the full desktop width. */
   .menu-section h1 {
     left: 0 !important;
     right: 0 !important;
@@ -71,14 +25,69 @@
     margin-left: auto !important;
     margin-right: auto !important;
   }
-}
 
-@media screen and (min-width: 901px) and (max-width: 1200px) {
-  .column-left, .column-middle, .column-right {
-    flex-basis: 50% !important;
+  /* Exactly two menu columns across the desktop viewport. */
+  .column-left,
+  .column-middle,
+  .column-right,
+  .column-new {
+    flex: 0 0 50% !important;
     width: 50% !important;
     max-width: 50% !important;
+    min-width: 0 !important;
+    margin-top: 190px !important;
+    padding-left: 3% !important;
+    padding-right: 3% !important;
+    overflow: visible !important;
   }
 
-  .menu-section { flex-wrap: wrap !important; }
+  .column {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  /* Do not create additional nested columns inside each desktop column. */
+  ul.leaders,
+  ul.drinks {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    column-count: 1 !important;
+    column-width: auto !important;
+    column-gap: 0 !important;
+    overflow: visible !important;
+  }
+
+  ul.leaders li,
+  ul.drinks li {
+    width: 100% !important;
+    max-width: 100% !important;
+    break-inside: avoid !important;
+  }
+
+  .desc {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+    word-break: normal !important;
+  }
+
+  .name,
+  .price {
+    font-size: clamp(.82rem, 1.05vw, 1.05rem) !important;
+  }
+
+  .desc {
+    font-size: clamp(.72rem, .85vw, .9rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  .column h2 {
+    font-size: clamp(1.8rem, 2.7vw, 3rem) !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    overflow-wrap: anywhere !important;
+  }
 }
