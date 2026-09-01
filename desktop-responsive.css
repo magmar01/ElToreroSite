@@ -1,0 +1,84 @@
+/* Desktop/laptop responsiveness: remove legacy fixed-width assumptions on normal screens. */
+
+@media screen and (min-width: 901px) and (max-width: 1600px) {
+  .menu-section {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    overflow-x: hidden !important;
+  }
+
+  .column-left, .column-middle, .column-right {
+    flex: 1 1 33.333% !important;
+    width: 33.333% !important;
+    min-width: 0 !important;
+    max-width: 33.333% !important;
+    margin-top: 190px !important;
+    padding-left: 2.5% !important;
+    padding-right: 2.5% !important;
+  }
+
+  .column {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    overflow: visible !important;
+  }
+
+  ul.leaders, ul.drinks {
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    column-count: 2 !important;
+    column-width: auto !important;
+  }
+
+  ul.drinks { column-count: 1 !important; }
+
+  .desc {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-wrap: break-word !important;
+  }
+
+  .name, .price {
+    font-size: clamp(.82rem, 1.05vw, 1.05rem) !important;
+  }
+
+  .desc {
+    font-size: clamp(.72rem, .85vw, .9rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  .column h2 {
+    font-size: clamp(1.8rem, 2.7vw, 3rem) !important;
+    max-width: 100% !important;
+    text-align: center !important;
+  }
+
+  .menu-section h1 {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+    font-size: clamp(5rem, 8vw, 8rem) !important;
+  }
+
+  .menu-line {
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+@media screen and (min-width: 901px) and (max-width: 1200px) {
+  .column-left, .column-middle, .column-right {
+    flex-basis: 50% !important;
+    width: 50% !important;
+    max-width: 50% !important;
+  }
+
+  .menu-section { flex-wrap: wrap !important; }
+}
