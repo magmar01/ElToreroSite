@@ -1,0 +1,30 @@
+name: Apply responsive stylesheet
+on:
+  push:
+    branches: [responsive-layout-fix]
+permissions:
+  contents: write
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add responsive stylesheet
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          tag = '<link rel="stylesheet" href="responsive.css" type="text/css">'
+          if 'href="responsive.css"' not in s:
+              marker = '<link rel="stylesheet" href="style.css"  type="text/css">'
+              s = s.replace(marker, marker + '\n\t' + tag, 1)
+              p.write_text(s)
+          PY
+      - name: Commit change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Load responsive stylesheet"
+          git push
