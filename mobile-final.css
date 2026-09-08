@@ -96,11 +96,14 @@
     margin-left:12px !important;
   }
 
-  .menu a {
+  /* Keep the main hamburger links visually consistent with the category
+     submenu: same typeface and a smaller, matching text size. */
+  .menu > a {
     display:block !important;
     margin:10px 0 !important;
     padding:2px 0 !important;
-    font-size:2.3rem !important;
+    font-family:'Souvenir-Demi' !important;
+    font-size:1.4rem !important;
     line-height:1.1 !important;
     text-align:center !important;
   }
@@ -123,6 +126,9 @@
     display:block !important;
     width:100% !important;
     box-sizing:border-box !important;
+    font-family:'Souvenir-Demi' !important;
+    font-size:1.4rem !important;
+    line-height:1.1 !important;
   }
 
   .header::before,
