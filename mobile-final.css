@@ -250,4 +250,25 @@
     padding:0 !important;
     border:0 !important;
   }
+
+  /* The restaurant copyright belongs below the map, not over it. Give it a
+     small grey footer strip and strong black text so it remains readable. */
+  .contact-section > .copyright {
+    display:block !important;
+    order:999 !important;
+    width:100% !important;
+    max-width:100% !important;
+    flex:none !important;
+    box-sizing:border-box !important;
+    margin:0 !important;
+    padding:10px 8px 14px !important;
+    background:#595959 !important;
+    color:#000 !important;
+    font-family:'Josefin Sans', Arial, sans-serif !important;
+    font-size:clamp(.8rem,3.2vw,1rem) !important;
+    line-height:1.25 !important;
+    text-align:center !important;
+    position:static !important;
+    z-index:5 !important;
+  }
 }
