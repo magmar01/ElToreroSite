@@ -1,20 +1,3 @@
-/* Shared hamburger typography: keep the main menu and category submenu
-   visually consistent on desktop and mobile. */
-.menu > a {
-  font-family:'Souvenir-Demi' !important;
-  font-size:1.4rem !important;
-  line-height:1.1 !important;
-}
-
-.menu .menu-category-submenu a,
-.menu .menu-submenu a,
-.menu .submenu a,
-.menu [class*="submenu"] a {
-  font-family:'Souvenir-Demi' !important;
-  font-size:1.4rem !important;
-  line-height:1.1 !important;
-}
-
 /* Final responsive layout overrides. These rules intentionally neutralize the legacy fixed-position menu styles on phones. */
 html, body { width:100% !important; max-width:100% !important; overflow-x:hidden !important; }
 *, *::before, *::after { box-sizing:border-box !important; }
@@ -68,16 +51,12 @@ img { max-width:100% !important; height:auto !important; }
   .menu-section > h1,.menu-section .column h2,.menu-section ul.leaders .name,.menu-section ul.leaders .price { background:#fff !important; }
   .menu-section > h1,.menu-section .column h2 { color:#EE2E22 !important; }
   .menu-section ul.leaders .price { overflow:visible !important; }
-
   .hours-section { position:relative !important; margin-top:0 !important; padding-bottom:30px !important; height:auto !important; min-height:0 !important; overflow:visible !important; z-index:1 !important; }
   .hours-wrap,.hours { position:relative !important; width:100% !important; max-width:100% !important; min-width:0 !important; }
   .contact-section-background { display:block !important; width:100% !important; height:0 !important; min-height:0 !important; margin:0 !important; padding:0 !important; }
   .contact-section { position:relative !important; display:flex !important; flex-direction:column !important; width:100% !important; max-width:100% !important; min-width:0 !important; margin:0 !important; padding:35px 5% 0 !important; overflow:visible !important; z-index:2 !important; height:auto !important; min-height:0 !important; }
   .contact,.location { position:relative !important; display:flex !important; flex-direction:column !important; align-items:center !important; width:100% !important; max-width:100% !important; min-width:0 !important; flex:none !important; margin:0 !important; padding:0 !important; height:auto !important; min-height:0 !important; }
   .contact h1,.location h1 { position:static !important; width:100% !important; max-width:100% !important; margin:0 0 20px !important; font-size:clamp(3rem,14vw,4.5rem) !important; line-height:1 !important; text-align:center !important; }
-
-  /* The map must be the final visual element on mobile. Remove legacy section
-     heights/padding and make the iframe end exactly at the document bottom. */
   #locations,.location,.map { height:auto !important; min-height:0 !important; max-height:none !important; margin-bottom:0 !important; padding-bottom:0 !important; }
   .map { display:block !important; position:relative !important; top:auto !important; bottom:auto !important; left:auto !important; right:auto !important; margin:0 !important; padding:0 !important; overflow:visible !important; }
   .map iframe { display:block !important; position:relative !important; top:auto !important; bottom:auto !important; left:auto !important; right:auto !important; width:100% !important; max-width:100% !important; height:360px !important; min-height:360px !important; margin:0 !important; padding:0 !important; border:0 !important; }
