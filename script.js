@@ -7,39 +7,49 @@ const img = document.querySelector('.image-slider');
 const menuLinks = document.querySelectorAll('.menu a');
 let num = 1;
 
-menuLinks.forEach((node) => {
-  node.addEventListener('click', function() {
+/* The original page has optional/legacy slider controls. Do not let a
+   missing slider stop the rest of the site JavaScript from running. */
+if (ham) {
+  menuLinks.forEach((node) => {
+    node.addEventListener('click', function() {
+      ham.classList.remove('ham-open');
+    });
+  });
+
+  ham.addEventListener('click', function() {
+    ham.classList.add('ham-open');
+  });
+}
+
+if (menuClose && ham) {
+  menuClose.addEventListener('click', function() {
     ham.classList.remove('ham-open');
   });
-});
+}
 
-ham.addEventListener('click', function() {
-  ham.classList.add('ham-open');
-});
+if (leftArrow && img) {
+  leftArrow.addEventListener('click', function() {
+    num--;
+    if (num > 0) {
+      img.style.backgroundImage = 'url(img/fam-' + num + '.jpeg)';
+    } else {
+      num = 4;
+      img.style.backgroundImage = 'url(img/fam-' + num + '.jpeg)';
+    }
+  });
+}
 
-menuClose.addEventListener('click', function() {
-  ham.classList.remove('ham-open');
-});
-
-leftArrow.addEventListener('click', function() {
-  num--;
-  if (num > 0) {
-    img.style.backgroundImage = 'url(img/fam-' + num + '.jpeg)';
-  } else {
-    num = 4;
-    img.style.backgroundImage = 'url(img/fam-' + num + '.jpeg)';
-  }
-});
-
-rightArrow.addEventListener('click', function() {
-  num++;
-  if (num <= 4) {
-    img.style.backgroundImage = 'url(img/fam-' + num + '.jpeg)';
-  } else {
-    num = 1;
-    img.style.backgroundImage = 'url(img/fam-' + num + '.jpeg)';
-  }
-});
+if (rightArrow && img) {
+  rightArrow.addEventListener('click', function() {
+    num++;
+    if (num <= 4) {
+      img.style.backgroundImage = 'url(img/fam-' + num + '.jpeg)';
+    } else {
+      num = 1;
+      img.style.backgroundImage = 'url(img/fam-' + num + '.jpeg)';
+    }
+  });
+}
 
 /* ---------------------------------------------------------
    Repair a few malformed legacy menu tags before layout/pricing
@@ -57,8 +67,6 @@ function repairMenuMarkup() {
     }
 
     if (priceEl) {
-      /* If the malformed price span swallowed the description,
-         move the description back out before cleaning the price. */
       if (descEl && priceEl.contains(descEl)) {
         const priceText = priceEl.childNodes[0]?.textContent || '';
         priceEl.textContent = priceText.replace(/\s*\/span>\s*$/i, '').trim();
@@ -124,6 +132,7 @@ function loadCentralizedMenuPrices() {
   const script = document.createElement('script');
   script.src = 'menu-prices.js?v=' + Date.now();
   script.onload = applyMenuPriceOverrides;
+  script.onerror = () => console.error('Unable to load menu-prices.js');
   document.head.appendChild(script);
 }
 
