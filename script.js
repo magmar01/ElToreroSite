@@ -317,3 +317,54 @@ if (document.readyState === 'loading') {
 } else {
   setupMenuCategorySubmenu();
 }
+
+/* Add a clickable address directly above the Location map. On Apple devices
+   it opens Apple Maps; on Android and desktop it opens Google Maps. */
+function setupClickableLocationAddress() {
+  const locationSection = document.querySelector('.location');
+  if (!locationSection) return;
+  if (locationSection.querySelector('.clickable-location-address')) return;
+
+  const heading = locationSection.querySelector('h1, h2');
+  const map = locationSection.querySelector('.map');
+  if (!map) return;
+
+  const address = '3656 Satellite Boulevard, Duluth, GA 30043';
+  const encodedAddress = encodeURIComponent(address);
+  const isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) && !('MSStream' in window);
+  const destination = isApple
+    ? 'https://maps.apple.com/?address=' + encodedAddress
+    : 'https://www.google.com/maps/search/?api=1&query=' + encodedAddress;
+
+  const link = document.createElement('a');
+  link.className = 'clickable-location-address';
+  link.href = destination;
+  link.textContent = address;
+  link.target = '_blank';
+  link.rel = 'noopener noreferrer';
+  Object.assign(link.style, {
+    display: 'block',
+    width: '100%',
+    boxSizing: 'border-box',
+    margin: '0 auto 14px',
+    padding: '0 12px',
+    color: '#EE2E22',
+    fontFamily: "'Josefin Sans', Arial, sans-serif",
+    fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
+    fontWeight: '700',
+    lineHeight: '1.35',
+    textAlign: 'center',
+    textDecoration: 'underline',
+    textUnderlineOffset: '3px',
+    cursor: 'pointer'
+  });
+
+  if (heading) heading.insertAdjacentElement('afterend', link);
+  else map.insertAdjacentElement('beforebegin', link);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', setupClickableLocationAddress, { once: true });
+} else {
+  setupClickableLocationAddress();
+}
