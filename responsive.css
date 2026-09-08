@@ -1,3 +1,20 @@
+/* Shared hamburger typography: keep the main menu and category submenu
+   visually consistent on desktop and mobile. */
+.menu > a {
+  font-family:'Souvenir-Demi' !important;
+  font-size:1.4rem !important;
+  line-height:1.1 !important;
+}
+
+.menu .menu-category-submenu a,
+.menu .menu-submenu a,
+.menu .submenu a,
+.menu [class*="submenu"] a {
+  font-family:'Souvenir-Demi' !important;
+  font-size:1.4rem !important;
+  line-height:1.1 !important;
+}
+
 /* Final responsive layout overrides. These rules intentionally neutralize the legacy fixed-position menu styles on phones. */
 html, body { width:100% !important; max-width:100% !important; overflow-x:hidden !important; }
 *, *::before, *::after { box-sizing:border-box !important; }
