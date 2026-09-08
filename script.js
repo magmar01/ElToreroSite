@@ -9,7 +9,7 @@ document.head.appendChild(menuArtifactCss);
 if (window.matchMedia && window.matchMedia('(max-width: 800px)').matches) {
   const mobileCss = document.createElement('link');
   mobileCss.rel = 'stylesheet';
-  mobileCss.href = 'mobile-final.css?v=20260908-6';
+  mobileCss.href = 'mobile-final.css?v=20260908-7';
   document.head.appendChild(mobileCss);
 }
 
@@ -20,6 +20,7 @@ const leftArrow = document.querySelector('#left');
 const rightArrow = document.querySelector('#right');
 const img = document.querySelector('.image-slider');
 const menuLinks = document.querySelectorAll('.menu a');
+const backToTop = document.querySelector('.back-to-top');
 let num = 1;
 
 if (ham) {
@@ -65,6 +66,37 @@ if (rightArrow && img) {
       img.style.backgroundImage = 'url(img/fam-' + num + '.jpeg)';
     }
   });
+}
+
+/* Back to Top: keep the control hidden until the visitor reaches the bottom
+   of the page, then return them to the beginning of the menu when clicked. */
+if (backToTop) {
+  const toggleBackToTop = () => {
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
+    backToTop.classList.toggle('is-visible', atBottom);
+  };
+
+  backToTop.setAttribute('role', 'button');
+  backToTop.setAttribute('tabindex', '0');
+  backToTop.setAttribute('aria-label', 'Return to top of menu');
+
+  const goToMenuTop = () => {
+    const menuSection = document.querySelector('.menu-section');
+    const top = menuSection ? menuSection.getBoundingClientRect().top + window.scrollY : 0;
+    window.scrollTo({ top, behavior: 'smooth' });
+  };
+
+  backToTop.addEventListener('click', goToMenuTop);
+  backToTop.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      goToMenuTop();
+    }
+  });
+
+  window.addEventListener('scroll', toggleBackToTop, { passive: true });
+  window.addEventListener('resize', toggleBackToTop);
+  toggleBackToTop();
 }
 
 function cleanMalformedMenuText(root = document) {
