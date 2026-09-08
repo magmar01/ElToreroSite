@@ -86,9 +86,7 @@ img { max-width:100% !important; height:auto !important; }
     clip-path:none !important;
     transform:none !important;
   }
-  .menu-line {
-    display:none !important;
-  }
+  .menu-line { display:none !important; }
 
   .column-left,.column-middle,.column-right,.column-new {
     display:block !important;
@@ -277,4 +275,73 @@ img { max-width:100% !important; height:auto !important; }
   .menu-section > h1 { color:#EE2E22 !important; }
   .menu-section .column h2 { color:#EE2E22 !important; }
   .menu-section ul.leaders .price { overflow:visible !important; }
+}
+
+/* 2026-09-08 mobile flow fix: legacy desktop negative margins made the
+   Hours section paint over the Contact section on phones. */
+@media screen and (max-width: 800px) {
+  .hours-section {
+    position:relative !important;
+    margin-top:0 !important;
+    padding-bottom:30px !important;
+    height:auto !important;
+    min-height:0 !important;
+    overflow:visible !important;
+    z-index:1 !important;
+  }
+
+  .hours-wrap,
+  .hours {
+    position:relative !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+  }
+
+  .contact-section-background {
+    display:block !important;
+    width:100% !important;
+    height:0 !important;
+    min-height:0 !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .contact-section {
+    position:relative !important;
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    margin:0 !important;
+    padding:35px 5% 30px !important;
+    overflow:visible !important;
+    z-index:2 !important;
+  }
+
+  .contact,
+  .location {
+    position:relative !important;
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    flex:none !important;
+    margin:0 !important;
+    padding:0 !important;
+  }
+
+  .contact h1,
+  .location h1 {
+    position:static !important;
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 0 20px !important;
+    font-size:clamp(3rem,14vw,4.5rem) !important;
+    line-height:1 !important;
+    text-align:center !important;
+  }
 }
