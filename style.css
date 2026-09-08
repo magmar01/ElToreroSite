@@ -53,3 +53,10 @@ html, body { width:100% !important; max-width:100% !important; overflow-x:hidden
   .name,.price { font-size:.94rem !important; }
   .desc { font-size:.82rem !important; }
 }
+
+/* Main hamburger sections use the same typography as the category submenu; preserve existing link colors. */
+.menu > a {
+  font-family:'Josefin Sans', Arial, sans-serif !important;
+  font-size:2.3rem !important;
+  line-height:1.1 !important;
+}
