@@ -1,3 +1,9 @@
+/* Load the regular-menu artifact fix after all legacy styles. */
+const menuArtifactCss = document.createElement('link');
+menuArtifactCss.rel = 'stylesheet';
+menuArtifactCss.href = 'menu-artifact-fix.css?v=20260908-1';
+document.head.appendChild(menuArtifactCss);
+
 /* Load the final mobile cleanup after the legacy styles so the old
    absolutely-positioned menu decorations cannot paint over content. */
 if (window.matchMedia && window.matchMedia('(max-width: 800px)').matches) {
