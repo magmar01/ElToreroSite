@@ -1,5 +1,7 @@
 /* Final mobile cleanup: remove legacy painted/positioned elements that can cover menu text. */
 @media screen and (max-width: 800px) {
+  html, body, header, main { margin:0 !important; padding-top:0 !important; }
+
   header,
   .header,
   .info-wrap,
@@ -17,6 +19,7 @@
   header,
   .header {
     z-index:0 !important;
+    margin-bottom:0 !important;
   }
 
   .header::before,
@@ -51,6 +54,8 @@
     isolation:isolate !important;
     background:#fff !important;
     overflow:visible !important;
+    margin-top:0 !important;
+    padding-top:0 !important;
   }
 
   .menu-section > h1,
@@ -74,6 +79,8 @@
     z-index:100 !important;
     clip:auto !important;
     clip-path:none !important;
+    margin:0 !important;
+    padding:6px 0 0 !important;
   }
 
   .menu-section .column h2 {
