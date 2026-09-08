@@ -3,7 +3,7 @@
 if (window.matchMedia && window.matchMedia('(max-width: 800px)').matches) {
   const mobileCss = document.createElement('link');
   mobileCss.rel = 'stylesheet';
-  mobileCss.href = 'mobile-final.css?v=20260908-1';
+  mobileCss.href = 'mobile-final.css?v=20260908-2';
   document.head.appendChild(mobileCss);
 }
 
@@ -61,27 +61,41 @@ if (rightArrow && img) {
 }
 
 /* ---------------------------------------------------------
-   Repair a few malformed legacy menu tags before layout/pricing
-   code runs. These were literal /span> strings in the HTML and
-   caused descriptions to become nested inside price/name spans.
+   Repair malformed legacy menu markup before layout/pricing.
+   Some legacy HTML contains literal /span> text where a closing
+   </span> was intended. Remove that artifact from the DOM and
+   normalize any accidentally nested description elements.
 --------------------------------------------------------- */
+function sanitizeMalformedMenuText() {
+  document.querySelectorAll('.menu-section .name, .menu-section .price, .menu-section .desc').forEach((el) => {
+    if (el.childNodes.length === 0) return;
+    el.childNodes.forEach((node) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        node.textContent = node.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ');
+      }
+    });
+  });
+}
+
 function repairMenuMarkup() {
+  sanitizeMalformedMenuText();
+
   document.querySelectorAll('.menu-section li').forEach((li) => {
     const nameEl = li.querySelector('.name');
     const priceEl = li.querySelector('.price');
     const descEl = li.querySelector('.desc');
 
     if (nameEl) {
-      nameEl.textContent = nameEl.textContent.replace(/\s*\/span>\s*$/i, '').trim();
+      nameEl.textContent = nameEl.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
     }
 
     if (priceEl) {
       if (descEl && priceEl.contains(descEl)) {
         const priceText = priceEl.childNodes[0]?.textContent || '';
-        priceEl.textContent = priceText.replace(/\s*\/span>\s*$/i, '').trim();
+        priceEl.textContent = priceText.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
         li.appendChild(descEl);
       } else {
-        priceEl.textContent = priceEl.textContent.replace(/\s*\/span>\s*$/i, '').trim();
+        priceEl.textContent = priceEl.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
       }
     }
   });
