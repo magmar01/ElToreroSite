@@ -1,6 +1,6 @@
 /* Final mobile cleanup: remove legacy painted/positioned elements that can cover menu text. */
 @media screen and (max-width: 800px) {
-  html, body, header, main { margin:0 !important; padding-top:0 !important; }
+  html, body { margin:0 !important; padding-top:0 !important; }
 
   header,
   .header,
@@ -16,16 +16,17 @@
     transform:none !important;
   }
 
+  /* Keep the fixed hamburger and its dropdown above the scrolling menu content. */
   header,
   .header {
-    z-index:0 !important;
+    z-index:3000 !important;
     margin-bottom:0 !important;
+    overflow:visible !important;
   }
 
-  /* Replace the legacy hamburger animation on phones with a clean, stable X. */
   nav,
   .nav-box {
-    z-index:1000 !important;
+    z-index:4000 !important;
   }
 
   .nav-box {
@@ -63,8 +64,13 @@
     left:0 !important;
   }
 
+  /* The black X in the hamburger is the only close control. */
+  #menu-close {
+    display:none !important;
+  }
+
   .menu {
-    z-index:999 !important;
+    z-index:3500 !important;
     left:12px !important;
     top:70px !important;
     margin-left:-500px !important;
@@ -88,15 +94,6 @@
     font-size:2.3rem !important;
     line-height:1.1 !important;
     text-align:center !important;
-  }
-
-  #menu-close {
-    position:absolute !important;
-    right:10px !important;
-    top:8px !important;
-    color:#EE2E22 !important;
-    font-size:1.25rem !important;
-    z-index:1001 !important;
   }
 
   .header::before,
