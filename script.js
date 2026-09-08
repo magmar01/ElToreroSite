@@ -275,3 +275,88 @@ function loadCentralizedMenuPrices() {
 }
 
 loadCentralizedMenuPrices();
+
+/* Robust floating Back to Top initialization. This runs after the page body
+   exists, removes any legacy/static version, and uses the Hours section's
+   actual viewport position as the show/hide trigger. */
+function initReliableBackToTop() {
+  document.querySelectorAll('.floating-back-to-top').forEach((el) => el.remove());
+
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.id = 'floating-back-to-top';
+  button.className = 'floating-back-to-top';
+  button.textContent = 'Back to Top';
+  button.setAttribute('aria-label', 'Return to top of menu');
+  button.title = 'Return to top of menu';
+
+  Object.assign(button.style, {
+    position: 'fixed',
+    right: '20px',
+    bottom: '20px',
+    top: 'auto',
+    left: 'auto',
+    display: 'none',
+    visibility: 'hidden',
+    opacity: '0',
+    zIndex: '2147483647',
+    minWidth: '150px',
+    padding: '12px 18px',
+    margin: '0',
+    boxSizing: 'border-box',
+    border: '2px solid #000',
+    borderRadius: '999px',
+    background: '#fff',
+    color: '#000',
+    cursor: 'pointer',
+    fontFamily: "'Josefin Sans', Arial, sans-serif",
+    fontSize: '16px',
+    fontWeight: '700',
+    lineHeight: '1.1',
+    textAlign: 'center',
+    boxShadow: '0 3px 12px rgba(0,0,0,.25)'
+  });
+
+  document.body.appendChild(button);
+
+  const show = () => {
+    button.style.display = 'block';
+    button.style.visibility = 'visible';
+    button.style.opacity = '1';
+  };
+
+  const hide = () => {
+    button.style.display = 'none';
+    button.style.visibility = 'hidden';
+    button.style.opacity = '0';
+  };
+
+  const update = () => {
+    const hours = document.querySelector('.hours-section');
+    if (!hours) {
+      hide();
+      return;
+    }
+    /* Show once the bottom edge of Hours has scrolled above the viewport. */
+    if (hours.getBoundingClientRect().bottom <= 0) show();
+    else hide();
+  };
+
+  button.addEventListener('click', () => {
+    const menuSection = document.querySelector('.menu-section');
+    const top = menuSection
+      ? menuSection.getBoundingClientRect().top + window.scrollY
+      : 0;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+  update();
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initReliableBackToTop, { once: true });
+} else {
+  initReliableBackToTop();
+}
