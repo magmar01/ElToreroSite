@@ -4,6 +4,7 @@
  * Edit prices ONLY in this file.
  * Format: "Section > ITEM NAME": "9.99"
  * For duplicate items in one section, use an array in display order.
+ * Deployment refresh marker: 2026-09-08
  */
 window.MENU_PRICE_OVERRIDES = {
   "Appetizers > CHEESE DIP": "9.50",
