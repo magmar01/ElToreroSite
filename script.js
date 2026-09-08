@@ -3,7 +3,7 @@
 if (window.matchMedia && window.matchMedia('(max-width: 800px)').matches) {
   const mobileCss = document.createElement('link');
   mobileCss.rel = 'stylesheet';
-  mobileCss.href = 'mobile-final.css?v=20260908-2';
+  mobileCss.href = 'mobile-final.css?v=20260908-3';
   document.head.appendChild(mobileCss);
 }
 
@@ -16,8 +16,6 @@ const img = document.querySelector('.image-slider');
 const menuLinks = document.querySelectorAll('.menu a');
 let num = 1;
 
-/* The original page has optional/legacy slider controls. Do not let a
-   missing slider stop the rest of the site JavaScript from running. */
 if (ham) {
   menuLinks.forEach((node) => {
     node.addEventListener('click', function() {
@@ -61,24 +59,20 @@ if (rightArrow && img) {
 }
 
 /* ---------------------------------------------------------
-   Repair malformed legacy menu markup before layout/pricing.
-   Some legacy HTML contains literal /span> text where a closing
-   </span> was intended. Remove that artifact from the DOM and
-   normalize any accidentally nested description elements.
+   MENU MARKUP CLEANUP
+   Legacy HTML contains a few literal /span> artifacts. Clean
+   those text nodes immediately so they can never be displayed.
 --------------------------------------------------------- */
-function sanitizeMalformedMenuText() {
-  document.querySelectorAll('.menu-section .name, .menu-section .price, .menu-section .desc').forEach((el) => {
-    if (el.childNodes.length === 0) return;
-    el.childNodes.forEach((node) => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        node.textContent = node.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ');
-      }
-    });
+function cleanMalformedMenuText(root = document) {
+  root.querySelectorAll('.menu-section .name, .menu-section .price, .menu-section .desc').forEach((el) => {
+    if (!el.textContent) return;
+    const cleaned = el.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
+    if (cleaned !== el.textContent) el.textContent = cleaned;
   });
 }
 
 function repairMenuMarkup() {
-  sanitizeMalformedMenuText();
+  cleanMalformedMenuText();
 
   document.querySelectorAll('.menu-section li').forEach((li) => {
     const nameEl = li.querySelector('.name');
@@ -103,9 +97,16 @@ function repairMenuMarkup() {
 
 repairMenuMarkup();
 
+/* Guard against any later DOM insertion containing the legacy artifact. */
+if (window.MutationObserver) {
+  const menuObserver = new MutationObserver(() => cleanMalformedMenuText());
+  const menuRoot = document.querySelector('.menu-section');
+  if (menuRoot) menuObserver.observe(menuRoot, { childList: true, subtree: true, characterData: true });
+}
+
 /* ---------------------------------------------------------
    CENTRALIZED MENU PRICING
-   Prices can now be changed in menu-prices.js only.
+   Prices can be changed in menu-prices.js only.
    The original HTML prices remain the fallback.
 --------------------------------------------------------- */
 function normalizeMenuText(text) {
