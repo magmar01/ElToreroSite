@@ -16,7 +16,6 @@
     transform:none !important;
   }
 
-  /* Keep the fixed hamburger and its dropdown above the scrolling menu content. */
   header,
   .header {
     z-index:3000 !important;
@@ -64,7 +63,6 @@
     left:0 !important;
   }
 
-  /* The black X in the hamburger is the only close control. */
   #menu-close {
     display:none !important;
   }
@@ -186,9 +184,6 @@
     z-index:50 !important;
   }
 
-  /* Mobile location map: neutralize legacy desktop positioning and make the
-     Google Maps iframe a responsive block so it cannot be clipped or leave
-     blank space inside the location section. */
   .contact-section {
     display:flex !important;
     flex-direction:column !important;
@@ -251,8 +246,7 @@
     border:0 !important;
   }
 
-  /* The restaurant copyright belongs below the map, not over it. Give it a
-     small grey footer strip and strong black text so it remains readable. */
+  /* The restaurant copyright belongs below the map, not over it. */
   .contact-section > .copyright {
     display:block !important;
     order:999 !important;
@@ -270,5 +264,37 @@
     text-align:center !important;
     position:static !important;
     z-index:5 !important;
+  }
+
+  /* Back to Top is a real keyboard/click target. It stays hidden until the
+     visitor reaches the bottom of the page, then appears above the footer. */
+  .back-to-top {
+    display:none !important;
+  }
+
+  .back-to-top.is-visible {
+    display:block !important;
+    position:fixed !important;
+    left:50% !important;
+    bottom:62px !important;
+    transform:translateX(-50%) !important;
+    margin:0 !important;
+    padding:10px 18px !important;
+    background:#fff !important;
+    color:#000 !important;
+    border:2px solid #000 !important;
+    border-radius:6px !important;
+    box-shadow:0 2px 8px rgba(0,0,0,.25) !important;
+    font-family:'Josefin Sans', Arial, sans-serif !important;
+    font-size:1.25rem !important;
+    font-weight:bold !important;
+    line-height:1 !important;
+    text-align:center !important;
+    cursor:pointer !important;
+    z-index:5000 !important;
+  }
+
+  .back-to-top.is-visible:active {
+    transform:translateX(-50%) scale(.97) !important;
   }
 }
