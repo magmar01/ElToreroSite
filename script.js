@@ -71,6 +71,16 @@ function repairPolloLocoMixed() {
     const text = (li.textContent || '').replace(/\s+/g, ' ').trim();
     if (!text.includes('POLLO LOCO MIXED') || !text.includes('STEAK, CHICKEN & SHRIMP')) return;
 
+    const existingName = li.querySelector('.name');
+    const existingPrice = li.querySelector('.price');
+    const existingDesc = li.querySelector('.desc');
+    const alreadyCorrect = existingName && existingPrice && existingDesc &&
+      normalizeMenuText(existingName.textContent) === 'POLLO LOCO MIXED' &&
+      normalizeMenuText(existingPrice.textContent) === '18.25' &&
+      normalizeMenuText(existingDesc.textContent) === 'STEAK, CHICKEN & SHRIMP';
+
+    if (alreadyCorrect && li.children.length === 3) return;
+
     li.innerHTML = '';
 
     const name = document.createElement('span');
@@ -116,20 +126,11 @@ function repairMenuMarkup() {
   });
 }
 
-repairMenuMarkup();
-
-if (window.MutationObserver) {
-  const menuObserver = new MutationObserver(() => {
-    cleanMalformedMenuText();
-    repairPolloLocoMixed();
-  });
-  const menuRoot = document.querySelector('.menu-section');
-  if (menuRoot) menuObserver.observe(menuRoot, { childList: true, subtree: true, characterData: true });
-}
-
 function normalizeMenuText(text) {
   return (text || '').replace(/\s+/g, ' ').trim();
 }
+
+repairMenuMarkup();
 
 function applyMenuPriceOverrides() {
   const overrides = window.MENU_PRICE_OVERRIDES || {};
