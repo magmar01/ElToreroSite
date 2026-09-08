@@ -318,53 +318,93 @@ if (document.readyState === 'loading') {
   setupMenuCategorySubmenu();
 }
 
-/* Add a clickable address directly above the Location map. On Apple devices
-   it opens Apple Maps; on Android and desktop it opens Google Maps. */
-function setupClickableLocationAddress() {
+/* Address chooser: clicking the Location address now gives visitors a choice
+   of Apple Maps or Google Maps on both iPhone and Android. */
+function setupLocationMapChooser() {
   const locationSection = document.querySelector('.location');
   if (!locationSection) return;
-  if (locationSection.querySelector('.clickable-location-address')) return;
 
-  const heading = locationSection.querySelector('h1, h2');
-  const map = locationSection.querySelector('.map');
-  if (!map) return;
+  const addressText = '3656 Satellite Boulevard, Duluth, GA 30043';
+  let addressLink = Array.from(locationSection.querySelectorAll('a')).find((el) =>
+    normalizeMenuText(el.textContent).toLowerCase() === addressText.toLowerCase()
+  );
 
-  const address = '3656 Satellite Boulevard, Duluth, GA 30043';
-  const encodedAddress = encodeURIComponent(address);
-  const isApple = /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent) && !('MSStream' in window);
-  const destination = isApple
-    ? 'https://maps.apple.com/?address=' + encodedAddress
-    : 'https://www.google.com/maps/search/?api=1&query=' + encodedAddress;
+  if (!addressLink) {
+    addressLink = document.createElement('a');
+    addressLink.textContent = addressText;
+    addressLink.href = '#';
+    addressLink.className = 'location-address-link';
+    const heading = locationSection.querySelector('h1, h2');
+    const map = locationSection.querySelector('.map');
+    if (heading) heading.insertAdjacentElement('afterend', addressLink);
+    else if (map) map.insertAdjacentElement('beforebegin', addressLink);
+  }
 
-  const link = document.createElement('a');
-  link.className = 'clickable-location-address';
-  link.href = destination;
-  link.textContent = address;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  Object.assign(link.style, {
-    display: 'block',
-    width: '100%',
-    boxSizing: 'border-box',
-    margin: '0 auto 14px',
-    padding: '0 12px',
-    color: '#EE2E22',
-    fontFamily: "'Josefin Sans', Arial, sans-serif",
-    fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
-    fontWeight: '700',
-    lineHeight: '1.35',
-    textAlign: 'center',
-    textDecoration: 'underline',
-    textUnderlineOffset: '3px',
-    cursor: 'pointer'
+  addressLink.href = '#';
+  addressLink.setAttribute('role', 'button');
+  addressLink.setAttribute('aria-label', 'Choose Apple Maps or Google Maps');
+  addressLink.style.cursor = 'pointer';
+
+  if (addressLink.dataset.mapChooserBound) return;
+  addressLink.dataset.mapChooserBound = 'true';
+
+  addressLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    const overlay = document.createElement('div');
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    Object.assign(overlay.style, {
+      position: 'fixed', inset: '0', zIndex: '2147483647', background: 'rgba(0,0,0,.45)',
+      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px', boxSizing: 'border-box'
+    });
+
+    const box = document.createElement('div');
+    Object.assign(box.style, {
+      width: 'min(360px, 100%)', background: '#fff', borderRadius: '12px', padding: '22px',
+      boxSizing: 'border-box', textAlign: 'center', boxShadow: '0 8px 30px rgba(0,0,0,.3)',
+      fontFamily: "'Josefin Sans', Arial, sans-serif"
+    });
+
+    const title = document.createElement('div');
+    title.textContent = 'Open directions with:';
+    Object.assign(title.style, { fontSize: '20px', fontWeight: '700', marginBottom: '16px' });
+
+    const makeButton = (label, url) => {
+      const button = document.createElement('a');
+      button.href = url;
+      button.textContent = label;
+      button.target = '_blank';
+      button.rel = 'noopener noreferrer';
+      Object.assign(button.style, {
+        display: 'block', padding: '12px 14px', margin: '8px 0', borderRadius: '8px',
+        background: '#f2f2f2', color: '#000', textDecoration: 'none', fontSize: '17px', fontWeight: '700'
+      });
+      return button;
+    };
+
+    const encodedAddress = encodeURIComponent(addressText);
+    box.appendChild(title);
+    box.appendChild(makeButton('Apple Maps', 'https://maps.apple.com/?address=' + encodedAddress));
+    box.appendChild(makeButton('Google Maps', 'https://www.google.com/maps/search/?api=1&query=' + encodedAddress));
+
+    const cancel = document.createElement('button');
+    cancel.type = 'button';
+    cancel.textContent = 'Cancel';
+    Object.assign(cancel.style, {
+      display: 'block', width: '100%', padding: '11px 14px', marginTop: '12px', border: '0',
+      borderRadius: '8px', background: '#ddd', color: '#000', fontSize: '16px', fontWeight: '700', cursor: 'pointer'
+    });
+    cancel.addEventListener('click', () => overlay.remove());
+
+    box.appendChild(cancel);
+    overlay.appendChild(box);
+    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+    document.body.appendChild(overlay);
   });
-
-  if (heading) heading.insertAdjacentElement('afterend', link);
-  else map.insertAdjacentElement('beforebegin', link);
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', setupClickableLocationAddress, { once: true });
+  document.addEventListener('DOMContentLoaded', setupLocationMapChooser, { once: true });
 } else {
-  setupClickableLocationAddress();
+  setupLocationMapChooser();
 }
