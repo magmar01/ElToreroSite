@@ -3,7 +3,7 @@
 if (window.matchMedia && window.matchMedia('(max-width: 800px)').matches) {
   const mobileCss = document.createElement('link');
   mobileCss.rel = 'stylesheet';
-  mobileCss.href = 'mobile-final.css?v=20260908-3';
+  mobileCss.href = 'mobile-final.css?v=20260908-4';
   document.head.appendChild(mobileCss);
 }
 
@@ -58,11 +58,6 @@ if (rightArrow && img) {
   });
 }
 
-/* ---------------------------------------------------------
-   MENU MARKUP CLEANUP
-   Legacy HTML contains a few literal /span> artifacts. Clean
-   those text nodes immediately so they can never be displayed.
---------------------------------------------------------- */
 function cleanMalformedMenuText(root = document) {
   root.querySelectorAll('.menu-section .name, .menu-section .price, .menu-section .desc').forEach((el) => {
     if (!el.textContent) return;
@@ -71,8 +66,34 @@ function cleanMalformedMenuText(root = document) {
   });
 }
 
+function repairPolloLocoMixed() {
+  document.querySelectorAll('.menu-section li').forEach((li) => {
+    const text = (li.textContent || '').replace(/\s+/g, ' ').trim();
+    if (!text.includes('POLLO LOCO MIXED') || !text.includes('STEAK, CHICKEN & SHRIMP')) return;
+
+    li.innerHTML = '';
+
+    const name = document.createElement('span');
+    name.className = 'name';
+    name.textContent = 'POLLO LOCO MIXED';
+
+    const price = document.createElement('span');
+    price.className = 'price';
+    price.textContent = '18.25';
+
+    const desc = document.createElement('small');
+    desc.className = 'desc';
+    desc.textContent = 'STEAK, CHICKEN & SHRIMP';
+
+    li.appendChild(name);
+    li.appendChild(price);
+    li.appendChild(desc);
+  });
+}
+
 function repairMenuMarkup() {
   cleanMalformedMenuText();
+  repairPolloLocoMixed();
 
   document.querySelectorAll('.menu-section li').forEach((li) => {
     const nameEl = li.querySelector('.name');
@@ -97,18 +118,15 @@ function repairMenuMarkup() {
 
 repairMenuMarkup();
 
-/* Guard against any later DOM insertion containing the legacy artifact. */
 if (window.MutationObserver) {
-  const menuObserver = new MutationObserver(() => cleanMalformedMenuText());
+  const menuObserver = new MutationObserver(() => {
+    cleanMalformedMenuText();
+    repairPolloLocoMixed();
+  });
   const menuRoot = document.querySelector('.menu-section');
   if (menuRoot) menuObserver.observe(menuRoot, { childList: true, subtree: true, characterData: true });
 }
 
-/* ---------------------------------------------------------
-   CENTRALIZED MENU PRICING
-   Prices can be changed in menu-prices.js only.
-   The original HTML prices remain the fallback.
---------------------------------------------------------- */
 function normalizeMenuText(text) {
   return (text || '').replace(/\s+/g, ' ').trim();
 }
