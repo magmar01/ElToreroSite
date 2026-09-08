@@ -24,6 +24,7 @@ let num = 1;
 
 if (ham) {
   menuLinks.forEach((node) => {
+    if (node.getAttribute('href') === '#menu') return;
     node.addEventListener('click', function() {
       ham.classList.remove('ham-open');
     });
@@ -78,7 +79,6 @@ function setupFloatingBackToTop() {
     return /back\s+to\s+(the\s+)?top/.test(text) && el.children.length <= 2;
   });
 
-  /* If the old static option is not present, create the floating control. */
   if (!backToTop) {
     backToTop = document.createElement('button');
     backToTop.type = 'button';
@@ -92,41 +92,20 @@ function setupFloatingBackToTop() {
   backToTop.setAttribute('role', 'button');
   backToTop.setAttribute('tabindex', '0');
 
-  /* Override legacy positioning so it cannot remain as a static menu item. */
   Object.assign(backToTop.style, {
-    position: 'fixed',
-    right: '24px',
-    bottom: '24px',
-    top: 'auto',
-    left: 'auto',
-    margin: '0',
-    display: 'none',
-    width: 'auto',
-    minWidth: '150px',
-    padding: '12px 18px',
-    zIndex: '5000',
-    boxSizing: 'border-box',
-    cursor: 'pointer',
-    border: '2px solid #000',
-    borderRadius: '999px',
-    background: '#fff',
-    color: '#000',
-    fontFamily: "'Josefin Sans', Arial, sans-serif",
-    fontSize: '1rem',
-    fontWeight: '700',
-    lineHeight: '1.1',
-    textAlign: 'center',
-    boxShadow: '0 3px 12px rgba(0,0,0,.25)'
+    position: 'fixed', right: '24px', bottom: '24px', top: 'auto', left: 'auto',
+    margin: '0', display: 'none', width: 'auto', minWidth: '150px',
+    padding: '12px 18px', zIndex: '5000', boxSizing: 'border-box', cursor: 'pointer',
+    border: '2px solid #000', borderRadius: '999px', background: '#fff', color: '#000',
+    fontFamily: "'Josefin Sans', Arial, sans-serif", fontSize: '1rem', fontWeight: '700',
+    lineHeight: '1.1', textAlign: 'center', boxShadow: '0 3px 12px rgba(0,0,0,.25)'
   });
 
   const goToMenuTop = () => {
-    const top = menuSection
-      ? menuSection.getBoundingClientRect().top + window.scrollY
-      : 0;
+    const top = menuSection ? menuSection.getBoundingClientRect().top + window.scrollY : 0;
     window.scrollTo({ top, behavior: 'smooth' });
   };
 
-  /* Avoid stacking duplicate click handlers if the script is ever loaded twice. */
   if (!backToTop.dataset.floatingBound) {
     backToTop.addEventListener('click', goToMenuTop);
     backToTop.addEventListener('keydown', (event) => {
@@ -142,8 +121,7 @@ function setupFloatingBackToTop() {
     const threshold = hoursSection
       ? hoursSection.getBoundingClientRect().bottom + window.scrollY
       : window.innerHeight;
-    const shouldShow = window.scrollY >= Math.max(0, threshold - 10);
-    backToTop.style.display = shouldShow ? 'block' : 'none';
+    backToTop.style.display = window.scrollY >= Math.max(0, threshold - 10) ? 'block' : 'none';
   };
 
   window.addEventListener('scroll', updateVisibility, { passive: true });
@@ -177,46 +155,27 @@ function repairPolloLocoMixed() {
     if (alreadyCorrect && li.children.length === 3) return;
 
     li.innerHTML = '';
-
-    const name = document.createElement('span');
-    name.className = 'name';
-    name.textContent = 'POLLO LOCO MIXED';
-
-    const price = document.createElement('span');
-    price.className = 'price';
-    price.textContent = '18.25';
-
-    const desc = document.createElement('small');
-    desc.className = 'desc';
-    desc.textContent = 'STEAK, CHICKEN & SHRIMP';
-
-    li.appendChild(name);
-    li.appendChild(price);
-    li.appendChild(desc);
+    const name = document.createElement('span'); name.className = 'name'; name.textContent = 'POLLO LOCO MIXED';
+    const price = document.createElement('span'); price.className = 'price'; price.textContent = '18.25';
+    const desc = document.createElement('small'); desc.className = 'desc'; desc.textContent = 'STEAK, CHICKEN & SHRIMP';
+    li.appendChild(name); li.appendChild(price); li.appendChild(desc);
   });
 }
 
 function repairMenuMarkup() {
   cleanMalformedMenuText();
   repairPolloLocoMixed();
-
   document.querySelectorAll('.menu-section li').forEach((li) => {
     const nameEl = li.querySelector('.name');
     const priceEl = li.querySelector('.price');
     const descEl = li.querySelector('.desc');
-
-    if (nameEl) {
-      nameEl.textContent = nameEl.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
-    }
-
+    if (nameEl) nameEl.textContent = nameEl.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
     if (priceEl) {
       if (descEl && priceEl.contains(descEl)) {
         const priceText = priceEl.childNodes[0]?.textContent || '';
         priceEl.textContent = priceText.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
         li.appendChild(descEl);
-      } else {
-        priceEl.textContent = priceEl.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
-      }
+      } else priceEl.textContent = priceEl.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
     }
   });
 }
@@ -230,37 +189,28 @@ repairMenuMarkup();
 function applyMenuPriceOverrides() {
   const overrides = window.MENU_PRICE_OVERRIDES || {};
   const sectionCounts = {};
-
   document.querySelectorAll('.menu-section .column').forEach((column) => {
     let currentSection = '';
-
     Array.from(column.children).forEach((child) => {
       if (child.matches('h2')) {
         currentSection = normalizeMenuText(child.textContent);
         sectionCounts[currentSection] = sectionCounts[currentSection] || {};
         return;
       }
-
       if (!child.matches('ul.leaders, ul.drinks')) return;
-
       Array.from(child.querySelectorAll('li')).forEach((li) => {
         const nameEl = li.querySelector('.name');
         const priceEl = li.querySelector('.price');
         if (!nameEl || !priceEl || !currentSection) return;
-
         const itemName = normalizeMenuText(nameEl.textContent);
         const key = currentSection + ' > ' + itemName;
         const override = overrides[key];
         if (override === undefined) return;
-
         sectionCounts[currentSection][itemName] = (sectionCounts[currentSection][itemName] || 0) + 1;
         const occurrence = sectionCounts[currentSection][itemName] - 1;
-
         if (Array.isArray(override)) {
           if (override[occurrence] !== undefined) priceEl.textContent = override[occurrence];
-        } else {
-          priceEl.textContent = override;
-        }
+        } else priceEl.textContent = override;
       });
     });
   });
@@ -276,87 +226,84 @@ function loadCentralizedMenuPrices() {
 
 loadCentralizedMenuPrices();
 
-/* Robust floating Back to Top initialization. This runs after the page body
-   exists, removes any legacy/static version, and uses the Hours section's
-   actual viewport position as the show/hide trigger. */
-function initReliableBackToTop() {
-  document.querySelectorAll('.floating-back-to-top').forEach((el) => el.remove());
+/* Expandable Menu submenu. Categories are generated from the actual h2
+   headings in the menu, so the list stays synchronized with the menu. */
+function setupMenuCategorySubmenu() {
+  if (!menu) return;
 
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.id = 'floating-back-to-top';
-  button.className = 'floating-back-to-top';
-  button.textContent = 'Back to Top';
-  button.setAttribute('aria-label', 'Return to top of menu');
-  button.title = 'Return to top of menu';
+  const menuLink = Array.from(menu.querySelectorAll('a')).find((link) =>
+    link.getAttribute('href') === '#menu' || normalizeMenuText(link.textContent).toLowerCase() === 'menu'
+  );
+  if (!menuLink) return;
 
-  Object.assign(button.style, {
-    position: 'fixed',
-    right: '20px',
-    bottom: '20px',
-    top: 'auto',
-    left: 'auto',
-    display: 'none',
-    visibility: 'hidden',
-    opacity: '0',
-    zIndex: '2147483647',
-    minWidth: '150px',
-    padding: '12px 18px',
-    margin: '0',
-    boxSizing: 'border-box',
-    border: '2px solid #000',
-    borderRadius: '999px',
-    background: '#fff',
-    color: '#000',
-    cursor: 'pointer',
-    fontFamily: "'Josefin Sans', Arial, sans-serif",
-    fontSize: '16px',
-    fontWeight: '700',
-    lineHeight: '1.1',
-    textAlign: 'center',
-    boxShadow: '0 3px 12px rgba(0,0,0,.25)'
+  const oldSubmenu = menu.querySelector('.menu-category-submenu');
+  if (oldSubmenu) oldSubmenu.remove();
+
+  const headings = Array.from(document.querySelectorAll('.menu-section h2.menu-h2, .menu-section h2'));
+  if (!headings.length) return;
+
+  const submenu = document.createElement('div');
+  submenu.className = 'menu-category-submenu';
+  submenu.setAttribute('aria-label', 'Menu categories');
+  submenu.style.display = 'none';
+  submenu.style.flexDirection = 'column';
+  submenu.style.width = '100%';
+  submenu.style.boxSizing = 'border-box';
+  submenu.style.padding = '6px 0 8px';
+  submenu.style.margin = '0';
+  submenu.style.background = '#fff';
+  submenu.style.borderTop = '1px solid #ddd';
+  submenu.style.borderBottom = '1px solid #ddd';
+  submenu.style.position = 'relative';
+  submenu.style.zIndex = '4100';
+
+  headings.forEach((heading, index) => {
+    const base = normalizeMenuText(heading.textContent).toLowerCase()
+      .replace(/&/g, ' and ')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-|-$/g, '') || 'section-' + index;
+    let id = 'menu-' + base;
+    let suffix = 2;
+    while (document.getElementById(id) && document.getElementById(id) !== heading) id = 'menu-' + base + '-' + suffix++;
+    heading.id = id;
+    heading.style.scrollMarginTop = '90px';
+
+    const link = document.createElement('a');
+    link.href = '#' + id;
+    link.textContent = normalizeMenuText(heading.textContent);
+    link.className = 'menu-category-link';
+    link.setAttribute('role', 'menuitem');
+    Object.assign(link.style, {
+      display: 'block', width: '100%', boxSizing: 'border-box', padding: '9px 24px 9px 42px',
+      margin: '0', color: '#000', background: '#fff', fontFamily: "'Josefin Sans', Arial, sans-serif",
+      fontSize: '15px', fontWeight: '600', lineHeight: '1.2', textDecoration: 'none', textAlign: 'left'
+    });
+
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      heading.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      submenu.style.display = 'none';
+      menuLink.setAttribute('aria-expanded', 'false');
+      ham?.classList.remove('ham-open');
+    });
+    submenu.appendChild(link);
   });
 
-  document.body.appendChild(button);
-
-  const show = () => {
-    button.style.display = 'block';
-    button.style.visibility = 'visible';
-    button.style.opacity = '1';
-  };
-
-  const hide = () => {
-    button.style.display = 'none';
-    button.style.visibility = 'hidden';
-    button.style.opacity = '0';
-  };
-
-  const update = () => {
-    const hours = document.querySelector('.hours-section');
-    if (!hours) {
-      hide();
-      return;
-    }
-    /* Show once the bottom edge of Hours has scrolled above the viewport. */
-    if (hours.getBoundingClientRect().bottom <= 0) show();
-    else hide();
-  };
-
-  button.addEventListener('click', () => {
-    const menuSection = document.querySelector('.menu-section');
-    const top = menuSection
-      ? menuSection.getBoundingClientRect().top + window.scrollY
-      : 0;
-    window.scrollTo({ top, behavior: 'smooth' });
+  menuLink.setAttribute('aria-haspopup', 'true');
+  menuLink.setAttribute('aria-expanded', 'false');
+  menuLink.style.cursor = 'pointer';
+  menuLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    const isOpen = submenu.style.display === 'flex';
+    submenu.style.display = isOpen ? 'none' : 'flex';
+    menuLink.setAttribute('aria-expanded', String(!isOpen));
   });
 
-  window.addEventListener('scroll', update, { passive: true });
-  window.addEventListener('resize', update);
-  update();
+  menuLink.insertAdjacentElement('afterend', submenu);
 }
 
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initReliableBackToTop, { once: true });
+  document.addEventListener('DOMContentLoaded', setupMenuCategorySubmenu, { once: true });
 } else {
-  initReliableBackToTop();
+  setupMenuCategorySubmenu();
 }
