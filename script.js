@@ -25,7 +25,17 @@ let num = 1;
 if (ham) {
   menuLinks.forEach((node) => {
     if (node.getAttribute('href') === '#menu') return;
-    node.addEventListener('click', function() {
+    node.addEventListener('click', function(event) {
+      const text = normalizeMenuText(node.textContent).toLowerCase();
+      if (text === 'location') {
+        const target = document.getElementById('location') || document.querySelector('.location');
+        if (target) {
+          event.preventDefault();
+          ham.classList.remove('ham-open');
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+      }
       ham.classList.remove('ham-open');
     });
   });
