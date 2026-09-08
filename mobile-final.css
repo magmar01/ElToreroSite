@@ -185,4 +185,69 @@
     position:relative !important;
     z-index:50 !important;
   }
+
+  /* Mobile location map: neutralize legacy desktop positioning and make the
+     Google Maps iframe a responsive block so it cannot be clipped or leave
+     blank space inside the location section. */
+  .contact-section {
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    height:auto !important;
+    min-height:0 !important;
+    overflow:visible !important;
+  }
+
+  .location {
+    display:flex !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    width:100% !important;
+    max-width:100% !important;
+    min-width:0 !important;
+    height:auto !important;
+    min-height:0 !important;
+    flex:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:visible !important;
+  }
+
+  .location h1 {
+    position:static !important;
+    width:100% !important;
+    margin:0 0 20px !important;
+    padding:0 !important;
+  }
+
+  .location .map {
+    position:relative !important;
+    top:0 !important;
+    left:auto !important;
+    right:auto !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:clamp(360px,60vw,500px) !important;
+    min-height:360px !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    flex:none !important;
+  }
+
+  .location .map iframe {
+    display:block !important;
+    position:relative !important;
+    top:auto !important;
+    left:auto !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:100% !important;
+    min-height:360px !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+  }
 }
