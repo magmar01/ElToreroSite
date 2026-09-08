@@ -1,3 +1,12 @@
+/* Load the final mobile cleanup after the legacy styles so the old
+   absolutely-positioned menu decorations cannot paint over content. */
+if (window.matchMedia && window.matchMedia('(max-width: 800px)').matches) {
+  const mobileCss = document.createElement('link');
+  mobileCss.rel = 'stylesheet';
+  mobileCss.href = 'mobile-final.css?v=20260908-1';
+  document.head.appendChild(mobileCss);
+}
+
 const ham = document.querySelector('.nav-box');
 const menu = document.querySelector('.menu');
 const menuClose = document.querySelector('#menu-close');
