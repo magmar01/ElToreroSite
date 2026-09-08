@@ -20,7 +20,6 @@ const leftArrow = document.querySelector('#left');
 const rightArrow = document.querySelector('#right');
 const img = document.querySelector('.image-slider');
 const menuLinks = document.querySelectorAll('.menu a');
-const backToTop = document.querySelector('.back-to-top');
 let num = 1;
 
 if (ham) {
@@ -68,36 +67,91 @@ if (rightArrow && img) {
   });
 }
 
-/* Back to Top: keep the control hidden until the visitor reaches the bottom
-   of the page, then return them to the beginning of the menu when clicked. */
-if (backToTop) {
-  const toggleBackToTop = () => {
-    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 40;
-    backToTop.classList.toggle('is-visible', atBottom);
-  };
+/* Floating Back to Top: the control is removed from normal document flow and
+   appears only after the visitor has scrolled past the entire Hours section. */
+function setupFloatingBackToTop() {
+  const hoursSection = document.querySelector('.hours-section');
+  const menuSection = document.querySelector('.menu-section');
+  const candidates = Array.from(document.querySelectorAll('a,button,[role="button"],div,p,span'));
+  let backToTop = candidates.find((el) => {
+    const text = (el.textContent || '').replace(/\s+/g, ' ').trim().toLowerCase();
+    return /back\s+to\s+(the\s+)?top/.test(text) && el.children.length <= 2;
+  });
 
+  /* If the old static option is not present, create the floating control. */
+  if (!backToTop) {
+    backToTop = document.createElement('button');
+    backToTop.type = 'button';
+    backToTop.textContent = 'Back to Top';
+    document.body.appendChild(backToTop);
+  }
+
+  backToTop.classList.add('floating-back-to-top');
+  backToTop.setAttribute('aria-label', 'Return to top of menu');
+  backToTop.setAttribute('title', 'Return to top of menu');
   backToTop.setAttribute('role', 'button');
   backToTop.setAttribute('tabindex', '0');
-  backToTop.setAttribute('aria-label', 'Return to top of menu');
+
+  /* Override legacy positioning so it cannot remain as a static menu item. */
+  Object.assign(backToTop.style, {
+    position: 'fixed',
+    right: '24px',
+    bottom: '24px',
+    top: 'auto',
+    left: 'auto',
+    margin: '0',
+    display: 'none',
+    width: 'auto',
+    minWidth: '150px',
+    padding: '12px 18px',
+    zIndex: '5000',
+    boxSizing: 'border-box',
+    cursor: 'pointer',
+    border: '2px solid #000',
+    borderRadius: '999px',
+    background: '#fff',
+    color: '#000',
+    fontFamily: "'Josefin Sans', Arial, sans-serif",
+    fontSize: '1rem',
+    fontWeight: '700',
+    lineHeight: '1.1',
+    textAlign: 'center',
+    boxShadow: '0 3px 12px rgba(0,0,0,.25)'
+  });
 
   const goToMenuTop = () => {
-    const menuSection = document.querySelector('.menu-section');
-    const top = menuSection ? menuSection.getBoundingClientRect().top + window.scrollY : 0;
+    const top = menuSection
+      ? menuSection.getBoundingClientRect().top + window.scrollY
+      : 0;
     window.scrollTo({ top, behavior: 'smooth' });
   };
 
-  backToTop.addEventListener('click', goToMenuTop);
-  backToTop.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      goToMenuTop();
-    }
-  });
+  /* Avoid stacking duplicate click handlers if the script is ever loaded twice. */
+  if (!backToTop.dataset.floatingBound) {
+    backToTop.addEventListener('click', goToMenuTop);
+    backToTop.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        goToMenuTop();
+      }
+    });
+    backToTop.dataset.floatingBound = 'true';
+  }
 
-  window.addEventListener('scroll', toggleBackToTop, { passive: true });
-  window.addEventListener('resize', toggleBackToTop);
-  toggleBackToTop();
+  const updateVisibility = () => {
+    const threshold = hoursSection
+      ? hoursSection.getBoundingClientRect().bottom + window.scrollY
+      : window.innerHeight;
+    const shouldShow = window.scrollY >= Math.max(0, threshold - 10);
+    backToTop.style.display = shouldShow ? 'block' : 'none';
+  };
+
+  window.addEventListener('scroll', updateVisibility, { passive: true });
+  window.addEventListener('resize', updateVisibility);
+  updateVisibility();
 }
+
+setupFloatingBackToTop();
 
 function cleanMalformedMenuText(root = document) {
   root.querySelectorAll('.menu-section .name, .menu-section .price, .menu-section .desc').forEach((el) => {
