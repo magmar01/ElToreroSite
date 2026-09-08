@@ -9,7 +9,7 @@ document.head.appendChild(menuArtifactCss);
 if (window.matchMedia && window.matchMedia('(max-width: 800px)').matches) {
   const mobileCss = document.createElement('link');
   mobileCss.rel = 'stylesheet';
-  mobileCss.href = 'mobile-final.css?v=20260908-5';
+  mobileCss.href = 'mobile-final.css?v=20260908-6';
   document.head.appendChild(mobileCss);
 }
 
@@ -29,11 +29,14 @@ if (ham) {
     });
   });
 
+  /* The hamburger itself becomes the close button when it is open. */
   ham.addEventListener('click', function() {
-    ham.classList.add('ham-open');
+    ham.classList.toggle('ham-open');
   });
 }
 
+/* The legacy red close icon is hidden on mobile; keep this handler harmless
+   for any non-mobile/legacy rendering where the icon may still exist. */
 if (menuClose && ham) {
   menuClose.addEventListener('click', function() {
     ham.classList.remove('ham-open');
