@@ -1,6 +1,7 @@
 @import url("legacy-style.css");
 @import url("responsive.css?v=20260901-7");
 @import url("desktop-responsive.css?v=20260901-6");
+@import url("hamburger-menu-style.css?v=20260908-1");
 
 html, body { width:100% !important; max-width:100% !important; overflow-x:hidden !important; }
 *, *::before, *::after { box-sizing:border-box !important; }
@@ -22,7 +23,6 @@ html, body { width:100% !important; max-width:100% !important; overflow-x:hidden
   .column-left,.column-middle,.column-right,.column-new { display:block !important; width:100% !important; max-width:100% !important; min-width:0 !important; margin:0 !important; padding:8px 5% 30px !important; flex:none !important; position:relative !important; left:auto !important; right:auto !important; top:auto !important; bottom:auto !important; float:none !important; overflow:visible !important; }
   .column { display:flex !important; flex-direction:column !important; width:100% !important; max-width:720px !important; min-width:0 !important; margin:0 auto !important; padding:0 !important; position:relative !important; left:auto !important; right:auto !important; top:auto !important; bottom:auto !important; float:none !important; overflow:visible !important; }
 
-  /* Section headings must stay in normal document flow and cannot be covered by legacy decorations. */
   .menu-section .column h2,
   .menu-section .column-left h2,
   .menu-section .column-middle h2,
@@ -32,7 +32,6 @@ html, body { width:100% !important; max-width:100% !important; overflow-x:hidden
   .menu-section .column h2::before { content:none !important; display:none !important; }
   .menu-section .column h2::after { content:"" !important; display:block !important; position:static !important; inset:auto !important; width:78% !important; height:2px !important; margin:8px auto 0 !important; background:#000 !important; border:0 !important; transform:none !important; }
 
-  /* Mobile rows use a dedicated price column so prices can never collide with wrapped names. */
   ul.leaders,ul.drinks { display:block !important; width:100% !important; max-width:100% !important; min-width:0 !important; column-count:1 !important; column-width:auto !important; padding:0 !important; margin:0 !important; overflow:visible !important; }
   ul.leaders li,ul.drinks li { display:grid !important; grid-template-columns:minmax(0,1fr) minmax(12px,1fr) max-content !important; grid-template-rows:auto auto !important; align-items:baseline !important; width:100% !important; max-width:100% !important; min-width:0 !important; height:auto !important; min-height:0 !important; padding:7px 0 10px !important; margin:0 !important; break-inside:avoid !important; overflow:visible !important; position:relative !important; float:none !important; }
   ul.leaders li::before,ul.drinks li::before { content:"" !important; display:block !important; grid-column:2 !important; grid-row:1 !important; width:auto !important; height:1px !important; margin:0 5px !important; border-bottom:2px dotted #222 !important; background:transparent !important; float:none !important; position:static !important; overflow:hidden !important; }
