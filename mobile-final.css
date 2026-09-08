@@ -1,0 +1,107 @@
+/* Final mobile cleanup: remove legacy painted/positioned elements that can cover menu text. */
+@media screen and (max-width: 800px) {
+  header,
+  .header,
+  .info-wrap,
+  .wrap-wrap,
+  main,
+  .menu-section,
+  .column-middle,
+  .column-right,
+  .column-left,
+  .column-new,
+  .column {
+    transform:none !important;
+  }
+
+  header,
+  .header {
+    z-index:0 !important;
+  }
+
+  .header::before,
+  .header::after,
+  .menu-section::before,
+  .menu-section::after,
+  .column::before,
+  .column::after,
+  .column-middle::before,
+  .column-middle::after,
+  .column-right::before,
+  .column-right::after,
+  .column-left::before,
+  .column-left::after,
+  .column-new::before,
+  .column-new::after {
+    content:none !important;
+    display:none !important;
+    visibility:hidden !important;
+  }
+
+  main {
+    position:relative !important;
+    z-index:10 !important;
+    isolation:isolate !important;
+    background:#fff !important;
+  }
+
+  .menu-section {
+    position:relative !important;
+    z-index:11 !important;
+    isolation:isolate !important;
+    background:#fff !important;
+    overflow:visible !important;
+  }
+
+  .menu-section > h1,
+  .menu-section .column h2,
+  .menu-section .name,
+  .menu-section .price,
+  .menu-section .desc {
+    opacity:1 !important;
+    visibility:visible !important;
+  }
+
+  .menu-section > h1,
+  .menu-section .column h2,
+  .menu-section .name,
+  .menu-section .price {
+    background:#fff !important;
+  }
+
+  .menu-section > h1 {
+    position:static !important;
+    z-index:100 !important;
+    clip:auto !important;
+    clip-path:none !important;
+  }
+
+  .menu-section .column h2 {
+    position:static !important;
+    z-index:100 !important;
+    clip:auto !important;
+    clip-path:none !important;
+  }
+
+  .menu-section ul.leaders,
+  .menu-section ul.drinks {
+    position:relative !important;
+    z-index:20 !important;
+    isolation:isolate !important;
+  }
+
+  .menu-section ul.leaders li,
+  .menu-section ul.drinks li {
+    position:relative !important;
+    z-index:21 !important;
+    isolation:isolate !important;
+  }
+
+  .menu-section ul.leaders .name,
+  .menu-section ul.leaders .price,
+  .menu-section ul.drinks .name,
+  .menu-section ul.drinks .price {
+    position:relative !important;
+    z-index:50 !important;
+  }
+}
