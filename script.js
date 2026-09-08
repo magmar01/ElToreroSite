@@ -3,7 +3,7 @@
 if (window.matchMedia && window.matchMedia('(max-width: 800px)').matches) {
   const mobileCss = document.createElement('link');
   mobileCss.rel = 'stylesheet';
-  mobileCss.href = 'mobile-final.css?v=20260908-4';
+  mobileCss.href = 'mobile-final.css?v=20260908-5';
   document.head.appendChild(mobileCss);
 }
 
