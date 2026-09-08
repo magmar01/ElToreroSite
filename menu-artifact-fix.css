@@ -1,0 +1,44 @@
+/* Regular menu heading artifact fix.
+   Legacy .column has overflow:hidden while the menu list is wider than the
+   column. This can create a clipping/paint boundary over section headings. */
+.menu-section,
+.menu-section .column,
+.menu-section .column-middle,
+.menu-section .column-right,
+.menu-section .column-left,
+.menu-section .column-new {
+  overflow: visible !important;
+}
+
+.menu-section .column h2,
+.menu-section .column-left h2,
+.menu-section .column-middle h2,
+.menu-section .column-right h2,
+.menu-section .column-new h2 {
+  position: relative !important;
+  display: block !important;
+  overflow: visible !important;
+  clip: auto !important;
+  clip-path: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 1000 !important;
+  isolation: isolate !important;
+  transform: none !important;
+  text-indent: 0 !important;
+  white-space: normal !important;
+  background: #fff !important;
+}
+
+.menu-section .column h2::before,
+.menu-section .column h2::after,
+.menu-section .column-left h2::before,
+.menu-section .column-left h2::after,
+.menu-section .column-middle h2::before,
+.menu-section .column-middle h2::after,
+.menu-section .column-right h2::before,
+.menu-section .column-right h2::after,
+.menu-section .column-new h2::before,
+.menu-section .column-new h2::after {
+  box-sizing: border-box !important;
+}
