@@ -1,6 +1,9 @@
 {
   "private": true,
   "scripts": {
-    "deploy": "npx wrangler deploy && node scripts/purge-production-cache.mjs"
+    "deploy": "wrangler deploy && node scripts/purge-production-cache.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "4.130.0"
   }
 }
