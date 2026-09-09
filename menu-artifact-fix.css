@@ -37,8 +37,6 @@
 .menu-section .column-new h2::before,
 .menu-section .column-new h2::after { box-sizing: border-box !important; }
 
-/* Location address: keep it in normal document flow so it sits in the
-   actual space between the Location heading and map. */
 .location-address-link {
   display: block !important;
   width: 100% !important;
@@ -65,8 +63,6 @@
 .location-address-link:hover,
 .location-address-link:focus { color: #ffffff !important; }
 
-/* Keep the Side Orders prices in the third grid column so the existing
-   dotted leader always sits between the item name and price. */
 .menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1),
 .menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) {
   grid-template-columns: minmax(0,1fr) minmax(12px,1fr) max-content !important;
@@ -95,40 +91,37 @@
 
 .menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(8) .desc::after {
   content: "YOUR CHOICE OF SIRLOIN STEAK, CHICKEN OR PORK TENDERLOIN WITH CHOICE PEPPERS, ONIONS, TOMATOES AND SPICES SIMMERED TOGETHER, SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS";
-  color: #000 !important;
-  position: absolute !important;
-  inset: 0 !important;
-  font: inherit !important;
+  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
 }
-
 .menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(19) .desc::after {
   content: "GRILLED CHICKEN, CHEESE & MUSHROOMS SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS";
-  color: #000 !important;
-  position: absolute !important;
-  inset: 0 !important;
-  font: inherit !important;
+  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
 }
-
 .menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(11) .desc::after {
   content: "ORDER OF THREE ENCHILADAS, YOUR CHOICE OF STUFFING, TOPPED WITH CHEESE DIP, LETTUCE, GUACAMOLE & SOUR CREAM";
-  color: #000 !important;
-  position: absolute !important;
-  inset: 0 !important;
-  font: inherit !important;
+  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
 }
-
 .menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(12) .name::after {
   content: "SPECIAL ORDER ABC";
-  color: #000 !important;
-  position: absolute !important;
-  inset: 0 !important;
-  font: inherit !important;
+  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
 }
-
 .menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(14) .desc::after {
   content: "THREE FAJITA TACOS, CRISPY TACO SHELLS STUFFED WITH YOUR CHOICE OF BEEF, CHICKEN, OR SHRIMP FAJITAS, LETTUCE, GUACAMOLE, SOUR CREAM & PICO DE GALLO *CAN NOT BE SUBSTITUTED ANYWHERE ON THE MENU*";
-  color: #000 !important;
-  position: absolute !important;
-  inset: 0 !important;
-  font: inherit !important;
+  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
 }
+
+/* Repair malformed literal </span> remnants in the live HTML without changing layout. */
+.menu-section .column > h2:nth-of-type(5) + ul.leaders li:nth-child(3) .desc,
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1) .name,
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) .name,
+.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(23) .name {
+  color: transparent !important;
+  position: relative !important;
+}
+.menu-section .column > h2:nth-of-type(5) + ul.leaders li:nth-child(3) .desc::after {
+  content: "BEEF, BEAN, PORK, OR CHICKEN";
+  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
+}
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1) .name::after { content:"SMALL SIDE"; color:#000 !important; position:absolute !important; inset:0 !important; font:inherit !important; }
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) .name::after { content:"LARGE SIDE"; color:#000 !important; position:absolute !important; inset:0 !important; font:inherit !important; }
+.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(23) .name::after { content:"POLLO LOCO MIXED"; color:#000 !important; position:absolute !important; inset:0 !important; font:inherit !important; }
