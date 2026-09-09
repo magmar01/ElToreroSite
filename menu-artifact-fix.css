@@ -64,3 +64,71 @@
 
 .location-address-link:hover,
 .location-address-link:focus { color: #ffffff !important; }
+
+/* Keep the Side Orders prices in the third grid column so the existing
+   dotted leader always sits between the item name and price. */
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1),
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) {
+  grid-template-columns: minmax(0,1fr) minmax(12px,1fr) max-content !important;
+}
+
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1)::before,
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2)::before {
+  content: "" !important;
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  display: block !important;
+  border-bottom: 2px dotted #222 !important;
+  height: 1px !important;
+  margin: 0 5px !important;
+}
+
+/* Correct the five visible menu typos without changing their layout. */
+.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(8) .desc,
+.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(19) .desc,
+.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(11) .desc,
+.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(14) .desc,
+.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(12) .name {
+  color: transparent !important;
+  position: relative !important;
+}
+
+.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(8) .desc::after {
+  content: "YOUR CHOICE OF SIRLOIN STEAK, CHICKEN OR PORK TENDERLOIN WITH CHOICE PEPPERS, ONIONS, TOMATOES AND SPICES SIMMERED TOGETHER, SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS";
+  color: #000 !important;
+  position: absolute !important;
+  inset: 0 !important;
+  font: inherit !important;
+}
+
+.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(19) .desc::after {
+  content: "GRILLED CHICKEN, CHEESE & MUSHROOMS SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS";
+  color: #000 !important;
+  position: absolute !important;
+  inset: 0 !important;
+  font: inherit !important;
+}
+
+.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(11) .desc::after {
+  content: "ORDER OF THREE ENCHILADAS, YOUR CHOICE OF STUFFING, TOPPED WITH CHEESE DIP, LETTUCE, GUACAMOLE & SOUR CREAM";
+  color: #000 !important;
+  position: absolute !important;
+  inset: 0 !important;
+  font: inherit !important;
+}
+
+.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(12) .name::after {
+  content: "SPECIAL ORDER ABC";
+  color: #000 !important;
+  position: absolute !important;
+  inset: 0 !important;
+  font: inherit !important;
+}
+
+.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(14) .desc::after {
+  content: "THREE FAJITA TACOS, CRISPY TACO SHELLS STUFFED WITH YOUR CHOICE OF BEEF, CHICKEN, OR SHRIMP FAJITAS, LETTUCE, GUACAMOLE, SOUR CREAM & PICO DE GALLO *CAN NOT BE SUBSTITUTED ANYWHERE ON THE MENU*";
+  color: #000 !important;
+  position: absolute !important;
+  inset: 0 !important;
+  font: inherit !important;
+}
