@@ -9,7 +9,7 @@ document.head.appendChild(menuArtifactCss);
 if (window.matchMedia && window.matchMedia('(max-width: 800px)').matches) {
   const mobileCss = document.createElement('link');
   mobileCss.rel = 'stylesheet';
-  mobileCss.href = 'mobile-final.css?v=20260908-7';
+  mobileCss.href = 'mobile-final.css?v=20260909-1';
   document.head.appendChild(mobileCss);
 }
 
@@ -397,3 +397,93 @@ if (document.readyState === 'loading') {
 } else {
   setupLocationMapChooser();
 }
+
+/* SEO + performance pass. These changes are injected from the site's
+   existing script so they do not require a risky rewrite of the large legacy
+   index.html file. */
+(function setupSeoAndPerformance() {
+  const siteUrl = 'https://eltoreroduluth.com/';
+  const title = 'El Torero Mexican Restaurant | Duluth, GA';
+  const description = 'El Torero Mexican Restaurant in Duluth, Georgia. View our Mexican food menu, hours, phone number and location at 3656 Satellite Boulevard.';
+
+  document.title = title;
+
+  const upsertMeta = (selector, attrs) => {
+    let el = document.head.querySelector(selector);
+    if (!el) {
+      el = document.createElement('meta');
+      document.head.appendChild(el);
+    }
+    Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
+  };
+
+  upsertMeta('meta[name="description"]', { name: 'description', content: description });
+  upsertMeta('meta[name="robots"]', { name: 'robots', content: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' });
+  upsertMeta('meta[name="theme-color"]', { name: 'theme-color', content: '#ffffff' });
+  upsertMeta('meta[property="og:title"]', { property: 'og:title', content: title });
+  upsertMeta('meta[property="og:description"]', { property: 'og:description', content: description });
+  upsertMeta('meta[property="og:type"]', { property: 'og:type', content: 'restaurant' });
+  upsertMeta('meta[property="og:url"]', { property: 'og:url', content: siteUrl });
+  upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary' });
+
+  let canonical = document.head.querySelector('link[rel="canonical"]');
+  if (!canonical) {
+    canonical = document.createElement('link');
+    canonical.rel = 'canonical';
+    document.head.appendChild(canonical);
+  }
+  canonical.href = siteUrl;
+
+  if (!document.head.querySelector('script[data-el-torero-schema]')) {
+    const schema = {
+      '@context': 'https://schema.org',
+      '@type': 'Restaurant',
+      name: 'El Torero Mexican Restaurant',
+      url: siteUrl,
+      telephone: '+1-770-476-4320',
+      servesCuisine: ['Mexican'],
+      priceRange: '$$',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: '3656 Satellite Boulevard',
+        addressLocality: 'Duluth',
+        addressRegion: 'GA',
+        postalCode: '30043',
+        addressCountry: 'US'
+      },
+      openingHoursSpecification: [
+        { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '11:00', closes: '21:00' }
+      ],
+      menu: siteUrl + '#menu'
+    };
+    const schemaScript = document.createElement('script');
+    schemaScript.type = 'application/ld+json';
+    schemaScript.dataset.elToreroSchema = 'true';
+    schemaScript.textContent = JSON.stringify(schema);
+    document.head.appendChild(schemaScript);
+  }
+
+  /* Images and the embedded map are below the initial viewport on this
+     long menu page, so let the browser defer their network work. */
+  document.querySelectorAll('img').forEach((image) => {
+    if (!image.hasAttribute('loading')) image.setAttribute('loading', 'lazy');
+    if (!image.hasAttribute('decoding')) image.setAttribute('decoding', 'async');
+  });
+  document.querySelectorAll('iframe').forEach((frame) => {
+    if (!frame.hasAttribute('loading')) frame.setAttribute('loading', 'lazy');
+  });
+
+  /* Make the restaurant phone number immediately actionable on phones. */
+  document.querySelectorAll('.contact-section, #contact').forEach((section) => {
+    section.querySelectorAll('p, span, div').forEach((node) => {
+      if (node.children.length) return;
+      const text = normalizeMenuText(node.textContent);
+      if (!text.includes('(770)476-4320')) return;
+      const link = document.createElement('a');
+      link.href = 'tel:+17704764320';
+      link.textContent = text;
+      link.setAttribute('aria-label', 'Call El Torero Mexican Restaurant');
+      node.replaceChildren(link);
+    });
+  });
+})();
