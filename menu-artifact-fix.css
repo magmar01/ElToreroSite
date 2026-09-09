@@ -63,10 +63,10 @@
 .location-address-link:hover,
 .location-address-link:focus { color: #ffffff !important; }
 
-/* Side Orders is the third heading in the second column. Keep its first two
+/* Side Orders is the sixth heading in the menu column. Keep its first two
    rows as true leader rows: name, dotted separator, then price on the far right. */
-.menu-section > .column-middle:nth-of-type(3) .column > h2:nth-of-type(3) + ul.leaders li:nth-child(1),
-.menu-section > .column-middle:nth-of-type(3) .column > h2:nth-of-type(3) + ul.leaders li:nth-child(2) {
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1),
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) {
   display: grid !important;
   grid-template-columns: minmax(0,1fr) minmax(12px,1fr) max-content !important;
   grid-template-rows: auto !important;
@@ -79,8 +79,8 @@
   overflow: visible !important;
 }
 
-.menu-section > .column-middle:nth-of-type(3) .column > h2:nth-of-type(3) + ul.leaders li:nth-child(1) .name,
-.menu-section > .column-middle:nth-of-type(3) .column > h2:nth-of-type(3) + ul.leaders li:nth-child(2) .name {
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1) .name,
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) .name {
   grid-column: 1 !important;
   grid-row: 1 !important;
   float: none !important;
@@ -96,8 +96,8 @@
   white-space: normal !important;
 }
 
-.menu-section > .column-middle:nth-of-type(3) .column > h2:nth-of-type(3) + ul.leaders li:nth-child(1) .price,
-.menu-section > .column-middle:nth-of-type(3) .column > h2:nth-of-type(3) + ul.leaders li:nth-child(2) .price {
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1) .price,
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) .price {
   grid-column: 3 !important;
   grid-row: 1 !important;
   float: none !important;
@@ -115,8 +115,8 @@
   justify-self: end !important;
 }
 
-.menu-section > .column-middle:nth-of-type(3) .column > h2:nth-of-type(3) + ul.leaders li:nth-child(1)::before,
-.menu-section > .column-middle:nth-of-type(3) .column > h2:nth-of-type(3) + ul.leaders li:nth-child(2)::before {
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1)::before,
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2)::before {
   content: "" !important;
   grid-column: 2 !important;
   grid-row: 1 !important;
