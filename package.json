@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "scripts": {
+    "deploy": "npx wrangler deploy && node scripts/purge-production-cache.mjs"
+  }
+}
