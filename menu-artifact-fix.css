@@ -37,22 +37,23 @@
 .menu-section .column-new h2::before,
 .menu-section .column-new h2::after { box-sizing: border-box !important; }
 
-/* Location address: larger, centered, and positioned in the open space between
-   the Location heading and map, matching the area indicated by the user. */
+/* Location address: prominent, centered, and positioned higher in the open space
+   between the Location heading and map. */
 .location-address-link {
   display: block !important;
   width: 100% !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
-  margin: clamp(120px, 11vw, 165px) auto 42px !important;
+  margin: clamp(75px, 7vw, 110px) auto 38px !important;
   padding: 0 12px !important;
   text-align: center !important;
   align-self: center !important;
   font-family: 'Josefin Sans', Arial, sans-serif !important;
-  font-size: clamp(2.7rem, 4vw, 3.5rem) !important;
+  font-size: clamp(2.9rem, 4.3vw, 3.7rem) !important;
   font-weight: 700 !important;
   line-height: 1.15 !important;
-  color: #000 !important;
+  color: #ffffff !important;
+  -webkit-text-stroke: 0.7px #000 !important;
   text-decoration: underline !important;
   text-decoration-thickness: 2px !important;
   text-underline-offset: 5px !important;
@@ -60,4 +61,4 @@
 }
 
 .location-address-link:hover,
-.location-address-link:focus { color: #000 !important; }
+.location-address-link:focus { color: #ffffff !important; }
