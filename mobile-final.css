@@ -16,6 +16,9 @@
   .menu a { display:block !important; margin:4px 0 !important; padding:2px 0 !important; font-size:2.3rem !important; line-height:1.1 !important; text-align:center !important; }
   .menu .menu-category-submenu,.menu .menu-submenu,.menu .submenu,.menu [class*="submenu"] { max-height:none !important; overflow:visible !important; touch-action:auto !important; }
   .menu .menu-category-submenu a,.menu .menu-submenu a,.menu .submenu a,.menu [class*="submenu"] a { display:block !important; width:100% !important; box-sizing:border-box !important; }
+  /* Distinguish each menu category with a subtle divider without changing the panel styling. */
+  .menu .menu-category-submenu a { margin:0 !important; padding:8px 4px !important; border-bottom:1px solid #ddd !important; }
+  .menu .menu-category-submenu a:last-child { border-bottom:0 !important; }
   .header::before,.header::after,.menu-section::before,.menu-section::after,.column::before,.column::after,.column-middle::before,.column-middle::after,.column-right::before,.column-right::after,.column-left::before,.column-left::after,.column-new::before,.column-new::after { content:none !important; display:none !important; visibility:hidden !important; }
   main { position:relative !important; z-index:10 !important; isolation:isolate !important; background:#fff !important; }
   .menu-section { position:relative !important; z-index:11 !important; isolation:isolate !important; background:#fff !important; overflow:visible !important; margin-top:0 !important; padding-top:0 !important; }
