@@ -10,7 +10,7 @@
   .nav-box.ham-open .b2 { opacity:0 !important; transform:none !important; }
   .nav-box.ham-open .b3 { transform:translateY(-13px) rotate(-45deg) !important; transform-origin:center !important; left:0 !important; }
   #menu-close { display:none !important; }
-  .menu { position:fixed !important; z-index:3500 !important; left:12px !important; right:auto !important; top:70px !important; bottom:auto !important; margin-left:-500px !important; width:calc(100vw - 24px) !important; max-width:292px !important; height:auto !important; max-height:290px !important; padding:18px 12px 18px !important; border:0 !important; border-radius:8px !important; box-shadow:0 4px 18px rgba(0,0,0,.18) !important; box-sizing:border-box !important; overflow-x:hidden !important; overflow-y:hidden !important; -webkit-overflow-scrolling:touch !important; overscroll-behavior:contain !important; touch-action:pan-y !important; scrollbar-width:thin !important; transition:max-height .3s ease !important; }
+  .menu { position:fixed !important; z-index:3500 !important; left:12px !important; right:auto !important; top:70px !important; bottom:auto !important; margin-left:-500px !important; width:calc(100vw - 24px) !important; max-width:292px !important; height:auto !important; max-height:290px !important; padding:18px 12px 18px !important; border:0 !important; border-radius:8px !important; box-shadow:0 4px 18px rgba(0,0,0,.18) !important; box-sizing:border-box !important; overflow-x:hidden !important; overflow-y:hidden !important; -webkit-overflow-scrolling:touch !important; overscroll-behavior:contain !important; touch-action:pan-y !important; scrollbar-width:thin !important; transition:margin-left .3s ease, max-height .3s ease, box-shadow .2s ease !important; will-change:margin-left, max-height !important; }
   .menu.menu-categories-open { max-height:calc(100vh - 90px) !important; overflow-y:auto !important; }
   .ham-open + .menu { margin-left:12px !important; }
   .menu a { display:block !important; margin:4px 0 !important; padding:2px 0 !important; font-size:2.3rem !important; line-height:1.1 !important; text-align:center !important; }
@@ -18,14 +18,10 @@
   .menu .menu-category-submenu a,.menu .menu-submenu a,.menu .submenu a,.menu [class*="submenu"] a { display:block !important; width:100% !important; box-sizing:border-box !important; }
   .menu .menu-category-submenu a { margin:0 !important; padding:8px 4px !important; border-bottom:1px solid #ddd !important; }
   .menu .menu-category-submenu a:last-child { border-bottom:0 !important; }
-
-  /* Prevent the legacy header/menu pseudo-elements from painting an overlay over the first menu section. */
   .header::before,.header::after,.menu-section::before,.menu-section::after,.column::before,.column::after,.column-middle::before,.column-middle::after,.column-right::before,.column-right::after,.column-left::before,.column-left::after,.column-new::before,.column-new::after { content:none !important; display:none !important; visibility:hidden !important; }
   main { position:relative !important; z-index:10 !important; isolation:isolate !important; background:#fff !important; }
   .menu-section { position:relative !important; z-index:11 !important; isolation:isolate !important; background:#fff !important; overflow:visible !important; margin-top:0 !important; padding-top:0 !important; }
   .menu-section > h1,.menu-section .column h2,.menu-section .name,.menu-section .price,.menu-section .desc { opacity:1 !important; visibility:visible !important; }
-
-  /* Headings remain visually white-on-white, but no longer create a painted layer that can cover content. */
   .menu-section > h1,.menu-section .column h2,.menu-section .name,.menu-section .price { background:transparent !important; }
   .menu-section > h1 { position:static !important; z-index:auto !important; clip:auto !important; clip-path:none !important; margin:0 !important; padding:6px 0 0 !important; }
   .menu-section .column h2 { position:static !important; z-index:auto !important; clip:auto !important; clip-path:none !important; isolation:auto !important; }
