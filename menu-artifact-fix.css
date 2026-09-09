@@ -37,7 +37,7 @@
 .menu-section .column-new h2::before,
 .menu-section .column-new h2::after { box-sizing: border-box !important; }
 
-/* Location address: place it in the open space marked by the user,
+/* Location address: place it higher in the open space marked by the user,
    between the Location heading and the map. */
 .location-address-link {
   display: block !important;
@@ -47,7 +47,7 @@
   margin: 0 auto 38px !important;
   padding: 0 12px !important;
   position: relative !important;
-  top: clamp(-330px, -20vh, -150px) !important;
+  top: clamp(-520px, -30vh, -250px) !important;
   text-align: center !important;
   align-self: center !important;
   font-family: 'Josefin Sans', Arial, sans-serif !important;
