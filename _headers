@@ -1,0 +1,8 @@
+# Keep HTML fresh so Cloudflare never serves an old page after a deployment.
+/
+  Cache-Control: no-store, no-cache, must-revalidate
+  CDN-Cache-Control: no-store
+
+/*.html
+  Cache-Control: no-store, no-cache, must-revalidate
+  CDN-Cache-Control: no-store
