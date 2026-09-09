@@ -63,9 +63,56 @@
 .location-address-link:hover,
 .location-address-link:focus { color: #ffffff !important; }
 
+/* Keep Small Side and Large Side as true leader rows: item name, dotted
+   separator, then price. Explicitly reset the legacy float layout here. */
 .menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1),
 .menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) {
+  display: grid !important;
   grid-template-columns: minmax(0,1fr) minmax(12px,1fr) max-content !important;
+  grid-template-rows: auto !important;
+  align-items: baseline !important;
+  width: 100% !important;
+  min-width: 0 !important;
+  height: auto !important;
+  float: none !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1) .name,
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) .name {
+  grid-column: 1 !important;
+  grid-row: 1 !important;
+  float: none !important;
+  display: block !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  padding-right: 0.33em !important;
+  margin: 0 !important;
+  position: relative !important;
+  z-index: 2 !important;
+  background: #fff !important;
+  white-space: normal !important;
+}
+
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1) .price,
+.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) .price {
+  grid-column: 3 !important;
+  grid-row: 1 !important;
+  float: none !important;
+  display: block !important;
+  width: max-content !important;
+  min-width: max-content !important;
+  max-width: 100% !important;
+  padding-left: 0.33em !important;
+  margin: 0 !important;
+  position: relative !important;
+  z-index: 3 !important;
+  background: #fff !important;
+  white-space: nowrap !important;
+  text-align: right !important;
+  justify-self: end !important;
 }
 
 .menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1)::before,
@@ -74,9 +121,14 @@
   grid-column: 2 !important;
   grid-row: 1 !important;
   display: block !important;
-  border-bottom: 2px dotted #222 !important;
+  width: auto !important;
   height: 1px !important;
   margin: 0 5px !important;
+  border-bottom: 2px dotted #222 !important;
+  background: transparent !important;
+  float: none !important;
+  position: static !important;
+  overflow: visible !important;
 }
 
 /* Correct the five visible menu typos without changing their layout. */
