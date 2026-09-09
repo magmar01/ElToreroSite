@@ -1,7 +1,7 @@
 /* Load the regular-menu artifact fix after all legacy styles. */
 const menuArtifactCss = document.createElement('link');
 menuArtifactCss.rel = 'stylesheet';
-menuArtifactCss.href = 'menu-artifact-fix.css?v=20260908-1';
+menuArtifactCss.href = 'menu-artifact-fix.css?v=' + Date.now();
 document.head.appendChild(menuArtifactCss);
 
 /* Load the final mobile cleanup after the legacy styles so the old
