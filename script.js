@@ -149,6 +149,28 @@ function cleanMalformedMenuText(root = document) {
   });
 }
 
+/* Apply spelling corrections to the actual rendered menu text. This is
+   intentionally content-based rather than tied to section/row numbers, so
+   the fixes remain correct if menu items are reordered. */
+function correctMenuSpelling() {
+  const replacements = [
+    ['SIIMMERED', 'SIMMERED'],
+    ['MUSHROOOMS', 'MUSHROOMS'],
+    ['CHOIUCE', 'CHOICE'],
+    ['SEPCIAL ORDER ABC', 'SPECIAL ORDER ABC'],
+    ['ANWHERE', 'ANYWHERE']
+  ];
+
+  document.querySelectorAll('.menu-section .name, .menu-section .price, .menu-section .desc').forEach((el) => {
+    if (!el.textContent) return;
+    let text = el.textContent;
+    replacements.forEach(([wrong, right]) => {
+      text = text.replace(new RegExp(wrong, 'gi'), right);
+    });
+    if (text !== el.textContent) el.textContent = text;
+  });
+}
+
 function repairPolloLocoMixed() {
   document.querySelectorAll('.menu-section li').forEach((li) => {
     const text = (li.textContent || '').replace(/\s+/g, ' ').trim();
@@ -174,6 +196,7 @@ function repairPolloLocoMixed() {
 
 function repairMenuMarkup() {
   cleanMalformedMenuText();
+  correctMenuSpelling();
   repairPolloLocoMixed();
   document.querySelectorAll('.menu-section li').forEach((li) => {
     const nameEl = li.querySelector('.name');
@@ -362,9 +385,9 @@ function setupLocationMapChooser() {
     } else if (isAndroid) {
       window.location.href = 'geo:0,0?q=' + encodedAddress;
     } else if (isMobile) {
-      window.location.href = 'geo:0,0?q=' + encodedAddress;
-    } else {
       window.location.href = 'https://www.google.com/maps/search/?api=1&query=' + encodedAddress;
+    } else {
+      window.open('https://www.google.com/maps/search/?api=1&query=' + encodedAddress, '_blank', 'noopener');
     }
   });
 }
