@@ -37,15 +37,17 @@
 .menu-section .column-new h2::before,
 .menu-section .column-new h2::after { box-sizing: border-box !important; }
 
-/* Location address: prominent, centered, and positioned higher in the open space
-   between the Location heading and map. */
+/* Location address: place it in the open space marked by the user,
+   between the Location heading and the map. */
 .location-address-link {
   display: block !important;
   width: 100% !important;
   max-width: 100% !important;
   box-sizing: border-box !important;
-  margin: clamp(75px, 7vw, 110px) auto 38px !important;
+  margin: 0 auto 38px !important;
   padding: 0 12px !important;
+  position: relative !important;
+  top: clamp(-330px, -20vh, -150px) !important;
   text-align: center !important;
   align-self: center !important;
   font-family: 'Josefin Sans', Arial, sans-serif !important;
