@@ -177,3 +177,86 @@
 .menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1) .name::after { content:"SMALL SIDE"; color:#000 !important; position:absolute !important; inset:0 !important; font:inherit !important; }
 .menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) .name::after { content:"LARGE SIDE"; color:#000 !important; position:absolute !important; inset:0 !important; font:inherit !important; }
 .menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(23) .name::after { content:"POLLO LOCO MIXED"; color:#000 !important; position:absolute !important; inset:0 !important; font:inherit !important; }
+
+/* Desktop leader rows: the legacy stylesheet floats the price before its
+   dotted pseudo-element in this menu. Replace that conflicting float layout
+   with the same three-column structure used by the mobile menu: name, dots,
+   then price at the far right. */
+@media screen and (min-width: 801px) {
+  .menu-section ul.leaders li,
+  .menu-section ul.drinks li {
+    display: grid !important;
+    grid-template-columns: minmax(0,1fr) minmax(12px,1fr) max-content !important;
+    grid-template-rows: auto auto !important;
+    align-items: baseline !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    float: none !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .menu-section ul.leaders li::before,
+  .menu-section ul.drinks li::before {
+    content: "" !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: block !important;
+    width: auto !important;
+    height: 1px !important;
+    margin: 0 5px !important;
+    border-bottom: 2px dotted #222 !important;
+    background: transparent !important;
+    float: none !important;
+    position: static !important;
+    overflow: visible !important;
+  }
+
+  .menu-section ul.leaders li .name,
+  .menu-section ul.drinks li .name {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    float: none !important;
+    display: block !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    position: relative !important;
+    z-index: 2 !important;
+    background: #fff !important;
+    white-space: normal !important;
+  }
+
+  .menu-section ul.leaders li .price,
+  .menu-section ul.drinks li .price {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    float: none !important;
+    display: block !important;
+    width: max-content !important;
+    min-width: max-content !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    position: relative !important;
+    z-index: 3 !important;
+    background: #fff !important;
+    white-space: nowrap !important;
+    text-align: right !important;
+    justify-self: end !important;
+  }
+
+  .menu-section ul.leaders li .desc,
+  .menu-section ul.drinks li .desc {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    float: none !important;
+    clear: both !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 3px !important;
+    position: static !important;
+  }
+}
