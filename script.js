@@ -318,8 +318,8 @@ if (document.readyState === 'loading') {
   setupMenuCategorySubmenu();
 }
 
-/* Address chooser: clicking the Location address now gives visitors a choice
-   of Apple Maps or Google Maps on both iPhone and Android. */
+/* Location address: mobile opens the device's default maps app;
+   desktop opens Google Maps. */
 function setupLocationMapChooser() {
   const locationSection = document.querySelector('.location');
   if (!locationSection) return;
@@ -341,8 +341,8 @@ function setupLocationMapChooser() {
   }
 
   addressLink.href = '#';
-  addressLink.setAttribute('role', 'button');
-  addressLink.setAttribute('aria-label', 'Choose Apple Maps or Google Maps');
+  addressLink.setAttribute('role', 'link');
+  addressLink.setAttribute('aria-label', 'Open directions to 3656 Satellite Boulevard, Duluth, GA 30043');
   addressLink.style.cursor = 'pointer';
 
   if (addressLink.dataset.mapChooserBound) return;
@@ -350,56 +350,22 @@ function setupLocationMapChooser() {
 
   addressLink.addEventListener('click', (event) => {
     event.preventDefault();
-    const overlay = document.createElement('div');
-    overlay.setAttribute('role', 'dialog');
-    overlay.setAttribute('aria-modal', 'true');
-    Object.assign(overlay.style, {
-      position: 'fixed', inset: '0', zIndex: '2147483647', background: 'rgba(0,0,0,.45)',
-      display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '20px', boxSizing: 'border-box'
-    });
-
-    const box = document.createElement('div');
-    Object.assign(box.style, {
-      width: 'min(360px, 100%)', background: '#fff', borderRadius: '12px', padding: '22px',
-      boxSizing: 'border-box', textAlign: 'center', boxShadow: '0 8px 30px rgba(0,0,0,.3)',
-      fontFamily: "'Josefin Sans', Arial, sans-serif"
-    });
-
-    const title = document.createElement('div');
-    title.textContent = 'Open directions with:';
-    Object.assign(title.style, { fontSize: '20px', fontWeight: '700', marginBottom: '16px' });
-
-    const makeButton = (label, url) => {
-      const button = document.createElement('a');
-      button.href = url;
-      button.textContent = label;
-      button.target = '_blank';
-      button.rel = 'noopener noreferrer';
-      Object.assign(button.style, {
-        display: 'block', padding: '12px 14px', margin: '8px 0', borderRadius: '8px',
-        background: '#f2f2f2', color: '#000', textDecoration: 'none', fontSize: '17px', fontWeight: '700'
-      });
-      return button;
-    };
-
     const encodedAddress = encodeURIComponent(addressText);
-    box.appendChild(title);
-    box.appendChild(makeButton('Apple Maps', 'https://maps.apple.com/?address=' + encodedAddress));
-    box.appendChild(makeButton('Google Maps', 'https://www.google.com/maps/search/?api=1&query=' + encodedAddress));
+    const userAgent = navigator.userAgent || '';
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isAndroid = /Android/i.test(userAgent);
+    const isMobile = isIOS || isAndroid || /Mobile|IEMobile|Opera Mini/i.test(userAgent);
 
-    const cancel = document.createElement('button');
-    cancel.type = 'button';
-    cancel.textContent = 'Cancel';
-    Object.assign(cancel.style, {
-      display: 'block', width: '100%', padding: '11px 14px', marginTop: '12px', border: '0',
-      borderRadius: '8px', background: '#ddd', color: '#000', fontSize: '16px', fontWeight: '700', cursor: 'pointer'
-    });
-    cancel.addEventListener('click', () => overlay.remove());
-
-    box.appendChild(cancel);
-    overlay.appendChild(box);
-    overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
-    document.body.appendChild(overlay);
+    if (isIOS) {
+      window.location.href = 'maps://?address=' + encodedAddress;
+    } else if (isAndroid) {
+      window.location.href = 'geo:0,0?q=' + encodedAddress;
+    } else if (isMobile) {
+      window.location.href = 'geo:0,0?q=' + encodedAddress;
+    } else {
+      window.location.href = 'https://www.google.com/maps/search/?api=1&query=' + encodedAddress;
+    }
   });
 }
 
