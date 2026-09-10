@@ -1,0 +1,49 @@
+name: Fix Wines display
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: ${{ !contains(github.event.head_commit.message, '[wines-fix]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Repair Wines rendering
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          marker = '<!-- WINES DISPLAY FIX -->'
+          if marker not in s:
+              fix = r'''\n<!-- WINES DISPLAY FIX -->\n<script>\n(function(){\n  function repairWines(){\n    var headings = Array.from(document.querySelectorAll('.menu-section h2'));\n    var heading = headings.find(function(h){ return (h.textContent || '').replace(/\\s+/g,' ').trim().toLowerCase() === 'wines'; });\n    if (!heading) return;\n    var list = heading.nextElementSibling;\n    if (!list || !list.matches('ul.leaders, ul.drinks')) return;\n    var desired = [\n      ['WHITE ZINFANDEL, CHARDONNAY','5.00'],\n      ['HOMEMADE SANGRIA (16oz.)','6.25'],\n      ['PITCHER SANGRIA (60oz.)','17.50'],\n      ['HALF PITCHER SANGRIA (32oz.)','10.00']\n    ];\n    var items = Array.from(list.querySelectorAll(':scope > li'));\n    desired.forEach(function(pair, i){\n      var li = items[i];\n      if (!li) {\n        li = document.createElement('li');\n        list.appendChild(li);\n      }\n      var name = li.querySelector('.name');\n      var price = li.querySelector('.price');\n      var desc = li.querySelector('.desc');\n      if (!name) { name = document.createElement('span'); name.className='name'; li.appendChild(name); }\n      if (!price) { price = document.createElement('span'); price.className='price'; li.appendChild(price); }\n      name.textContent = pair[0];\n      price.textContent = pair[1];\n      if (desc) desc.textContent = '';\n    });\n  }\n  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', repairWines, {once:true});\n  else repairWines();\n  window.addEventListener('load', repairWines, {once:true});\n})();\n</script>\n'''
+              s = s.replace('</body>', fix + '</body>')
+              p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit repair
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          if git diff --cached --quiet; then
+            echo 'No change needed.'
+          else
+            git commit -m '[wines-fix] Repair Wines section rendering'
+            git push
+          fi
+
+      - name: Remove one-time repair workflow
+        if: success()
+        run: |
+          git rm .github/workflows/fix-wines-display.yml
+          git commit -m '[wines-fix] Remove one-time repair workflow'
+          git push
