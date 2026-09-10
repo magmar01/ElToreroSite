@@ -1,2 +1,2 @@
-Cloudflare deployment trigger file. No website behavior.
-Last menu rendering correction: 2026-09-10.
+GitHub Pages deployment trigger file. No website behavior.
+Last deployment trigger: 2026-09-10.
