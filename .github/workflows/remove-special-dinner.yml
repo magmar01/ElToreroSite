@@ -1,0 +1,40 @@
+name: Remove Special Dinner
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  remove-special-dinner:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Remove Special Dinner from menu
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path("index.html")
+          s = p.read_text()
+          block = '''\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<span class="name">SPECIAL DINNER</span>\n\t\t\t\t\t\t\t<span class="price">18.95</span>\n\t\t\t\t\t\t\t<small class="desc">CHALUPA, CHILE RELLENO, TACO, RICE, BEANS, ENCHILADA, & TAMALE</small>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t'''
+          if block in s:
+              s = s.replace(block, '', 1)
+              p.write_text(s)
+          PY
+
+      - name: Commit menu change
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "SPECIAL DINNER already removed."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Remove Special Dinner from menu"
+          git push
