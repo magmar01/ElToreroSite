@@ -57,7 +57,7 @@
   top: 0 !important;
 }
 
-#menu-wines + ul.leaders > li:nth-child(1) .price::after { content: "5.00"; }
-#menu-wines + ul.leaders > li:nth-child(2) .price::after { content: "6.25"; }
-#menu-wines + ul.leaders > li:nth-child(3) .price::after { content: "17.50"; }
-#menu-wines + ul.leaders > li:nth-child(4) .price::after { content: "10.00"; }
+#menu-wines + ul.leaders > li:nth-child(1) .price::after { content: "6.00"; }
+#menu-wines + ul.leaders > li:nth-child(2) .price::after { content: "7.75"; }
+#menu-wines + ul.leaders > li:nth-child(3) .price::after { content: "21.25"; }
+#menu-wines + ul.leaders > li:nth-child(4) .price::after { content: "13.25"; }
