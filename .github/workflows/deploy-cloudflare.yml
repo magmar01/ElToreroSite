@@ -17,12 +17,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Deploy to Cloudflare Workers
+      - name: Deploy site from repository root
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: deploy
+          workingDirectory: .
+          command: deploy --config ./wrangler.jsonc
 
       - name: Purge Cloudflare cache for the production hostname
         env:
@@ -42,4 +43,4 @@ jobs:
 
           echo "$response" | grep -q '"success":true'
 
-# Deployment pipeline verified for the master branch.
+# Deployment path: repository root -> wrangler.jsonc -> Cloudflare Workers static assets.
