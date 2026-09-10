@@ -1,0 +1,51 @@
+name: Update Fajita Beef to Steak
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  update-menu:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update Beef to Steak in Fajita item descriptions
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          p = Path("index.html")
+          s = p.read_text()
+
+          pattern = re.compile(r'(<li>.*?<span class="name">[^<]*FAJITAS?[^<]*</span>.*?<small class="desc">)(.*?)(</small>)', re.S)
+
+          def replace_beef(match):
+              desc = match.group(2)
+              return match.group(1) + re.sub(r'\bBEEF\b', 'STEAK', desc) + match.group(3)
+
+          updated, count = pattern.subn(replace_beef, s)
+          if updated == s:
+              print("No Fajita descriptions needed updating.")
+          else:
+              p.write_text(updated)
+              print(f"Updated {count} Fajita item descriptions.")
+          PY
+
+      - name: Commit menu change
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Change beef to steak in fajita descriptions"
+          git push
