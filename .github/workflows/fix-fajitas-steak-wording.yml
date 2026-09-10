@@ -1,0 +1,34 @@
+name: Fix Fajitas Steak Wording
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  fix-wording:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Remove redundant beef from beef steak wording
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path("index.html")
+          s = p.read_text()
+          old = "YOUR CHOICE OF BEEF STEAK, CHICKEN, SHRIMP OR PORK TENDERLOIN"
+          new = "YOUR CHOICE OF STEAK, CHICKEN, SHRIMP OR PORK TENDERLOIN"
+          if old in s:
+              s = s.replace(old, new, 1)
+              p.write_text(s)
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Simplify fajitas steak description" || exit 0
+          git push
