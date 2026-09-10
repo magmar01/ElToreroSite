@@ -1,4 +1,4 @@
-/* Regular menu heading artifact fix. */
+/* Stable menu rendering rules. Content belongs in index.html; this file only handles layout. */
 .menu-section,
 .menu-section .column,
 .menu-section .column-middle,
@@ -63,125 +63,8 @@
 .location-address-link:hover,
 .location-address-link:focus { color: #ffffff !important; }
 
-/* Side Orders is the sixth heading in the menu column. Keep its first two
-   rows as true leader rows: name, dotted separator, then price on the far right. */
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1),
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) {
-  display: grid !important;
-  grid-template-columns: minmax(0,1fr) minmax(12px,1fr) max-content !important;
-  grid-template-rows: auto !important;
-  align-items: baseline !important;
-  width: 100% !important;
-  min-width: 0 !important;
-  height: auto !important;
-  float: none !important;
-  position: relative !important;
-  overflow: visible !important;
-}
-
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1) .name,
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) .name {
-  grid-column: 1 !important;
-  grid-row: 1 !important;
-  float: none !important;
-  display: block !important;
-  width: auto !important;
-  min-width: 0 !important;
-  max-width: none !important;
-  padding-right: 0.33em !important;
-  margin: 0 !important;
-  position: relative !important;
-  z-index: 2 !important;
-  background: #fff !important;
-  white-space: normal !important;
-}
-
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1) .price,
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) .price {
-  grid-column: 3 !important;
-  grid-row: 1 !important;
-  float: none !important;
-  display: block !important;
-  width: max-content !important;
-  min-width: max-content !important;
-  max-width: 100% !important;
-  padding-left: 0.33em !important;
-  margin: 0 !important;
-  position: relative !important;
-  z-index: 3 !important;
-  background: #fff !important;
-  white-space: nowrap !important;
-  text-align: right !important;
-  justify-self: end !important;
-}
-
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1)::before,
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2)::before {
-  content: "" !important;
-  grid-column: 2 !important;
-  grid-row: 1 !important;
-  display: block !important;
-  width: auto !important;
-  height: 1px !important;
-  margin: 0 5px !important;
-  border-bottom: 2px dotted #222 !important;
-  background: transparent !important;
-  float: none !important;
-  position: static !important;
-  overflow: visible !important;
-}
-
-/* Correct the five visible menu typos without changing their layout. */
-.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(8) .desc,
-.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(19) .desc,
-.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(11) .desc,
-.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(14) .desc,
-.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(12) .name {
-  color: transparent !important;
-  position: relative !important;
-}
-
-.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(8) .desc::after {
-  content: "YOUR CHOICE OF SIRLOIN STEAK, CHICKEN OR PORK TENDERLOIN WITH CHOICE PEPPERS, ONIONS, TOMATOES AND SPICES SIMMERED TOGETHER, SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS";
-  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
-}
-.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(19) .desc::after {
-  content: "GRILLED CHICKEN, CHEESE & MUSHROOMS SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS";
-  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
-}
-.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(11) .desc::after {
-  content: "ORDER OF THREE ENCHILADAS, YOUR CHOICE OF STUFFING, TOPPED WITH CHEESE DIP, LETTUCE, GUACAMOLE & SOUR CREAM";
-  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
-}
-.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(12) .name::after {
-  content: "SPECIAL ORDER ABC";
-  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
-}
-.menu-section .column > h2:nth-of-type(8) + ul.leaders li:nth-child(14) .desc::after {
-  content: "THREE FAJITA TACOS, CRISPY TACO SHELLS STUFFED WITH YOUR CHOICE OF BEEF, CHICKEN, OR SHRIMP FAJITAS, LETTUCE, GUACAMOLE, SOUR CREAM & PICO DE GALLO *CAN NOT BE SUBSTITUTED ANYWHERE ON THE MENU*";
-  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
-}
-
-/* Repair malformed literal </span> remnants in the live HTML without changing layout. */
-.menu-section .column > h2:nth-of-type(5) + ul.leaders li:nth-child(3) .desc,
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1) .name,
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) .name,
-.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(23) .name {
-  color: transparent !important;
-  position: relative !important;
-}
-.menu-section .column > h2:nth-of-type(5) + ul.leaders li:nth-child(3) .desc::after {
-  content: "BEEF, BEAN, PORK, OR CHICKEN";
-  color: #000 !important; position: absolute !important; inset: 0 !important; font: inherit !important;
-}
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(1) .name::after { content:"SMALL SIDE"; color:#000 !important; position:absolute !important; inset:0 !important; font:inherit !important; }
-.menu-section .column > h2:nth-of-type(6) + ul.leaders li:nth-child(2) .name::after { content:"LARGE SIDE"; color:#000 !important; position:absolute !important; inset:0 !important; font:inherit !important; }
-.menu-section .column > h2:nth-of-type(7) + ul.leaders li:nth-child(23) .name::after { content:"POLLO LOCO MIXED"; color:#000 !important; position:absolute !important; inset:0 !important; font:inherit !important; }
-
-/* Desktop leader rows: the legacy stylesheet floats the price before its
-   dotted pseudo-element in this menu. Replace that conflicting float layout
-   with the same three-column structure used by the mobile menu: name, dots,
-   then price at the far right. */
+/* Desktop leader rows. Keep menu item content in the HTML rather than
+   generating replacement text with CSS pseudo-elements. */
 @media screen and (min-width: 801px) {
   .menu-section ul.leaders li,
   .menu-section ul.drinks li {
