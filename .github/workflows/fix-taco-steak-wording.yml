@@ -1,0 +1,32 @@
+name: Fix Taco Steak Wording
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace exact taco wording
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          old = "YOUR CHOICE OF BEEF OR CHICKEN, GRILLED IN IT'S OWN JUICE, SERVED IN A FLOUR TORTILLA WITH LETTUCE, GUACAMOLE, SOUR CREAM & PICO DE GALLO"
+          new = "YOUR CHOICE OF STEAK OR CHICKEN, GRILLED IN IT'S OWN JUICE, SERVED IN A FLOUR TORTILLA WITH LETTUCE, GUACAMOLE, SOUR CREAM & PICO DE GALLO"
+          if s.count(old) != 1:
+              raise SystemExit(f'Expected exactly one match, found {s.count(old)}')
+          p.write_text(s.replace(old, new, 1))
+          PY
+      - name: Commit change
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Change taco description beef to steak"
+          git push
