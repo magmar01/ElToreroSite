@@ -347,7 +347,7 @@ function setupLocationMapChooser() {
   const locationSection = document.querySelector('.location');
   if (!locationSection) return;
 
-  const addressText = '3656 Satellite Boulevard, Duluth, GA 30043';
+  const addressText = '3656 Satellite Boulevard, Duluth, GA 30096';
   let addressLink = Array.from(locationSection.querySelectorAll('a')).find((el) =>
     normalizeMenuText(el.textContent).toLowerCase() === addressText.toLowerCase()
   );
@@ -365,7 +365,7 @@ function setupLocationMapChooser() {
 
   addressLink.href = '#';
   addressLink.setAttribute('role', 'link');
-  addressLink.setAttribute('aria-label', 'Open directions to 3656 Satellite Boulevard, Duluth, GA 30043');
+  addressLink.setAttribute('aria-label', 'Open directions to 3656 Satellite Boulevard, Duluth, GA 30096');
   addressLink.style.cursor = 'pointer';
 
   if (addressLink.dataset.mapChooserBound) return;
