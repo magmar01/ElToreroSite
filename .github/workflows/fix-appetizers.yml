@@ -1,0 +1,49 @@
+name: One-time appetizer repair
+
+on:
+  push:
+    branches: [master]
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Insert missing appetizer items
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+
+          marker = '<h2 class="menu-h2">Appetizers</h2>'
+          if marker not in text:
+              raise SystemExit('Appetizers heading not found')
+
+          start = text.index(marker)
+          ul_start = text.index('<ul class="leaders">', start)
+          ul_end = text.index('</ul>', ul_start)
+          block = text[ul_start:ul_end]
+
+          if 'CHEESE DIP' not in block:
+              items = '''\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<span class="name">CHEESE DIP</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<span class="name">GUACAMOLE DIP</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t\t<small class="desc">CREAMY OR CHUNKY</small>\n\t\t\t\t\t\t</li>\n'''
+              insertion_point = ul_start + len('<ul class="leaders">')
+              text = text[:insertion_point] + items + text[insertion_point:]
+              path.write_text(text, encoding='utf-8')
+          PY
+
+      - name: Commit repair and remove one-time workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git rm .github/workflows/fix-appetizers.yml
+          git diff --cached --quiet && exit 0
+          git commit -m "Restore Cheese Dip and Guacamole Dip appetizers"
+          git push
