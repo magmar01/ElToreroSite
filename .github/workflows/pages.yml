@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -25,31 +25,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Make exact menu.js correction
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('menu.js')
-          s = p.read_text(encoding='utf-8')
-          old = "description: ' CHOICE OF BEER WITH CLAMATO AND LIME JUICE.'"
-          new = "description: 'CHOICE OF BEER WITH CLAMATO AND LIME JUICE.'"
-          if s.count(old) != 1:
-              raise SystemExit(f'Expected exactly 1 target, found {s.count(old)}')
-          s = s.replace(old, new, 1)
-          if s.count(new) < 1:
-              raise SystemExit('Replacement verification failed')
-          p.write_text(s, encoding='utf-8')
-          PY
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add menu.js
-          git diff --cached --check
-          git diff --cached -- menu.js
-          git commit -m "Fix extra space in Michelada description"
-          git push origin HEAD:master
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
