@@ -18,3 +18,9 @@ body {
 *::after {
   box-sizing: border-box !important;
 }
+
+/* Make menu prices slightly larger and bolder without changing their spacing or alignment. */
+.price {
+  font-weight: 700 !important;
+  font-size: 1.04em !important;
+}
