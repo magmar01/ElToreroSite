@@ -3,7 +3,7 @@
    the final flow corrections here so older conflicting mobile overrides do
    not win by appearing later in the cascade. */
 @import url("legacy-style.css");
-@import url("responsive.css?v=20260911-2");
+@import url("responsive.css?v=20260911-3");
 @import url("desktop-responsive.css?v=20260911-2");
 
 html, body {
@@ -13,25 +13,26 @@ html, body {
 }
 *, *::before, *::after { box-sizing: border-box !important; }
 
-/* Mobile/tablet: keep the header and menu in normal document flow. */
+/* Mobile/tablet: keep the logo/header area as a true square and keep the menu in normal document flow. */
 @media screen and (max-width: 900px) {
   header {
     display: block !important;
     width: 100% !important;
-    height: 260px !important;
-    min-height: 260px !important;
-    max-height: 260px !important;
+    height: 100vw !important;
+    min-height: 100vw !important;
+    max-height: 100vw !important;
     margin: 0 !important;
     padding: 0 !important;
     position: relative !important;
     overflow: hidden !important;
+    aspect-ratio: 1 / 1 !important;
   }
   header .header {
     display: block !important;
     width: 100% !important;
-    height: 260px !important;
-    min-height: 260px !important;
-    max-height: 260px !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
     margin: 0 !important;
     padding: 0 !important;
     position: relative !important;
@@ -40,6 +41,10 @@ html, body {
     right: auto !important;
     bottom: auto !important;
     overflow: hidden !important;
+    aspect-ratio: 1 / 1 !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
   }
   main {
     display: block !important;
