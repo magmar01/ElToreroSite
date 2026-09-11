@@ -15,6 +15,27 @@
     overflow-x: hidden !important;
   }
 
+  /* Keep the desktop navigation and its fixed menu above the entire menu
+     section while the page scrolls. The old navigation z-index (10) allowed
+     menu headings/content to paint over it. */
+  header,
+  .header,
+  nav {
+    overflow: visible !important;
+  }
+
+  .nav-box,
+  .menu {
+    z-index: 100000 !important;
+  }
+
+  /* The legacy close icon sits outside the menu and creates the small extra
+     white X beside the hamburger. The hamburger's own open-state X is drawn
+     by style.css and remains untouched. */
+  #menu-close {
+    display: none !important;
+  }
+
   .menu-section {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
@@ -27,6 +48,7 @@
     padding: 0 4vw 20px !important;
     position: relative !important;
     overflow: visible !important;
+    z-index: 1 !important;
   }
 
   .menu-section > h1 {
