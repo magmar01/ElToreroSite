@@ -145,7 +145,7 @@ const MENU = [
     { name: 'POLLO LOCO', price: '19.25', description: 'CHUNKS OF CHICKEN TOPPED WITH NACHO CHEESE SAUCE SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS' },
     { name: 'POLLO LOCO MIXED', price: '21.25', description: 'STEAK, CHICKEN & SHRIMP' },
     { name: 'CHORI POLLO', price: '19.75', description: 'CHUNKS OF CHICKEN & MEXICAN SAUSAGE TOPPED WITH CHEESE SAUCE, SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS.' },
-    { name: 'POLLO SERRANO', price: '19.25', description: 'CHUNKS OF CHICKEN WITH ONIONS & SERRANO PEPPERS SIMMERED TOGETHER. SERVED WITH RICE, BEANS AND THREE FLOUR TORTILLAS' }
+    { name: 'POLLO SERRANO', price: '19.25', description: 'CHUNKS OF CHICKEN WITH ONIONS & SERRANO PEPPERS SIMMERED TOGETHER. SERVED WITH RICE, BEANS AND THREE FLOUR TORTILLAS' },
     { name: 'NACHOS DIABLO (VERY HOT)', price: '18.25', description: 'YOUR CHOICE OF STEAK, CHICKEN, SHRIMP OR PORK' },
     { name: 'NACHOS FRIES', price: '15.50', description: 'YOUR CHOICE OF BEED, CHICKEN, BEANS OR PORK' }
   ] },
@@ -225,8 +225,8 @@ const MENU = [
     { name: '#4', price: '6.50', description: 'ONE BURRITO & RICE' },
     { name: '#5', price: '6.50', description: 'ONE ENCHILADA, RICE AND BEANS' }, 
     { name: '#6', price: '6.50', description: 'ONE QUESADILLA, ONE TACO & RICE' },
-    { name: '#7', price: '6.50', description: 'POLLO AZADO & FRENCH FRIES OR RICE' }, {
-      name: '#8', price: '6.50', description: 'QUESADILLA & FRENCH FRIES' }
+    { name: '#7', price: '6.50', description: 'POLLO AZADO & FRENCH FRIES OR RICE' }, 
+    { name: '#8', price: '6.50', description: 'QUESADILLA & FRENCH FRIES' }
   ] },
   { title: 'Dessert', items: [
     { name: 'SOPAPILLA', price: '3.50' }, 
@@ -253,7 +253,7 @@ const MENU = [
     { name: 'PITCHER FROZEN MARGARITA (60oz.)', price: '27.50' }, 
     { name: 'HALF PITCHER FROZEN MARGARITA (32oz.)', price: '16.25' },
     { name: 'CHIQUITA MARGARITA', price: '6.25', description: 'LIME ONLY' }, 
-    { name: 'GOLD MARGARITA (16oz.)', price: 'QQ.00' }, 
+    { name: 'GOLD MARGARITA (16oz.)', price: '11.00' }, 
     { name: 'PITCHER GOLD MARGARITA (60oz.)', price: '29.50' },
     { name: 'HALF PITCHER GOLD MARGARITA (32oz.)', price: '17.00' }, 
     { name: 'TEXAS MARGARITA (16oz.)', price: '13.25' }, 
