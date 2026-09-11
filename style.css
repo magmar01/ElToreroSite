@@ -70,13 +70,12 @@ body {
 }
 
 /*
- * Contact + location cleanup
+ * Contact + location source layout
  *
- * The current HTML uses .contact-wrap inside .contact-section and a simple
- * .location + .map iframe. The legacy footer stylesheet still targets an
- * older DOM (.contact, .contact-line, decorative map streets, etc.), so those
- * rules can override the real elements and cause the footer to collapse or
- * position incorrectly. These rules establish the actual current structure.
+ * The HTML uses .contact-wrap inside .contact-section and a dedicated
+ * .location block. Keep the footer typography and spacing defined here in
+ * the master stylesheet so the imported legacy footer rules cannot change
+ * the actual contact/location structure.
  */
 .contact-section {
   display: block !important;
@@ -127,21 +126,29 @@ body {
 
 .contact-wrap p {
   width: 100% !important;
-  margin: 10px 0 !important;
+  margin: 0 0 10px !important;
   padding: 0 !important;
   color: #fff !important;
   font-family: 'Josefin Sans', Arial, sans-serif !important;
-  font-size: clamp(1rem, 2vw, 1.5rem) !important;
-  line-height: 1.4 !important;
+  font-size: clamp(1.15rem, 3vw, 2rem) !important;
+  line-height: 1.35 !important;
   text-align: center !important;
 }
 
-.contact-wrap a {
-  color: #fff !important;
-  text-decoration: none !important;
+.contact-wrap p:last-child {
+  margin-bottom: 0 !important;
 }
 
-.contact-wrap a:hover {
+.contact-wrap a {
+  display: inline-block !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.contact-wrap a:hover,
+.contact-wrap a:focus-visible {
   color: #17a832 !important;
 }
 
@@ -184,14 +191,20 @@ body {
   padding: 0 !important;
   color: #000 !important;
   font-family: 'Josefin Sans', Arial, sans-serif !important;
-  font-size: clamp(1rem, 2vw, 1.35rem) !important;
+  font-size: clamp(1.1rem, 3vw, 1.6rem) !important;
   line-height: 1.4 !important;
   text-align: center !important;
-  text-decoration: none !important;
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 3px !important;
+  cursor: pointer !important;
+  -webkit-tap-highlight-color: transparent !important;
 }
 
 .location > a:hover,
-.location-address-link:hover {
+.location > a:focus-visible,
+.location-address-link:hover,
+.location-address-link:focus-visible {
   color: #17a832 !important;
 }
 
