@@ -29,7 +29,7 @@ const MENU = [
     { name: 'NACHOS FAJITAS', price: '13.75', description: 'NACHOS WITH YOUR CHOICE OF STEAK, CHICKEN OR SHRIMP FAJITAS' },
     { name: 'HALF-ORDER', price: '10.25' },
     { name: 'NACHOS WITH FAJITAS MIXED', price: '16.25', description: 'NACHOS WITH YOUR CHOICE OF STEAK, CHICKEN & SHRIMP FAJITAS' },
-    { name: 'HALF-ORDER', price: '11,75' },
+    { name: 'HALF-ORDER', price: '11.75' },
     { name: 'SPECIAL NACHOS WITH FAJITAS', price: '16.50', description: 'NACHOS FAJITAS TOPPED WITH LETTUCE, SOUR CREAM AND GUACAMOLE' },
     { name: 'HALF-ORDER', price: '12.25' },
     { name: 'SPECIAL NACHOS WITH FAJITAS MIXED', price: '17.50', description: 'NACHOS FAJITAS MIXED TOPPED WITH LETTUCE, SOUR CREAM & GUACAMOLE' },
@@ -67,7 +67,7 @@ const MENU = [
     { name: 'SPECIAL LUNCH #9', price: '9.10', description: 'ENCHILADA, RICE & BEANS' },
     { name: 'SPECIAL LUNCH #10', price: '9.95', description: 'CHALUPA, RICE & TACO' },
     { name: 'SPECIAL LUNCH #11', price: '9.10', description: 'TWO TACOS (HARD OR SOFT SHELL) WITH YOUR CHOICE OF RICE OR BEANS' },
-    { name: 'SPECIAL LUNCH #12', price: '9.95', description: 'TWO ENCHILADAS WITH YOUT CHOICE OF RICE OR BEANS' },
+    { name: 'SPECIAL LUNCH #12', price: '9.95', description: 'TWO ENCHILADAS WITH YOUR CHOICE OF RICE OR BEANS' },
     { name: 'SPECIAL LUNCH #13', price: '9.10', description: 'ONE TAMALE, RICE & BEANS' },
     { name: 'SPECIAL LUNCH #14', price: '9.95', description: 'ONE CHILE RELLENO, RICE & BEANS' },
     { name: 'SPECIAL LUNCH #15', price: '10.45', description: 'ONE STUFFED QUESADILLA (YOUR CHOICE OF FLANK STEAK, CHICKEN OR GROUND BEEF) WITH RICE & BEANS' },
@@ -106,7 +106,7 @@ const MENU = [
     { name: 'ORDER OF FLOUR TORTILLAS (2)', price: '2.00' }, 
     { name: 'ORDER OF CORN TORTILLAS (4)', price: '2.00' },
     { name: 'SINGLE BURRITO', price: '7.25', description: 'BEEF, BEAN, CHICKEN, PORK OR CHEESE' }, 
-    { name: 'SINGLE CHALUPA', price: '7.25', description: 'FLAT CORN TORTILLA WITIH BEANS, SPRINKLED WITH CHEESE & TOPPED WITH LETTUCE AND GUACAMOLE' },
+    { name: 'SINGLE CHALUPA', price: '7.25', description: 'FLAT CORN TORTILLA WITH BEANS, SPRINKLED WITH CHEESE & TOPPED WITH LETTUCE AND GUACAMOLE' },
     { name: 'SINGLE CHILE RELLENO', price: '7.25', description: 'BEEF, BEAN, CHICKEN, CHEESE OR PORK' },
     { name: 'SINGLE ENCHILADA', price: '4.25', description: 'BEEF, BEAN, CHICKEN, CHEESE OR PORK' },
     { name: 'SINGLE TACO', price: '3.40', description: 'BEEF, BEAN, CHICKEN OR PORK' },
@@ -115,9 +115,9 @@ const MENU = [
     { name: 'TOSTAGUAC', price: '9.00' },
     { name: 'SMALL GUACAMOLE DIP (4oz.)', price: '4.50' }, 
     { name: 'SMALL CHEESE DIP (4oz.)', price: '4.50' },
-    { name: 'SMALL ORDER MUSHROOMS ORSPINACH', price: '3.25' }, 
+    { name: 'SMALL ORDER MUSHROOMS OR SPINACH', price: '3.25' }, 
     { name: 'GRILLED ONIONS', price: '2.25' }, 
-    { name: 'GRILLED CERRANO PEPPERS', price: '2.25' },
+    { name: 'GRILLED SERRANO PEPPERS', price: '2.25' },
     { name: 'SAUTEED BELL PEPPERS & ONIONS', price: '4.25' }, 
     { name: 'SLICED AVOCADO', price: '3.25' }
   ] },
@@ -128,7 +128,7 @@ const MENU = [
     { name: 'CHIMICHANGAS', price: '17.80', description: 'ORDER OF TWO FLOUR TORTILLAS STUFFED WITH YOUR CHOICE OF SIRLOIN STEAK, CHICKEN, OR GROUND BEEF, FRIED CRISPY, SERVED WITH LETTUCE, TOMATO, SOUR CREAM, GUACAMOLE & CHEESE SAUCE' },
     { name: 'SINGLE CHIMICHANGA', price: '11.00' },
     { name: 'CHILE RANCHERO', price: '19.25', description: 'CHUNKS OF SIRLOIN STEAK WITH RED CHILE SAUCE SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS' },
-    { name: 'MEXICAN STEW', price: '19.25', description: 'YOUR CHOICE OF SIRLOIN STEAK, CHICKEN OR PORK TENDERLOIN WITH CHOICE PEPPERS, ONIONS, TOMATOES AND SPICES SIIMMERED TOGETHER, SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS' },
+    { name: 'MEXICAN STEW', price: '19.25', description: 'YOUR CHOICE OF SIRLOIN STEAK, CHICKEN OR PORK TENDERLOIN WITH CHOICE PEPPERS, ONIONS, TOMATOES AND SPICES SIMMERED TOGETHER, SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS' },
     { name: 'CARNE AZADA', price: '19.25', description: 'YOUR CHOICE OF SIRLOIN STEAK, CHICKEN, OR PORK TENDERLOIN SLICED THIN & GRILLED IN ITS OWN JUICES SERVED WITH BEANS, LETTUCE, TOMATOES, GUACAMOLE, ONIONS & THREE FLOUR TORTILLAS' },
     { name: 'BISTEC RANCHERO', price: '27.25', description: 'RIB-EYE STEAK IN OUR OWN SPECIAL SAUCE, SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS' },
     { name: 'BISTEC & PEPPERS', price: '27.25', description: 'RIB-EYE, CHOICE PEPPERS & ONIONS IN A TOMATO SAUCE SIMMERED TOGETHER, SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS' },
@@ -147,7 +147,7 @@ const MENU = [
     { name: 'CHORI POLLO', price: '19.75', description: 'CHUNKS OF CHICKEN & MEXICAN SAUSAGE TOPPED WITH CHEESE SAUCE, SERVED WITH RICE, BEANS & THREE FLOUR TORTILLAS.' },
     { name: 'POLLO SERRANO', price: '19.25', description: 'CHUNKS OF CHICKEN WITH ONIONS & SERRANO PEPPERS SIMMERED TOGETHER. SERVED WITH RICE, BEANS AND THREE FLOUR TORTILLAS' },
     { name: 'NACHOS DIABLO (VERY HOT)', price: '18.25', description: 'YOUR CHOICE OF STEAK, CHICKEN, SHRIMP OR PORK' },
-    { name: 'NACHOS FRIES', price: '15.50', description: 'YOUR CHOICE OF BEED, CHICKEN, BEANS OR PORK' }
+    { name: 'NACHOS FRIES', price: '15.50', description: 'YOUR CHOICE OF BEEF, CHICKEN, BEANS OR PORK' }
   ] },
   { title: 'El Torero Special Orders', items: [
     { name: 'SPECIAL ORDER A', price: '14.50', description: 'ORDER OF TWO TOSTADAS, SERVED WITH BEEF OR CHICKEN, TOPPED WITH LETTUCE, CHEESE, SOUR CREAM, GUACAMOLE, & TOMATOES' }, 
@@ -270,7 +270,7 @@ const MENU = [
     { name: 'HALF PITCHER SANGRIA (32oz.)', price: '13.25' }
   ] },
   { title: 'Soft Drinks', items: [
-    { name: 'SOFT DRINKS', price: '3,25', description: 'COKE, CHERRY COKE, DIET COKE, MR. PIBB, SPRITE, LEMONADE, ICED TEA' },
+    { name: 'SOFT DRINKS', price: '3.25', description: 'COKE, CHERRY COKE, DIET COKE, MR. PIBB, SPRITE, LEMONADE, ICED TEA' },
     { name: 'JARRITOS', price: '3.25', description: 'VARIETY OF FLAVORS' },
     { name: 'MILK, COFFEE, GREEN TEA', price: '3.25' }, 
     { name: 'SHIRLEY TEMPLE', price: '3.25' },  
