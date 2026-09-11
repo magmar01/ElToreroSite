@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -25,102 +25,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      # Apply the requested menu cleanup without deleting neighboring sections
-      # or changing the page's closing-div structure.
-      - name: Fix malformed and outdated menu HTML
-        run: |
-          python - <<'PY'
-          import re
-          from pathlib import Path
-
-          path = Path("index.html")
-          html = path.read_text(encoding="utf-8")
-
-          html = html.replace("POLLO LOCO MIXED/span>", "POLLO LOCO MIXED</span>")
-          html = html.replace('<di class="hours-line-left"></di>', '<div class="hours-line-left"></div>')
-          html = html.replace('<div class="hours-line-left"></di>', '<div class="hours-line-left"></div>')
-
-          removed_names = {
-              "CHEESE DIP",
-              "GUACAMOLE DIP",
-              "LUNCH MIXED PLATE",
-              "QUESADILLA MIXED",
-              "SPECIAL QUESADILLA MIXED",
-              "NACHOS WITH CHICKEN AND SHRIMP",
-              "NACHOS MIXED",
-              "SPECIAL NACHOS MIXED",
-              "TACO DE POLLO OR CARNE AZADA",
-          }
-          li_re = re.compile(r"\s*<li\b[^>]*>.*?</li>", re.I | re.S)
-
-          def clean_li(match):
-              block = match.group(0)
-              text = re.sub(r"<[^>]+>", " ", block)
-              text = re.sub(r"\s+", " ", text).strip().upper()
-              name_match = re.search(r"<span class=[\"']name[\"']>(.*?)</span>", block, re.I | re.S)
-              name = re.sub(r"<[^>]+>", "", name_match.group(1)).strip().upper() if name_match else ""
-              if "FAJITA" in text or name in removed_names:
-                  return ""
-              return block
-
-          html = li_re.sub(clean_li, html)
-          html = re.sub(r"\s*<span class=[\"']name3[\"']>.*?</span>", "", html, flags=re.I | re.S)
-          html = re.sub(r"\s*<span class=[\"']name4[\"']>.*?</span>", "", html, flags=re.I | re.S)
-
-          html = re.sub(
-              r'(<span class=["\']name["\']>TORTILLA SOUP WITH CHICKEN OR SHRIMP</span>\s*<span class=["\']price["\']>.*?</span>)\s*<small class=["\']desc["\']>.*?</small>',
-              r'\1', html, flags=re.I | re.S)
-
-          html = re.sub(
-              r'(<span class=["\']name["\']>SPECIAL LUNCH #11</span>.*?<small class=["\']desc["\']>).*?(</small>)',
-              r'\1Two tacos (hard or soft shell) with your choice of rice or beans.\2', html, flags=re.I | re.S)
-          html = re.sub(
-              r'(<span class=["\']name["\']>SPECIAL LUNCH #12</span>.*?<small class=["\']desc["\']>).*?(</small>)',
-              r'\1Two Enchiladas with your choice of rice or beans.\2', html, flags=re.I | re.S)
-
-          m = re.search(r'(<h2[^>]*>\s*A La Carte\s*</h2>)(.*?)(?=<h2[^>]*>)', html, re.I | re.S)
-          if m:
-              section = m.group(2)
-              section = re.sub(r'\s*,?\s*SERVED WITH RICE\b', '', section, flags=re.I)
-              html = html[:m.start(2)] + section + html[m.end(2):]
-
-          # Desktop-only structural grouping: keep the existing menu content
-          # order, but give the left and right halves independent vertical flow.
-          # This removes the large gap created when a tall right-hand section
-          # forced the next left-hand section down in the shared CSS grid row.
-          if 'class="desktop-menu-column desktop-menu-column-left"' not in html:
-              menu_start = html.index('<div class="menu-section" id="menu">')
-              first_wrapper = html.index('\n\t\t\t<div class="column-middle">', menu_start)
-              first_right_wrapper = html.index('\n\t\t\t<div class="column-right">', first_wrapper)
-              html = html[:first_wrapper] + '\n\t\t\t<div class="desktop-menu-column desktop-menu-column-left">' + html[first_wrapper:]
-              first_right_wrapper = html.index('\n\t\t\t<div class="column-right">', first_wrapper)
-              html = html[:first_right_wrapper] + '\n\t\t\t</div>\n\t\t\t<div class="desktop-menu-column desktop-menu-column-right">' + html[first_right_wrapper:]
-              hours_marker = html.index('\n<div class="hours-section" id="hours">')
-              menu_close = html.rfind('\n\t\t</div>', menu_start, hours_marker)
-              html = html[:menu_close] + '\n\t\t\t</div>' + html[menu_close:]
-
-          path.write_text(html, encoding="utf-8")
-          PY
-
-      - name: Format index.html
-        continue-on-error: true
-        run: npx --yes prettier@3.6.2 --write index.html
-
-      - name: Fix restaurant ZIP in deployed script
-        run: sed -i 's/Duluth, GA 30043/Duluth, GA 30096/g' script.js
-
-      - name: Persist deployment corrections
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html script.js
-          if git diff --cached --quiet; then
-            echo "No deployment corrections to commit."
-          else
-            git commit -m "Persist deployed menu corrections [skip ci]"
-            git push origin HEAD:master
-          fi
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
