@@ -1,0 +1,36 @@
+name: Add draft beer 22oz option
+on:
+  push:
+    branches: [master]
+permissions:
+  contents: write
+jobs:
+  edit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Add GLASS 22oz entry
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('index.html')
+          s = p.read_text()
+          if 'GLASS (22oz.)' in s:
+              print('Already present')
+              raise SystemExit(0)
+          # Locate the Draft Beer heading, then the first menu item in its following list.
+          m = re.search(r'(<h2[^>]*>\\s*DRAFT BEER\\s*</h2>.*?<ul[^>]*>\\s*)(<li>.*?</li>)', s, re.I | re.S)
+          if not m:
+              raise SystemExit('Draft Beer section not found')
+          first = m.group(2)
+          new = re.sub(r'(<span class="name">)\\s*.*?(</span>)', r'\\1GLASS (22oz.)\\2', first, count=1, flags=re.S)
+          s = s[:m.end(2)] + '\n' + new + s[m.end(2):]
+          p.write_text(s)
+          print('Added GLASS (22oz.)')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git diff --cached --quiet || git commit -m 'Add GLASS (22oz.) draft beer option'
+          git push
