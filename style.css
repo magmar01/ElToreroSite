@@ -24,3 +24,13 @@ body {
   font-weight: 700 !important;
   font-size: 1.04em !important;
 }
+
+/* Give descriptions a subtle visual break from the item name without adding heavy lines or excess spacing. */
+.desc::before {
+  content: "" !important;
+  display: block !important;
+  width: 28px !important;
+  height: 1px !important;
+  margin: 2px 0 3px !important;
+  background: #d0d0d0 !important;
+}
