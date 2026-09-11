@@ -65,3 +65,5 @@ body {
 .nav-box.ham-open::after {
   transform: translate(-50%, -50%) rotate(-45deg) !important;
 }
+
+/* Deployment trigger: preserve behavior while ensuring the latest Pages workflow is re-run. */
