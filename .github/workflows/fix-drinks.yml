@@ -14,21 +14,23 @@ jobs:
         run: |
           python3 - <<'PY'
           from pathlib import Path
+          import re
           p=Path('index.html')
           s=p.read_text()
-          old='''<li>\n\t\t\t\t\t\t\t<span class="name">FROZEN MARGARITA 22oz.)</span>\n\t\t\t\t\t\t</li>'''
-          new='''<li>\n\t\t\t\t\t\t\t<span class="name">FROZEN MARGARITA (16oz.)</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t\t<small class="desc">LIME, STRAWBERRY OR MANGO</small> \n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<span class="name">FROZEN MARGARITA 22oz.)</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t\t<small class="desc">LIME, STRAWBERRY OR MANGO</small> \n\t\t\t\t\t\t</li>'''
-          if old not in s:
-              raise SystemExit('Expected 22oz entry not found')
-          s=s.replace(old,new,1)
-          old2='''<li>\n\t\t\t\t\t\t\t<span class="name">MILKSHAKE</span>\n\t\t\t\t\t\t\t<span class="price">3.85</span>\n\t\t\t\t\t\t\t<small class="desc">VANILLA</small> \n\t\t\t\t\t\t</li>'''
-          if old2 in s:
-              s=s.replace(old2,'',1)
-          else:
-              old3='''<li>\n\t\t\t\t\t\t\t<span class="price">3.85</span>\n\t\t\t\t\t\t\t<small class="desc">VANILLA</small> \n\t\t\t\t\t\t</li>'''
-              if old3 not in s:
-                  raise SystemExit('Expected milkshake price/description block not found')
-              s=s.replace(old3,'',1)
+          # Rebuild the two frozen margarita entries as adjacent, complete <li> elements.
+          li_pat=re.compile(r'<li>.*?</li>', re.S)
+          blocks=list(li_pat.finditer(s))
+          frozen=[m for m in blocks if 'FROZEN MARGARITA' in m.group(0) and ('16oz' in m.group(0) or '22oz' in m.group(0))]
+          if not frozen:
+              raise SystemExit('Frozen margarita entries not found')
+          first=frozen[0]
+          last=frozen[-1]
+          replacement='''<li>\n\t\t\t\t\t\t\t<span class="name">FROZEN MARGARITA (16oz.)</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t\t<small class="desc">LIME, STRAWBERRY OR MANGO</small> \n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<span class="name">FROZEN MARGARITA 22oz.)</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t\t<small class="desc">LIME, STRAWBERRY OR MANGO</small> \n\t\t\t\t\t\t</li>'''
+          s=s[:first.start()]+replacement+s[last.end():]
+          # Remove any remaining milkshake <li>, including its price and description, wherever it occurs.
+          s=re.sub(r'<li>.*?MILKSHAKE.*?</li>', '', s, flags=re.S|re.I)
+          # Remove any orphaned milkshake price/description-only <li> (the previously reported 3.85 / VANILLA block).
+          s=re.sub(r'<li>\s*<span class="price">3\.85</span>\s*<small class="desc">VANILLA</small>\s*</li>', '', s, flags=re.S|re.I)
           p.write_text(s)
           PY
       - name: Commit and push
