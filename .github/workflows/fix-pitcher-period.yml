@@ -7,7 +7,7 @@ permissions:
   contents: write
 jobs:
   fix:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,7 +20,7 @@ jobs:
           old = 'PITCHER (60oz,)'
           new = 'PITCHER (60oz.)'
           if old not in s:
-              raise SystemExit('Target text not found')
+              raise SystemExit(f'Target text not found; current matches: {s.count(old)}')
           if s.count(old) != 1:
               raise SystemExit(f'Expected 1 target, found {s.count(old)}')
           p.write_text(s.replace(old, new))
