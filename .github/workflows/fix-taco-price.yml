@@ -1,0 +1,35 @@
+name: Fix A La Carte Taco
+
+on:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.event.head_commit.message != 'Fix A La Carte taco price'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix exact taco entry
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          old = '''<span class="name">ORDER OF TACOS (3)</span>\n\t\t\t\t\t\t\t<span class="price">9.00/span>\n\t\t\t\t\t\t\t<small class="desc">YOUR CHOICE OF BEEF, CHICKEN OR PORK IN A HARD OR SOFT SHELL</small>'''
+          new = '''<span class="name">ORDER OF TACOS (3)</span>\n\t\t\t\t\t\t\t<span class="price">10.25</span>\n\t\t\t\t\t\t\t<small class="desc">YOUR CHOICE OF BEEF, CHICKEN OR PORK IN A HARD OR SOFT SHELL</small>'''
+          if old not in s:
+              raise SystemExit('Exact taco entry not found; no changes made.')
+          p.write_text(s.replace(old, new, 1))
+          PY
+      - name: Commit fix
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Fix A La Carte taco price'
+          git push
