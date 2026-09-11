@@ -85,6 +85,21 @@ jobs:
               section = re.sub(r'\s*,?\s*SERVED WITH RICE\b', '', section, flags=re.I)
               html = html[:m.start(2)] + section + html[m.end(2):]
 
+          # Desktop-only structural grouping: keep the existing menu content
+          # order, but give the left and right halves independent vertical flow.
+          # This removes the large gap created when a tall right-hand section
+          # forced the next left-hand section down in the shared CSS grid row.
+          if 'class="desktop-menu-column desktop-menu-column-left"' not in html:
+              menu_start = html.index('<div class="menu-section" id="menu">')
+              first_wrapper = html.index('\n\t\t\t<div class="column-middle">', menu_start)
+              first_right_wrapper = html.index('\n\t\t\t<div class="column-right">', first_wrapper)
+              html = html[:first_wrapper] + '\n\t\t\t<div class="desktop-menu-column desktop-menu-column-left">' + html[first_wrapper:]
+              first_right_wrapper = html.index('\n\t\t\t<div class="column-right">', first_wrapper)
+              html = html[:first_right_wrapper] + '\n\t\t\t</div>\n\t\t\t<div class="desktop-menu-column desktop-menu-column-right">' + html[first_right_wrapper:]
+              hours_marker = html.index('\n<div class="hours-section" id="hours">')
+              menu_close = html.rfind('\n\t\t</div>', menu_start, hours_marker)
+              html = html[:menu_close] + '\n\t\t\t</div>' + html[menu_close:]
+
           path.write_text(html, encoding="utf-8")
           PY
 
