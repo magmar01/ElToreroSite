@@ -1,0 +1,39 @@
+name: Fix drinks entries
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix entries
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text()
+          old='''<li>\n\t\t\t\t\t\t\t<span class="name">FROZEN MARGARITA 22oz.)</span>\n\t\t\t\t\t\t</li>'''
+          new='''<li>\n\t\t\t\t\t\t\t<span class="name">FROZEN MARGARITA (16oz.)</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t\t<small class="desc">LIME, STRAWBERRY OR MANGO</small> \n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<span class="name">FROZEN MARGARITA 22oz.)</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t\t<small class="desc">LIME, STRAWBERRY OR MANGO</small> \n\t\t\t\t\t\t</li>'''
+          if old not in s:
+              raise SystemExit('Expected 22oz entry not found')
+          s=s.replace(old,new,1)
+          old2='''<li>\n\t\t\t\t\t\t\t<span class="name">MILKSHAKE</span>\n\t\t\t\t\t\t\t<span class="price">3.85</span>\n\t\t\t\t\t\t\t<small class="desc">VANILLA</small> \n\t\t\t\t\t\t</li>'''
+          if old2 in s:
+              s=s.replace(old2,'',1)
+          else:
+              # Remove an orphaned milkshake price/description block if the name was already removed.
+              old3='''<li>\n\t\t\t\t\t\t\t<span class="price">3.85</span>\n\t\t\t\t\t\t\t<small class="desc">VANILLA</small> \n\t\t\t\t\t\t</li>'''
+              if old3 not in s:
+                  raise SystemExit('Expected milkshake price/description block not found')
+              s=s.replace(old3,'',1)
+          p.write_text(s)
+          PY
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Fix frozen margarita and milkshake entries"
+          git push
