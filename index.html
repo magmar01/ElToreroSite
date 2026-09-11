@@ -1,127 +1,148 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El Torero Duluth</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Cedarville+Cursive|Josefin+Sans|Kumar+One+Outline|Staatliches"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link
+      href="//db.onlinewebfonts.com/c/7b2e1f84b8737cbfc7cc58cffccfaaa9?family=ITC+Souvenir"
+      rel="stylesheet"
+      type="text/css"
+    />
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>El Torero Duluth</title>
-  <link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive|Josefin+Sans|Kumar+One+Outline|Staatliches" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css" type="text/css">
-  <link href="//db.onlinewebfonts.com/c/7b2e1f84b8737cbfc7cc58cffccfaaa9?family=ITC+Souvenir" rel="stylesheet" type="text/css"/>
-</head>
-
-<body>
-  <header>
-    <div class="header" id="home">
-      <nav>
-        <div class="nav-box">
-          <div class="b1"></div>
-          <div class="b2"></div>
-          <div class="b3"></div>
-        </div>
-        <div class="menu">
-          <a href="#home">Home</a>
-          <a href="#menu">Menu</a>
-          <a href="#hours">Hours</a>
-          <a href="#contact">Contact</a>
-          <a href="#location">Location</a>
-          <i class="fas fa-times" id="menu-close"></i>
-        </div>
-      </nav>
-      <div class="info-wrap">
-        <div class="wrap-wrap">
-          <div class="logo-wrap">
-            <div>Mexican Comfort Food</div>
+  <body>
+    <header>
+      <div class="header" id="home">
+        <nav>
+          <div class="nav-box">
+            <div class="b1"></div>
+            <div class="b2"></div>
+            <div class="b3"></div>
+          </div>
+          <div class="menu">
+            <a href="#home">Home</a>
+            <a href="#menu">Menu</a>
+            <a href="#hours">Hours</a>
+            <a href="#contact">Contact</a>
+            <a href="#location">Location</a>
+            <i class="fas fa-times" id="menu-close"></i>
+          </div>
+        </nav>
+        <div class="info-wrap">
+          <div class="wrap-wrap">
+            <div class="logo-wrap">
+              <div>Mexican Comfort Food</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <div class="menu-section" id="menu">
-      <h1>Menu</h1>
-      <div class="menu-line"></div>
+    <main>
+      <div class="menu-section" id="menu">
+        <h1>Menu</h1>
+        <div class="menu-line"></div>
 
-      <!-- Menu content is rendered exclusively from menu.js. No menu items belong in index.html. -->
-      <div class="desktop-menu-column desktop-menu-column-left">
-        <div class="column-middle">
-          <div class="column"></div>
+        <!-- Menu content is rendered exclusively from menu.js. No menu items belong in index.html. -->
+        <div class="desktop-menu-column desktop-menu-column-left">
+          <div class="column-middle">
+            <div class="column"></div>
+          </div>
+        </div>
+
+        <div class="desktop-menu-column desktop-menu-column-right">
+          <div class="column-right column-middle">
+            <div class="column"></div>
+          </div>
         </div>
       </div>
 
-      <div class="desktop-menu-column desktop-menu-column-right">
-        <div class="column-right column-middle">
-          <div class="column"></div>
+      <div class="hours-section" id="hours">
+        <div class="hours-line-left"></div>
+        <h1>Hours</h1>
+        <div class="hours-line-right"></div>
+        <div class="hours-wrap">
+          <div class="design-wrap-left-side">
+            <div class="top"></div>
+          </div>
+          <div class="hours">
+            <div class="day">
+              <div><p>Sunday</p></div>
+              <div><p>Monday</p></div>
+              <div><p>Tuesday</p></div>
+              <div><p>Wednesday</p></div>
+              <div><p>Thursday</p></div>
+              <div><p>Friday</p></div>
+              <div><p>Saturday</p></div>
+            </div>
+            <div class="hours-open">
+              <div><p>Closed</p></div>
+              <div><p>11am-9pm</p></div>
+              <div><p>11am-9pm</p></div>
+              <div><p>11am-9pm</p></div>
+              <div><p>11am-9pm</p></div>
+              <div><p>11am-9pm</p></div>
+              <div><p>11am-9pm</p></div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="hours-section" id="hours">
-      <div class="hours-line-left"></div>
-      <h1>Hours</h1>
-      <div class="hours-line-right"></div>
-      <div class="hours-wrap">
-        <div class="design-wrap-left-side">
+      <div class="hex">
+        <svg viewbox="0, 0, 100, 100" class="svg"></svg>
+      </div>
+      <div class="back-to-top">Back to Top</div>
+      <div class="rhombus"><svg viewbox="0, 0, 100, 100"></svg></div>
+      <a href="#home"><i class="far fa-arrow-alt-circle-up btp-arrow"></i></a>
+    </main>
+
+    <footer>
+      <div class="contact-section-background"></div>
+      <div class="contact-section" id="contact">
+        <div class="contact-design-wrap-left">
           <div class="top"></div>
         </div>
-        <div class="hours">
-          <div class="day">
-            <div><p>Sunday</p></div>
-            <div><p>Monday</p></div>
-            <div><p>Tuesday</p></div>
-            <div><p>Wednesday</p></div>
-            <div><p>Thursday</p></div>
-            <div><p>Friday</p></div>
-            <div><p>Saturday</p></div>
-          </div>
-          <div class="hours-open">
-            <div><p>Closed</p></div>
-            <div><p>11am-9pm</p></div>
-            <div><p>11am-9pm</p></div>
-            <div><p>11am-9pm</p></div>
-            <div><p>11am-9pm</p></div>
-            <div><p>11am-9pm</p></div>
-            <div><p>11am-9pm</p></div>
-          </div>
+        <div class="contact-wrap">
+          <h1>Contact</h1>
+          <p>3656 Satellite Boulevard, Duluth, GA 30096</p>
+          <p><a href="tel:+17704764320">(770) 476-4320</a></p>
+          <p>
+            <a href="mailto:ElToreroDuluth@gmail.com"
+              >ElToreroDuluth@gmail.com</a
+            >
+          </p>
         </div>
       </div>
-    </div>
 
-    <div class="hex">
-      <svg viewbox="0, 0, 100, 100" class="svg"></svg>
-    </div>
-    <div class="back-to-top">Back to Top</div>
-    <div class="rhombus"><svg viewbox="0, 0, 100, 100"></svg></div>
-    <a href="#home"><i class="far fa-arrow-alt-circle-up btp-arrow"></i></a>
-  </main>
-
-  <footer>
-    <div class="contact-section-background"></div>
-    <div class="contact-section" id="contact">
-      <div class="contact-design-wrap-left">
-        <div class="top"></div>
+      <div class="location" id="location">
+        <h1>Location</h1>
+        <a href="#">3656 Satellite Boulevard, Duluth, GA 30096</a>
+        <div class="map">
+          <iframe
+            title="El Torero Mexican Restaurant location"
+            src="https://www.google.com/maps?q=3656+Satellite+Boulevard,+Duluth,+GA+30043&output=embed"
+            loading="lazy"
+          ></iframe>
+        </div>
       </div>
-      <div class="contact-wrap">
-        <h1>Contact</h1>
-        <p>3656 Satellite Boulevard, Duluth, GA 30096</p>
-        <p><a href="tel:+17704764320">(770) 476-4320</a></p>
-        <p><a href="mailto:ElToreroDuluth@gmail.com">ElToreroDuluth@gmail.com</a></p>
-      </div>
-    </div>
 
-    <div class="location" id="location">
-      <h1>Location</h1>
-      <a href="#">3656 Satellite Boulevard, Duluth, GA 30096</a>
-      <div class="map">
-        <iframe title="El Torero Mexican Restaurant location" src="https://www.google.com/maps?q=3656+Satellite+Boulevard,+Duluth,+GA+30043&output=embed" loading="lazy"></iframe>
-      </div>
-    </div>
+      <p class="copyright">
+        © 1985 El Torero Mexican Restaurant | All Rights Reserved
+      </p>
+    </footer>
 
-    <p class="copyright">© 1985 El Torero Mexican Restaurant | All Rights Reserved</p>
-  </footer>
-
-  <script src="script.js" defer></script>
-</body>
+    <script src="script.js" defer></script>
+  </body>
 </html>
