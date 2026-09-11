@@ -46,6 +46,31 @@ html, body {
     background-position: center center !important;
     background-repeat: no-repeat !important;
   }
+
+  /* Remove the legacy diagonal/triangular paint layer that cuts across the logo and menu. */
+  header::before,
+  header::after,
+  .header::before,
+  .header::after,
+  .menu-section::before,
+  .menu-section::after,
+  .column::before,
+  .column::after,
+  .column-middle::before,
+  .column-middle::after,
+  .column-left::before,
+  .column-left::after,
+  .column-right::before,
+  .column-right::after,
+  .column-new::before,
+  .column-new::after {
+    content: none !important;
+    display: none !important;
+    visibility: hidden !important;
+    clip-path: none !important;
+    transform: none !important;
+  }
+
   main {
     display: block !important;
     width: 100% !important;
@@ -137,5 +162,9 @@ html, body {
     transform: none !important;
     overflow: visible !important;
     clear: both !important;
+  }
+  .menu-section .column > h2::before {
+    content: none !important;
+    display: none !important;
   }
 }
