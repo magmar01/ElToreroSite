@@ -1,7 +1,8 @@
 /* Desktop menu layout — clean two-column presentation.
-   The HTML contains four menu groups. Groups 1+2 form the left column;
-   groups 3+4 form the right column. Nothing is flattened with display:contents,
-   so each group keeps its natural height and sections cannot overlap. */
+   The HTML contains two outer menu wrappers. The first wrapper contains
+   Appetizers, Soups & Salads, and Lunch; the second contains Lunch or Dinner
+   Specialties and A La Carte. Keep those two wrappers side-by-side so the
+   sections do not create a large vertical gap between Lunch and Specialties. */
 
 @media screen and (min-width: 901px) {
   html, body {
@@ -51,9 +52,8 @@
     margin: 12px auto 34px !important;
   }
 
-  /* Four existing menu groups -> two visual columns. */
-  .menu-section > .column-middle,
-  .menu-section > .column-right {
+  /* There are two .column-middle wrappers in the HTML. Put them side-by-side. */
+  .menu-section > .column-middle {
     display: block !important;
     width: 100% !important;
     max-width: none !important;
@@ -63,28 +63,20 @@
     position: relative !important;
     overflow: visible !important;
     box-sizing: border-box !important;
+    grid-row: 3 !important;
   }
 
-  /* First two groups on the left. */
-  .menu-section > .column-middle:nth-child(3),
-  .menu-section > .column-middle:nth-child(4) {
+  /* First wrapper: Appetizers, Soups & Salads, Lunch. */
+  .menu-section > .column-middle:nth-child(3) {
     grid-column: 1 !important;
   }
 
-  /* Last two groups on the right. */
-  .menu-section > .column-right:nth-child(5),
-  .menu-section > .column-right:nth-child(6) {
+  /* Second wrapper: Lunch or Dinner Specialties, A La Carte. */
+  .menu-section > .column-middle:nth-child(4) {
     grid-column: 2 !important;
   }
 
-  /* Put the four groups into two independent vertical stacks. */
-  .menu-section > .column-middle:nth-child(3) { grid-row: 3 !important; }
-  .menu-section > .column-middle:nth-child(4) { grid-row: 4 !important; }
-  .menu-section > .column-right:nth-child(5) { grid-row: 3 !important; }
-  .menu-section > .column-right:nth-child(6) { grid-row: 4 !important; }
-
-  .menu-section > .column-middle > .column,
-  .menu-section > .column-right > .column {
+  .menu-section > .column-middle > .column {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
@@ -113,7 +105,6 @@
     box-sizing: border-box !important;
   }
 
-  /* Separator is part of the heading flow, never positioned over text. */
   .column h2:after,
   .column-left h2:after,
   .column-middle h2:after,
