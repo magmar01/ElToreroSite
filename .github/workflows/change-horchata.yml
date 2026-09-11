@@ -1,0 +1,41 @@
+name: Update Aguas Naturales
+on:
+  push:
+    branches:
+      - master
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update Soft Drinks item
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('index.html')
+          s = p.read_text()
+          section = re.search(r'(<h2 class="menu-h2">Soft Drinks</h2>)(.*?)(?=<h2 class="menu-h2">|</div>\s*</div>\s*</main>)', s, re.S)
+          if not section:
+              raise SystemExit('Soft Drinks section not found')
+          block = section.group(2)
+          pattern = re.compile(r'(<li>\s*<span class="name">)AGUA DE HORCHATA(</span>\s*<span class="price">[^<]*</span>\s*<small class="desc">)[^<]*(</small>)', re.S)
+          new_block, count = pattern.subn(r'\1AGUAS NATURALES\2Horchata, Jamaica & Tamarindo\3', block, count=1)
+          if count != 1:
+              raise SystemExit(f'Expected exactly one AGUA DE HORCHATA item in Soft Drinks, found {count}')
+          s = s[:section.start(2)] + new_block + s[section.end(2):]
+          p.write_text(s)
+          PY
+      - name: Commit change
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "No change needed"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Update agua de horchata to aguas naturales"
+          git push
