@@ -20,16 +20,18 @@ jobs:
         run: |
           python - <<'PY'
           from pathlib import Path
+          import re
           p = Path('index.html')
           s = p.read_text()
-          replacements = {
-              'ONE FLAUTA, LETTUCE, SOUR CREAM, GUACAMOLE, & PICO DE GALLO': 'Two tacos (hard or soft shell) with your choice of rice or beans.',
-              'ONE FLAUTA, RICE & BEANS': 'Two Enchiladas with your choice of rice or beans.',
+          targets = {
+              'SPECIAL LUNCH #11': 'Two tacos (hard or soft shell) with your choice of rice or beans.',
+              'SPECIAL LUNCH #12': 'Two Enchiladas with your choice of rice or beans.',
           }
-          for old, new in replacements.items():
-              if s.count(old) != 1:
-                  raise SystemExit(f'Expected exactly one occurrence of {old!r}, found {s.count(old)}')
-              s = s.replace(old, new)
+          for item, new_desc in targets.items():
+              pattern = rf'(<span class="name">{re.escape(item)}</span>.*?<small class="desc">)(.*?)(</small>)'
+              s, count = re.subn(pattern, rf'\g<1>{new_desc}\g<3>', s, count=1, flags=re.S)
+              if count != 1:
+                  raise SystemExit(f'Could not uniquely update {item}; matches={count}')
           p.write_text(s)
           PY
 
