@@ -26,20 +26,77 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Repair known malformed HTML and apply the requested menu cleanup.
+      # Apply the requested menu cleanup without deleting neighboring sections
+      # or changing the page's closing-div structure.
       - name: Fix malformed and outdated menu HTML
         run: |
-          sed -i 's#POLLO LOCO MIXED/span>#POLLO LOCO MIXED</span>#' index.html
-          perl -0pi -e 's#(\n[ \t]*</div>){4}(\n[ \t]*<div class="hours-section")#$1$2#' index.html
-          sed -i 's#<di class="hours-line-left"></di>#<div class="hours-line-left"></div>#' index.html
-          sed -i 's#<div class="hours-line-left"></di>#<div class="hours-line-left"></div>#' index.html
-          perl -0pi -e 's#\n[ \t]*<li>.*?fajitas?.*?</li>##gis' index.html
-          perl -0pi -e 's#\n[ \t]*<li>.*?<span class="name">(?:CHEESE DIP|GUACAMOLE DIP|LUNCH MIXED PLATE|QUESADILLA MIXED|SPECIAL QUESADILLA MIXED|NACHOS WITH CHICKEN AND SHRIMP|NACHOS MIXED|SPECIAL NACHOS MIXED|TACO DE POLLO OR CARNE AZADA)</span>.*?</li>##gis' index.html
-          perl -0pi -e 's#\n?[ \t]*SERVED DAILY 11:00AM-3:00PM ADD NACHO CHEESE SAUCE ON ANY BURRITO FOR 1\.75\s*##gi' index.html
-          perl -0pi -e 's#\n?[ \t]*YOU CAN GET NACHO CHEESE ON ANY BURRITO FOR \$2\.25\s*##gi' index.html
-          perl -0pi -e 's#(<span class="name">TORTILLA SOUP WITH CHICKEN OR SHRIMP</span>\s*<span class="price">.*?</span>)\s*<small class="desc">.*?</small>#$1#gis' index.html
-          perl -0pi -e 's|(<span class="name">SPECIAL LUNCH \#11</span>.*?<small class="desc">).*?(</small>)|$1TWO TACOS (HARD OR SOFT SHELL) WITH YOUR CHOICE OF RICE OR BEANS.$2|gis' index.html
-          perl -0pi -e 's|(<span class="name">SPECIAL LUNCH \#12</span>.*?<small class="desc">).*?(</small>)|$1TWO ENCHILADAS WITH YOUR CHOICE OF RICE OR BEANS.$2|gis' index.html
+          python - <<'PY'
+          import re
+          from pathlib import Path
+
+          path = Path("index.html")
+          html = path.read_text(encoding="utf-8")
+
+          # Fix the known malformed item name.
+          html = html.replace("POLLO LOCO MIXED/span>", "POLLO LOCO MIXED</span>")
+          html = html.replace('<di class="hours-line-left"></di>', '<div class="hours-line-left"></div>')
+          html = html.replace('<div class="hours-line-left"></di>', '<div class="hours-line-left"></div>')
+
+          # Remove only complete <li> blocks that contain a forbidden fajita
+          # reference or one of the specifically removed menu items. This is
+          # deliberately scoped to one list item at a time so other sections
+          # cannot be swallowed by a broad multiline regex.
+          removed_names = {
+              "CHEESE DIP",
+              "GUACAMOLE DIP",
+              "LUNCH MIXED PLATE",
+              "QUESADILLA MIXED",
+              "SPECIAL QUESADILLA MIXED",
+              "NACHOS WITH CHICKEN AND SHRIMP",
+              "NACHOS MIXED",
+              "SPECIAL NACHOS MIXED",
+              "TACO DE POLLO OR CARNE AZADA",
+          }
+          li_re = re.compile(r"\\s*<li\\b[^>]*>.*?</li>", re.I | re.S)
+
+          def clean_li(match):
+              block = match.group(0)
+              text = re.sub(r"<[^>]+>", " ", block)
+              text = re.sub(r"\\s+", " ", text).strip().upper()
+              name_match = re.search(r"<span class=[\"']name[\"']>(.*?)</span>", block, re.I | re.S)
+              name = re.sub(r"<[^>]+>", "", name_match.group(1)).strip().upper() if name_match else ""
+              if "FAJITA" in text or name in removed_names:
+                  return ""
+              return block
+
+          html = li_re.sub(clean_li, html)
+
+          # Remove the two extra Lunch notes requested earlier.
+          html = re.sub(r"\\s*<span class=[\"']name3[\"']>.*?</span>", "", html, flags=re.I | re.S)
+          html = re.sub(r"\\s*<span class=[\"']name4[\"']>.*?</span>", "", html, flags=re.I | re.S)
+
+          # Keep Tortilla Soup, but remove its description.
+          html = re.sub(
+              r'(<span class=["\']name["\']>TORTILLA SOUP WITH CHICKEN OR SHRIMP</span>\\s*<span class=["\']price["\']>.*?</span>)\\s*<small class=["\']desc["\']>.*?</small>',
+              r'\\1', html, flags=re.I | re.S)
+
+          # Restore the exact requested Lunch #11/#12 descriptions.
+          html = re.sub(
+              r'(<span class=["\']name["\']>SPECIAL LUNCH #11</span>.*?<small class=["\']desc["\']>).*?(</small>)',
+              r'\\1Two tacos (hard or soft shell) with your choice of rice or beans.\\2', html, flags=re.I | re.S)
+          html = re.sub(
+              r'(<span class=["\']name["\']>SPECIAL LUNCH #12</span>.*?<small class=["\']desc["\']>).*?(</small>)',
+              r'\\1Two Enchiladas with your choice of rice or beans.\\2', html, flags=re.I | re.S)
+
+          # Remove only "served with rice" wording inside the A La Carte section.
+          m = re.search(r'(<h2[^>]*>\\s*A La Carte\\s*</h2>)(.*?)(?=<h2[^>]*>)', html, re.I | re.S)
+          if m:
+              section = m.group(2)
+              section = re.sub(r'\\s*,?\\s*SERVED WITH RICE\\b', '', section, flags=re.I)
+              html = html[:m.start(2)] + section + html[m.end(2):]
+
+          path.write_text(html, encoding="utf-8")
+          PY
 
       - name: Format index.html
         continue-on-error: true
