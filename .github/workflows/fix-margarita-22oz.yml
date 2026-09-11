@@ -1,0 +1,31 @@
+name: Fix frozen margarita 22oz punctuation
+on:
+  push:
+    branches: [master]
+permissions:
+  contents: write
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fix punctuation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          old = 'FROZEN MARGARITA 22oz.)'
+          new = 'FROZEN MARGARITA (22oz.)'
+          if s.count(old) != 1:
+              raise SystemExit(f'Expected exactly 1 target, found {s.count(old)}')
+          p.write_text(s.replace(old, new))
+          PY
+      - name: Commit change
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Fix frozen margarita 22oz punctuation'
+          git push
