@@ -60,3 +60,16 @@ html, body { width:100% !important; max-width:100% !important; overflow-x:hidden
   font-size:2.3rem !important;
   line-height:1.1 !important;
 }
+
+/* Final mobile stacking layer: keep the menu content above the decorative header/legacy stacking contexts. */
+@media screen and (max-width:900px) {
+  .header { position:relative !important; z-index:0 !important; }
+  .menu-section { position:relative !important; z-index:1000 !important; isolation:isolate !important; }
+  .menu-section h1,
+  .menu-section .menu-line,
+  .menu-section .column,
+  .menu-section .column-left,
+  .menu-section .column-middle,
+  .menu-section .column-right,
+  .menu-section .column-new { position:relative !important; z-index:1001 !important; }
+}
