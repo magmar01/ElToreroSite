@@ -32,7 +32,7 @@ jobs:
         run: |
           sed -i 's#POLLO LOCO MIXED/span>#POLLO LOCO MIXED</span>#' index.html
           perl -0pi -e 's#(\n[ \t]*</div>){4}(\n[ \t]*<div class="hours-section")#$1$2#' index.html
-          sed -i 's#<di class="hours-line-left">#<div class="hours-line-left">#' index.html
+          sed -i 's#<di class="hours-line-left"></di>#<div class="hours-line-left"></div>#' index.html
 
       # Keep the source HTML clean and consistently formatted. This only
       # changes whitespace/formatting; it does not change menu structure.
