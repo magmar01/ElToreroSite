@@ -13,19 +13,22 @@ html, body {
 }
 *, *::before, *::after { box-sizing: border-box !important; }
 
-/* Mobile/tablet: keep the logo/header area as a true square and keep the menu in normal document flow. */
+/* Mobile/tablet: the logo/header is deliberately shorter than the legacy
+   square so the menu section can never be covered by the header's white area. */
 @media screen and (max-width: 900px) {
   header {
     display: block !important;
     width: 100% !important;
-    height: 100vw !important;
-    min-height: 100vw !important;
-    max-height: 100vw !important;
+    height: 78vw !important;
+    min-height: 78vw !important;
+    max-height: 78vw !important;
     margin: 0 !important;
     padding: 0 !important;
     position: relative !important;
     overflow: hidden !important;
-    aspect-ratio: 1 / 1 !important;
+    z-index: 0 !important;
+    aspect-ratio: auto !important;
+    background: #fff !important;
   }
   header .header {
     display: block !important;
@@ -41,13 +44,18 @@ html, body {
     right: auto !important;
     bottom: auto !important;
     overflow: hidden !important;
-    aspect-ratio: 1 / 1 !important;
-    background-size: cover !important;
-    background-position: center center !important;
+    aspect-ratio: auto !important;
+    background-size: 100% auto !important;
+    background-position: center 42% !important;
     background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    clip-path: none !important;
+    transform: none !important;
+    border: 0 !important;
+    background-color: #fff !important;
   }
 
-  /* Remove the legacy diagonal/triangular paint layer that cuts across the logo and menu. */
+  /* Remove every legacy pseudo-element that could paint a diagonal/triangle. */
   header::before,
   header::after,
   .header::before,
@@ -81,6 +89,7 @@ html, body {
     position: relative !important;
     clear: both !important;
     overflow: visible !important;
+    z-index: 10 !important;
   }
   .menu-section {
     display: flex !important;
@@ -95,25 +104,40 @@ html, body {
     transform: none !important;
     overflow: visible !important;
     background: #fff !important;
+    z-index: 10 !important;
+    isolation: isolate !important;
   }
   .menu-section > h1 {
     position: static !important;
     display: block !important;
+    visibility: visible !important;
     width: 100% !important;
     height: auto !important;
     min-height: 0 !important;
+    max-height: none !important;
     margin: 0 !important;
-    padding: 18px 0 8px !important;
+    padding: 12px 0 4px !important;
     transform: none !important;
     overflow: visible !important;
+    clip: auto !important;
+    clip-path: none !important;
+    color: #EE2E22 !important;
+    font-size: 2.4rem !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    z-index: 20 !important;
+    background: #fff !important;
   }
   .menu-section > .menu-line {
     position: static !important;
     display: block !important;
+    visibility: visible !important;
     width: 60vw !important;
     height: 2px !important;
-    margin: 0 auto 18px !important;
+    margin: 0 auto 12px !important;
     transform: none !important;
+    z-index: 20 !important;
+    background: #000 !important;
   }
   .menu-section > .column-left,
   .menu-section > .column-middle,
@@ -132,6 +156,7 @@ html, body {
     float: none !important;
     clear: both !important;
     overflow: visible !important;
+    z-index: 10 !important;
   }
   .menu-section .column {
     display: flex !important;
@@ -148,6 +173,7 @@ html, body {
     float: none !important;
     clear: both !important;
     overflow: visible !important;
+    z-index: 10 !important;
   }
   .menu-section .column > h2 {
     position: static !important;
@@ -161,7 +187,11 @@ html, body {
     padding: 0 0 6px !important;
     transform: none !important;
     overflow: visible !important;
+    clip: auto !important;
+    clip-path: none !important;
     clear: both !important;
+    z-index: 20 !important;
+    background: #fff !important;
   }
   .menu-section .column > h2::before {
     content: none !important;
