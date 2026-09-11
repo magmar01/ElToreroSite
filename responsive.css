@@ -1,10 +1,11 @@
-/* Final responsive layout overrides. These rules intentionally neutralize the legacy fixed-position menu styles on phones. */
+/* Final responsive layout overrides. These rules intentionally neutralize the legacy fixed-position menu styles on phones and tablet-width mobile layouts. */
 html, body { width:100% !important; max-width:100% !important; overflow-x:hidden !important; }
 *, *::before, *::after { box-sizing:border-box !important; }
 img { max-width:100% !important; height:auto !important; }
 
-@media screen and (max-width: 800px) {
-  .header { width:100% !important; height:260px !important; min-height:260px !important; max-height:260px !important; background-size:contain !important; background-position:center top !important; background-repeat:no-repeat !important; overflow:hidden !important; position:relative !important; z-index:0 !important; }
+@media screen and (max-width: 900px) {
+  header { width:100% !important; height:260px !important; min-height:260px !important; max-height:260px !important; margin:0 !important; padding:0 !important; overflow:hidden !important; position:relative !important; z-index:0 !important; }
+  .header { width:100% !important; height:260px !important; min-height:260px !important; max-height:260px !important; background-size:contain !important; background-position:center top !important; background-repeat:no-repeat !important; overflow:hidden !important; position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; }
   .header::after { z-index:0 !important; pointer-events:none !important; }
   .wrap-wrap { width:100% !important; height:100% !important; position:relative !important; display:block !important; z-index:1 !important; }
   .logo-wrap { position:absolute !important; left:0 !important; right:0 !important; bottom:12px !important; width:100% !important; margin:0 !important; text-align:center !important; z-index:2 !important; }
@@ -14,15 +15,16 @@ img { max-width:100% !important; height:auto !important; }
   .menu { top:75px !important; left:15px !important; width:calc(100vw - 30px) !important; max-width:292px !important; margin-left:-500px !important; z-index:101 !important; }
   .ham-open + .menu { margin-left:0 !important; }
 
-  .menu-section { display:flex !important; flex-direction:column !important; align-items:stretch !important; width:100% !important; max-width:100% !important; min-width:0 !important; height:auto !important; min-height:0 !important; margin:0 !important; padding:0 !important; position:relative !important; top:auto !important; left:auto !important; overflow:visible !important; background:#fff !important; z-index:1 !important; isolation:isolate !important; }
-  .menu-section h1 { display:block !important; visibility:visible !important; position:static !important; order:0 !important; width:100% !important; height:auto !important; min-height:0 !important; max-height:none !important; margin:0 !important; padding:18px 0 8px !important; text-align:center !important; color:#EE2E22 !important; font-family:'Souvenir-Demi', Georgia, serif !important; font-size:clamp(3rem,13vw,4.2rem) !important; line-height:1 !important; z-index:50 !important; overflow:visible !important; clip:rect(auto,auto,auto,auto) !important; clip-path:none !important; transform:none !important; }
+  main { display:block !important; width:100% !important; height:auto !important; min-height:0 !important; margin:0 !important; padding:0 !important; position:relative !important; clear:both !important; overflow:visible !important; z-index:1 !important; }
+  .menu-section { display:flex !important; flex-direction:column !important; align-items:stretch !important; width:100% !important; max-width:100% !important; min-width:0 !important; height:auto !important; min-height:0 !important; margin:0 !important; padding:0 !important; position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; inset:auto !important; overflow:visible !important; background:#fff !important; z-index:1 !important; isolation:isolate !important; transform:none !important; }
+  .menu-section h1 { display:block !important; visibility:visible !important; position:static !important; order:0 !important; width:100% !important; height:auto !important; min-height:0 !important; max-height:none !important; margin:0 !important; padding:18px 0 8px !important; text-align:center !important; color:#EE2E22 !important; font-family:'Souvenir-Demi', Georgia, serif !important; font-size:clamp(3rem,13vw,4.2rem) !important; line-height:1 !important; overflow:visible !important; clip:auto !important; clip-path:none !important; transform:none !important; z-index:50 !important; }
   .menu-line { display:none !important; }
-  .column-left,.column-middle,.column-right,.column-new { display:block !important; order:1 !important; width:100% !important; max-width:100% !important; min-width:0 !important; flex:none !important; margin:0 !important; padding:0 5% 30px !important; position:static !important; overflow:visible !important; }
-  .column { display:flex !important; flex-direction:column !important; width:100% !important; max-width:720px !important; min-width:0 !important; margin:0 auto !important; padding:0 !important; position:static !important; overflow:visible !important; z-index:2 !important; }
-  .column h2 { display:block !important; visibility:visible !important; position:static !important; width:100% !important; max-width:100% !important; min-height:0 !important; max-height:none !important; margin:4px 0 14px !important; padding:0 0 6px !important; text-align:center !important; color:#EE2E22 !important; font-family:'Souvenir-Demi', Georgia, serif !important; font-size:clamp(1.45rem,5.5vw,2rem) !important; line-height:1.1 !important; overflow:visible !important; clip:rect(auto,auto,auto,auto) !important; clip-path:none !important; z-index:50 !important; background:#fff !important; isolation:isolate !important; }
+  .column-left,.column-middle,.column-right,.column-new { display:block !important; order:1 !important; width:100% !important; max-width:100% !important; min-width:0 !important; flex:none !important; height:auto !important; margin:0 !important; padding:0 5% 30px !important; position:static !important; overflow:visible !important; float:none !important; clear:both !important; transform:none !important; }
+  .column { display:flex !important; flex-direction:column !important; width:100% !important; max-width:720px !important; min-width:0 !important; height:auto !important; margin:0 auto !important; padding:0 !important; position:static !important; overflow:visible !important; z-index:2 !important; }
+  .column h2 { display:block !important; visibility:visible !important; position:static !important; width:100% !important; max-width:100% !important; min-height:0 !important; max-height:none !important; height:auto !important; margin:4px 0 14px !important; padding:0 0 6px !important; text-align:center !important; color:#EE2E22 !important; font-family:'Souvenir-Demi', Georgia, serif !important; font-size:clamp(1.45rem,5.5vw,2rem) !important; line-height:1.1 !important; overflow:visible !important; clip:auto !important; clip-path:none !important; transform:none !important; z-index:50 !important; background:#fff !important; }
   .column h2::before { content:none !important; display:none !important; }
   .column h2::after { content:"" !important; display:block !important; width:100% !important; height:2px !important; margin-top:6px !important; background:#000 !important; border:0 !important; position:static !important; transform:none !important; }
-  ul.leaders, ul.drinks { display:block !important; width:100% !important; max-width:100% !important; min-width:0 !important; column-count:1 !important; column-width:auto !important; column-rule:none !important; padding:0 !important; margin:0 !important; overflow:visible !important; }
+  ul.leaders, ul.drinks { display:block !important; width:100% !important; max-width:100% !important; min-width:0 !important; column-count:1 !important; column-width:auto !important; column-rule:none !important; padding:0 !important; margin:0 !important; overflow:visible !important; list-style:none !important; }
   ul.leaders li, ul.drinks li { display:grid !important; grid-template-columns:minmax(0,1fr) minmax(12px,1fr) max-content !important; grid-template-rows:auto auto !important; align-items:baseline !important; width:100% !important; max-width:100% !important; min-width:0 !important; height:auto !important; min-height:0 !important; margin:0 !important; padding:7px 0 10px !important; overflow:visible !important; break-inside:avoid !important; position:relative !important; float:none !important; z-index:1 !important; }
   ul.leaders li::before, ul.drinks li::before { content:"" !important; display:block !important; grid-column:2 !important; grid-row:1 !important; width:auto !important; height:1px !important; margin:0 5px !important; border-bottom:2px dotted #222 !important; background:transparent !important; float:none !important; position:static !important; overflow:hidden !important; }
   ul.leaders li::after, ul.drinks li::after { content:none !important; display:none !important; }
@@ -33,24 +35,6 @@ img { max-width:100% !important; height:auto !important; }
   .row,.row div { width:100% !important; max-width:100% !important; min-width:0 !important; }
   .row div p { max-width:100% !important; font-size:.95rem !important; }
   .hours-section,.contact-section,.contact,.location,.map,.map iframe { max-width:100% !important; width:100% !important; min-width:0 !important; }
-}
-
-@media screen and (max-width: 420px) {
-  .header { height:260px !important; min-height:260px !important; max-height:260px !important; }
-  .menu-section h1 { font-size:2.8rem !important; padding-top:16px !important; }
-  .column-left,.column-middle,.column-right,.column-new { padding-left:5% !important; padding-right:5% !important; }
-  .column h2 { font-size:1.5rem !important; }
-  .name,.price { font-size:.92rem !important; }
-  .desc { font-size:.82rem !important; }
-}
-
-@media screen and (max-width: 800px) {
-  header { position:relative !important; z-index:0 !important; }
-  main { position:relative !important; z-index:1 !important; }
-  .menu-section,.menu-section > h1,.menu-section > .menu-line,.menu-section .column,.menu-section .column h2,.menu-section ul.leaders,.menu-section ul.leaders li,.menu-section ul.leaders .name,.menu-section ul.leaders .price,.menu-section ul.leaders .desc { isolation:isolate !important; }
-  .menu-section > h1,.menu-section .column h2,.menu-section ul.leaders .name,.menu-section ul.leaders .price { background:#fff !important; }
-  .menu-section > h1,.menu-section .column h2 { color:#EE2E22 !important; }
-  .menu-section ul.leaders .price { overflow:visible !important; }
   .hours-section { position:relative !important; margin-top:0 !important; padding-bottom:30px !important; height:auto !important; min-height:0 !important; overflow:visible !important; z-index:1 !important; }
   .hours-wrap,.hours { position:relative !important; width:100% !important; max-width:100% !important; min-width:0 !important; }
   .contact-section-background { display:block !important; width:100% !important; height:0 !important; min-height:0 !important; margin:0 !important; padding:0 !important; }
@@ -62,4 +46,13 @@ img { max-width:100% !important; height:auto !important; }
   .map iframe { display:block !important; position:relative !important; top:auto !important; bottom:auto !important; left:auto !important; right:auto !important; width:100% !important; max-width:100% !important; height:360px !important; min-height:360px !important; margin:0 !important; padding:0 !important; border:0 !important; }
   .contact-section > :last-child,.location > :last-child { margin-bottom:0 !important; padding-bottom:0 !important; }
   body,main,#locations,.contact-section,.location { padding-bottom:0 !important; margin-bottom:0 !important; }
+}
+
+@media screen and (max-width: 420px) {
+  .header { height:260px !important; min-height:260px !important; max-height:260px !important; }
+  .menu-section h1 { font-size:2.8rem !important; padding-top:16px !important; }
+  .column-left,.column-middle,.column-right,.column-new { padding-left:5% !important; padding-right:5% !important; }
+  .column h2 { font-size:1.5rem !important; }
+  .name,.price { font-size:.92rem !important; }
+  .desc { font-size:.82rem !important; }
 }
