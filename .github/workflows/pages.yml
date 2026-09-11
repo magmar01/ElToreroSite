@@ -26,40 +26,42 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Repair known malformed HTML and apply the requested menu cleanup
-      # to the deployed copy without changing the site's existing layout.
+      # Repair known malformed HTML and apply the requested menu cleanup.
       - name: Fix malformed and outdated menu HTML
         run: |
           sed -i 's#POLLO LOCO MIXED/span>#POLLO LOCO MIXED</span>#' index.html
           perl -0pi -e 's#(\n[ \t]*</div>){4}(\n[ \t]*<div class="hours-section")#$1$2#' index.html
           sed -i 's#<di class="hours-line-left"></di>#<div class="hours-line-left"></div>#' index.html
           sed -i 's#<div class="hours-line-left"></di>#<div class="hours-line-left"></div>#' index.html
-
-          # Remove every menu item/description containing fajita/fajitas.
           perl -0pi -e 's#\n[ \t]*<li>.*?fajitas?.*?</li>##gis' index.html
-
-          # Remove specifically requested non-fajita items.
           perl -0pi -e 's#\n[ \t]*<li>.*?<span class="name">(?:CHEESE DIP|GUACAMOLE DIP|LUNCH MIXED PLATE|QUESADILLA MIXED|SPECIAL QUESADILLA MIXED|NACHOS WITH CHICKEN AND SHRIMP|NACHOS MIXED|SPECIAL NACHOS MIXED|TACO DE POLLO OR CARNE AZADA)</span>.*?</li>##gis' index.html
-
-          # Remove the old lunch service note and burrito surcharge note.
           perl -0pi -e 's#\n?[ \t]*SERVED DAILY 11:00AM-3:00PM ADD NACHO CHEESE SAUCE ON ANY BURRITO FOR 1\.75\s*##gi' index.html
           perl -0pi -e 's#\n?[ \t]*YOU CAN GET NACHO CHEESE ON ANY BURRITO FOR \$2\.25\s*##gi' index.html
-
-          # Remove the Tortilla Soup description if present.
           perl -0pi -e 's#(<span class="name">TORTILLA SOUP WITH CHICKEN OR SHRIMP</span>\s*<span class="price">.*?</span>)\s*<small class="desc">.*?</small>#$1#gis' index.html
+          perl -0pi -e 's|(<span class="name">SPECIAL LUNCH \#11</span>.*?<small class="desc">).*?(</small>)|$1TWO TACOS (HARD OR SOFT SHELL) WITH YOUR CHOICE OF RICE OR BEANS.$2|gis' index.html
+          perl -0pi -e 's|(<span class="name">SPECIAL LUNCH \#12</span>.*?<small class="desc">).*?(</small>)|$1TWO ENCHILADAS WITH YOUR CHOICE OF RICE OR BEANS.$2|gis' index.html
 
-          # Set the requested Special Lunch #11 and #12 descriptions.
-          perl -0pi -e 's|(<span class="name">SPECIAL LUNCH #11</span>.*?<small class="desc">).*?(</small>)|$1TWO TACOS (HARD OR SOFT SHELL) WITH YOUR CHOICE OF RICE OR BEANS.$2|gis' index.html
-          perl -0pi -e 's|(<span class="name">SPECIAL LUNCH #12</span>.*?<small class="desc">).*?(</small>)|$1TWO ENCHILADAS WITH YOUR CHOICE OF RICE OR BEANS.$2|gis' index.html
-
-      # Prettier is advisory for this legacy page. A parser failure must not
-      # block the actual GitHub Pages deployment.
       - name: Format index.html
         continue-on-error: true
         run: npx --yes prettier@3.6.2 --write index.html
 
       - name: Fix restaurant ZIP in deployed script
         run: sed -i 's/Duluth, GA 30043/Duluth, GA 30096/g' script.js
+
+      # Persist deployment-time corrections so the repository source and the
+      # Pages artifact stay in sync. This is idempotent and only commits when
+      # the deployment corrections actually changed tracked files.
+      - name: Persist deployment corrections
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html script.js
+          if git diff --cached --quiet; then
+            echo "No deployment corrections to commit."
+          else
+            git commit -m "Persist deployed menu corrections [skip ci]"
+            git push origin HEAD:master
+          fi
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
