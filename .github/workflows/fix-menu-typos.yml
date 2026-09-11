@@ -1,0 +1,41 @@
+name: Fix menu typos once
+on:
+  push:
+    branches: [master]
+permissions:
+  contents: write
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Correct requested menu typos
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('menu.js')
+          s = p.read_text()
+          replacements = {
+              '11,75': '11.75',
+              'YOUT CHOICE': 'YOUR CHOICE',
+              'WITIH BEANS': 'WITH BEANS',
+              'MUSHROOMS ORSPINACH': 'MUSHROOMS OR SPINACH',
+              'SIIMMERED TOGETHER': 'SIMMERED TOGETHER',
+              'BEED': 'BEEF',
+              'CERRANO': 'SERRANO',
+              'CALMATO': 'CLAMATO',
+              '3,25': '3.25',
+          }
+          for old, new in replacements.items():
+              s = s.replace(old, new)
+          p.write_text(s)
+          PY
+      - name: Commit corrections and remove this workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f .github/workflows/fix-menu-typos.yml
+          git add menu.js .github/workflows/fix-menu-typos.yml
+          git diff --cached --quiet || git commit -m "Correct requested menu typos"
+          git push
