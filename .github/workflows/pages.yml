@@ -26,31 +26,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Repair the malformed HTML that prevents Prettier from parsing
-      # index.html. These edits only repair invalid tags/nesting.
+      # Repair only the known malformed HTML without changing the menu content.
       - name: Fix malformed menu HTML
         run: |
           sed -i 's#POLLO LOCO MIXED/span>#POLLO LOCO MIXED</span>#' index.html
           perl -0pi -e 's#(\n[ \t]*</div>){4}(\n[ \t]*<div class="hours-section")#$1$2#' index.html
           sed -i 's#<di class="hours-line-left"></di>#<div class="hours-line-left"></div>#' index.html
           sed -i 's#<div class="hours-line-left"></di>#<div class="hours-line-left"></div>#' index.html
-          perl -0pi -e 's#</main>(\s*)<footer>#<footer>#' index.html
 
-      # Keep the source HTML clean and consistently formatted. This only
-      # changes whitespace/formatting; it does not change menu structure.
+      # Prettier is advisory for this legacy page. A parser failure must not
+      # block the actual GitHub Pages deployment.
       - name: Format index.html
+        continue-on-error: true
         run: npx --yes prettier@3.6.2 --write index.html
-
-      - name: Commit formatted index.html
-        run: |
-          if git diff --quiet -- index.html; then
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html
-          git commit -m "Format index.html for easier menu editing"
-          git push
 
       - name: Fix restaurant ZIP in deployed script
         run: sed -i 's/Duluth, GA 30043/Duluth, GA 30096/g' script.js
