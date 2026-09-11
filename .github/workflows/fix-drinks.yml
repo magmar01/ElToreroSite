@@ -1,5 +1,7 @@
 name: Fix drinks entries
 on:
+  push:
+    branches: [master]
   workflow_dispatch:
 permissions:
   contents: write
@@ -23,7 +25,6 @@ jobs:
           if old2 in s:
               s=s.replace(old2,'',1)
           else:
-              # Remove an orphaned milkshake price/description block if the name was already removed.
               old3='''<li>\n\t\t\t\t\t\t\t<span class="price">3.85</span>\n\t\t\t\t\t\t\t<small class="desc">VANILLA</small> \n\t\t\t\t\t\t</li>'''
               if old3 not in s:
                   raise SystemExit('Expected milkshake price/description block not found')
