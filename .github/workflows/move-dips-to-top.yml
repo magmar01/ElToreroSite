@@ -1,0 +1,35 @@
+name: Move dips to top of appetizers
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update index.html
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          start = s.index('<h2 class="menu-h2">Appetizers</h2>')
+          ul = s.index('<ul class="leaders">', start)
+          first = s.index('<li>', ul)
+          end = s.index('</ul>', first)
+          section = s[ul:end]
+          import re
+          section = re.sub(r'\s*<li>\s*<span class="name">CHEESE DIP</span>.*?</li>', '', section, flags=re.S)
+          section = re.sub(r'\s*<li>\s*<span class="name">GUACAMOLE DIP</span>.*?</li>', '', section, flags=re.S)
+          dips = '''\n\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<span class="name">CHEESE DIP</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<span class="name">GUACAMOLE DIP</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t\t<small class="desc">CREAMY OR CHUNKY</small>\n\t\t\t\t\t\t</li>'''
+          s = s[:ul] + '<ul class="leaders">' + dips + section + s[end:]
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Move dips to top of appetizers"
+          git push
