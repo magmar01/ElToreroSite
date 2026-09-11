@@ -26,6 +26,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # Repair the one malformed span that prevents Prettier from parsing
+      # index.html. This changes only the missing < character in the closing tag.
+      - name: Fix malformed menu HTML
+        run: sed -i 's#POLLO LOCO MIXED/span>#POLLO LOCO MIXED</span>#' index.html
+
       # Keep the source HTML clean and consistently formatted. This only
       # changes whitespace/formatting; it does not change menu structure.
       - name: Format index.html
