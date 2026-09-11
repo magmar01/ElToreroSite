@@ -442,6 +442,31 @@ body {
     position: static !important;
     clear: both !important;
   }
+
+  /* Mobile hours source layout: center the complete day/time group inside the hours frame. */
+  .hours-wrap {
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  .hours {
+    position: relative !important;
+    display: flex !important;
+    width: max-content !important;
+    max-width: calc(100% - 30px) !important;
+    min-width: 0 !important;
+    margin: 0 auto !important;
+  }
+
+  .hours .day,
+  .hours .hours-open {
+    flex: 0 0 auto !important;
+  }
 }
 
 /*
