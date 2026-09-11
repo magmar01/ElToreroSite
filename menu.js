@@ -245,7 +245,7 @@ const MENU = [
     { name: 'JUMBO MUG (32oz.)', price: '8.00' },
     { name: 'GLASS (22oz.)', price: '6.25' },
     { name: 'GLASS (12oz.)', price: '4.50' },
-    { name: 'MICHELADA', price: '10.25', description: ' CHOICE OF BEER WITH CALAMATO AND LIME JUICE.'}
+    { name: 'MICHELADA', price: '10.25', description: ' CHOICE OF BEER WITH CLAMATO AND LIME JUICE.'}
   ] },
   { title: 'Mixed Drinks', items: [
     { name: 'FROZEN MARGARITA (16oz.)', price: '9.50', description: 'LIME, STRAWBERRY, MANGO OR PEACH' },
