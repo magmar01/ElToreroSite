@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   update-descriptions:
-    if: "!contains(github.event.head_commit.message, 'Update Special Lunch descriptions')"
+    if: "github.event.head_commit.message == 'Add temporary workflow to update Special Lunch descriptions'"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
