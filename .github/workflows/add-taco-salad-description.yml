@@ -1,0 +1,33 @@
+name: Add taco salad with fajitas description
+on:
+  push:
+    branches:
+      - master
+jobs:
+  update:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Update menu item
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text()
+          old = '''<li>\n\t\t\t\t\t\t\t<span class="name">TACO SALAD WITH FAJITAS</span>\n\t\t\t\t\t\t\t<span class="price">9.75</span>\n\t\t\t\t\t\t\t</li>'''
+          new = '''<li>\n\t\t\t\t\t\t\t<span class="name">TACO SALAD WITH FAJITAS</span>\n\t\t\t\t\t\t\t<span class="price">9.75</span>\n\t\t\t\t\t\t\t<small class="desc">WITH YOUR CHOICE OF STEAK, CHICKEN OR SHRIMP</small> \n\t\t\t\t\t\t\t</li>'''
+          if old not in s:
+              raise SystemExit('Target taco salad item was not found exactly')
+          s = s.replace(old, new, 1)
+          p.write_text(s)
+          PY
+      - name: Commit change
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Add taco salad with fajitas description'
+          git push
