@@ -454,6 +454,9 @@ body {
 @media screen and (min-width: 901px) {
   .hours-wrap {
     position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: flex-start !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
@@ -461,9 +464,8 @@ body {
 
   .hours {
     display: flex !important;
-    width: fit-content !important;
+    width: max-content !important;
     max-width: calc(100% - 40px) !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
+    margin: 0 !important;
   }
 }
