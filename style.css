@@ -270,3 +270,163 @@ body {
     min-height: 300px !important;
   }
 }
+
+/*
+ * Mobile menu source layout
+ *
+ * These rules live in the master stylesheet so the menu structure itself is
+ * corrected here instead of adding another override/fix stylesheet. The
+ * existing mobile styles are kept, but their conflicting list-row display is
+ * superseded at the source stylesheet level.
+ */
+@media screen and (max-width: 900px) {
+  header,
+  .header {
+    position: relative !important;
+    z-index: 0 !important;
+  }
+
+  main,
+  .menu-section {
+    position: relative !important;
+    z-index: 10 !important;
+  }
+
+  .menu-section > h1 {
+    display: block !important;
+    position: relative !important;
+    z-index: 30 !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 20px 0 0 !important;
+    color: #EE2E22 !important;
+    background: #fff !important;
+    font-family: 'Souvenir-Demi', Georgia, serif !important;
+    font-size: clamp(2.8rem, 13vw, 4.5rem) !important;
+    line-height: 1 !important;
+    text-align: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow: visible !important;
+    clip: auto !important;
+    clip-path: none !important;
+    transform: none !important;
+  }
+
+  .menu-section > .menu-line {
+    display: block !important;
+    position: relative !important;
+    z-index: 30 !important;
+    width: 60vw !important;
+    height: 2px !important;
+    margin: 8px auto 20px !important;
+    background: #000 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .menu-section ul.leaders,
+  .menu-section ul.drinks {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    column-count: 1 !important;
+    column-width: auto !important;
+    overflow: visible !important;
+  }
+
+  .menu-section ul.leaders li,
+  .menu-section ul.drinks li {
+    display: grid !important;
+    grid-template-columns: minmax(0, 1fr) minmax(12px, 1fr) max-content !important;
+    grid-template-rows: auto auto !important;
+    align-items: baseline !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 7px 0 10px !important;
+    position: relative !important;
+    float: none !important;
+    overflow: visible !important;
+    break-inside: avoid !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+
+  .menu-section ul.leaders li::before,
+  .menu-section ul.drinks li::before {
+    content: "" !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
+    display: block !important;
+    width: auto !important;
+    height: 1px !important;
+    margin: 0 5px !important;
+    border-bottom: 2px dotted #222 !important;
+    background: transparent !important;
+    position: static !important;
+    float: none !important;
+    overflow: visible !important;
+  }
+
+  .menu-section ul.leaders li::after,
+  .menu-section ul.drinks li::after {
+    content: none !important;
+    display: none !important;
+  }
+
+  .menu-section ul.leaders .name,
+  .menu-section ul.drinks .name {
+    grid-column: 1 !important;
+    grid-row: 1 !important;
+    display: block !important;
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+    padding: 0 4px 0 0 !important;
+    position: relative !important;
+    z-index: 20 !important;
+    background: #fff !important;
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .menu-section ul.leaders .price,
+  .menu-section ul.drinks .price {
+    grid-column: 3 !important;
+    grid-row: 1 !important;
+    display: block !important;
+    width: max-content !important;
+    min-width: max-content !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 0 0 5px !important;
+    position: relative !important;
+    z-index: 30 !important;
+    background: #fff !important;
+    white-space: nowrap !important;
+    text-align: right !important;
+    justify-self: end !important;
+  }
+
+  .menu-section ul.leaders .desc,
+  .menu-section ul.drinks .desc {
+    grid-column: 1 / -1 !important;
+    grid-row: 2 !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 3px 0 0 !important;
+    padding: 0 !important;
+    position: static !important;
+    clear: both !important;
+  }
+}
