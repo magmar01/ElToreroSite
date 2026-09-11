@@ -10,21 +10,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Update index.html
+      - name: Fix appetizer list
         run: |
           python3 - <<'PY'
           from pathlib import Path
-          import re
           p = Path('index.html')
           s = p.read_text()
-          start = s.index('<h2 class="menu-h2">Appetizers</h2>')
-          ul = s.index('<ul class="leaders">', start)
-          end = s.index('</ul>', ul)
-          section = s[ul:end]
-          section = re.sub(r'\s*<li>\s*<span class="name">CHEESE DIP</span>.*?</li>', '', section, flags=re.S)
-          section = re.sub(r'\s*<li>\s*<span class="name">GUACAMOLE DIP</span>.*?</li>', '', section, flags=re.S)
-          dips = '''\n\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<span class="name">CHEESE DIP</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t</li>\n\t\t\t\t\t\t<li>\n\t\t\t\t\t\t\t<span class="name">GUACAMOLE DIP</span>\n\t\t\t\t\t\t\t<span class="price">8.50</span>\n\t\t\t\t\t\t\t<small class="desc">CREAMY OR CHUNKY</small>\n\t\t\t\t\t\t</li>'''
-          s = s[:ul] + '<ul class="leaders">' + dips + section + s[end:]
+          marker = '</li><ul class="leaders">'
+          if marker in s:
+              s = s.replace(marker, '</li>', 1)
           p.write_text(s)
           PY
       - name: Commit
@@ -32,5 +26,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add index.html
-          git diff --cached --quiet || git commit -m "Move dips to top of appetizers"
+          git diff --cached --quiet || git commit -m "Fix appetizer list structure"
           git push
