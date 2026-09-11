@@ -31,7 +31,7 @@ jobs:
       - name: Fix malformed menu HTML
         run: |
           sed -i 's#POLLO LOCO MIXED/span>#POLLO LOCO MIXED</span>#' index.html
-          sed -i '/^[[:space:]]*<\/div>[[:space:]]*$/ { N; N; N; N; /<\/div>[[:space:]]*\n[[:space:]]*<\/div>[[:space:]]*\n[[:space:]]*<\/div>[[:space:]]*\n[[:space:]]*<\/div>[[:space:]]*\n[[:space:]]*<div class="hours-section"/ { s#\n[[:space:]]*<\/div>[[:space:]]*$##; } }' index.html
+          sed -i '/^[[:space:]]*<\/div>[[:space:]]*$/ { N; N; N; /<\/div>[[:space:]]*\n[[:space:]]*<\/div>[[:space:]]*\n[[:space:]]*<\/div>[[:space:]]*\n[[:space:]]*<\/div>[[:space:]]*\n[[:space:]]*<div class="hours-section"/ { s#\n[[:space:]]*<\/div>[[:space:]]*$##; } }' index.html
 
       # Keep the source HTML clean and consistently formatted. This only
       # changes whitespace/formatting; it does not change menu structure.
