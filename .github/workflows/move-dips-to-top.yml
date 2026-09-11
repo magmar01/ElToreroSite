@@ -1,12 +1,11 @@
-name: Move dips to top of appetizers
+name: Fix appetizer dips
 on:
-  push:
-    branches: [master]
+  pull_request:
+    types: [opened, synchronize]
 permissions:
   contents: write
 jobs:
-  update:
-    if: github.actor != 'github-actions[bot]'
+  fix:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,7 +20,7 @@ jobs:
               s = s.replace(marker, '</li>', 1)
           p.write_text(s)
           PY
-      - name: Commit
+      - name: Commit fix
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
