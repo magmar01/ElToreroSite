@@ -19,13 +19,13 @@ jobs:
           if 'GLASS (22oz.)' in s:
               print('Already present')
               raise SystemExit(0)
-          # Locate the Draft Beer heading, then the first menu item in its following list.
-          m = re.search(r'(<h2[^>]*>\\s*DRAFT BEER\\s*</h2>.*?<ul[^>]*>\\s*)(<li>.*?</li>)', s, re.I | re.S)
+          pattern = r'(<li>\s*<span class="name">GLASS \(12oz\.\)</span>.*?</li>)'
+          m = re.search(pattern, s, re.S)
           if not m:
-              raise SystemExit('Draft Beer section not found')
-          first = m.group(2)
-          new = re.sub(r'(<span class="name">)\\s*.*?(</span>)', r'\\1GLASS (22oz.)\\2', first, count=1, flags=re.S)
-          s = s[:m.end(2)] + '\n' + new + s[m.end(2):]
+              raise SystemExit('GLASS (12oz.) draft beer item not found')
+          original = m.group(1)
+          new = re.sub(r'(<span class="name">)GLASS \(12oz\.\)(</span>)', r'\1GLASS (22oz.)\2', original, count=1)
+          s = s[:m.end()] + '\n\n' + new + s[m.end():]
           p.write_text(s)
           print('Added GLASS (22oz.)')
           PY
