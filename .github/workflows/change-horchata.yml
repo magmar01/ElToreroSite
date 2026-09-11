@@ -17,7 +17,7 @@ jobs:
           import re
           p = Path('index.html')
           s = p.read_text()
-          section = re.search(r'(<h2 class="menu-h2">Soft Drinks</h2>)(.*?)(?=<h2 class="menu-h2">|</div>\s*</div>\s*</main>)', s, re.S)
+          section = re.search(r'(<h2[^>]*>Soft Drinks</h2>)(.*?)(?=<h2[^>]*>|</main>)', s, re.S | re.I)
           if not section:
               raise SystemExit('Soft Drinks section not found')
           block = section.group(2)
