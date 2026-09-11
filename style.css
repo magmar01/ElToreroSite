@@ -443,3 +443,27 @@ body {
     clear: both !important;
   }
 }
+
+/*
+ * Desktop/tablet landscape hours source layout
+ *
+ * Keep the existing hours styling, but center the complete seven-row day/time
+ * group inside the green hours frame. The two columns retain their existing
+ * widths and row spacing; only the horizontal centering is corrected.
+ */
+@media screen and (min-width: 901px) {
+  .hours-wrap {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .hours {
+    display: flex !important;
+    width: fit-content !important;
+    max-width: calc(100% - 40px) !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
