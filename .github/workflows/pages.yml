@@ -26,22 +26,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Surgical mobile hours source edit
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p = Path('style.css')
-          s = p.read_text()
-          old = '''  .hours-wrap,.hours { position:relative !important; width:100% !important; max-width:100% !important; min-width:0 !important; }'''
-          new = '''  .hours-wrap { position:relative !important; display:flex !important; justify-content:center !important; align-items:flex-start !important; width:100% !important; max-width:100% !important; min-width:0 !important; }
-  .hours { position:relative !important; display:flex !important; width:max-content !important; max-width:calc(100% - 30px) !important; min-width:0 !important; margin:0 auto !important; }
-  .hours .day,
-  .hours .hours-open { flex:0 0 auto !important; }'''
-          if s.count(old) != 1:
-              raise SystemExit(f'Expected exactly one mobile hours block, found {s.count(old)}')
-          p.write_text(s.replace(old, new, 1))
-          PY
-
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
