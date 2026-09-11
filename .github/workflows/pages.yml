@@ -49,8 +49,8 @@ jobs:
           perl -0pi -e 's#(<span class="name">TORTILLA SOUP WITH CHICKEN OR SHRIMP</span>\s*<span class="price">.*?</span>)\s*<small class="desc">.*?</small>#$1#gis' index.html
 
           # Set the requested Special Lunch #11 and #12 descriptions.
-          perl -0pi -e 's#(<span class="name">SPECIAL LUNCH #11</span>.*?<small class="desc">).*?(</small>)#$1TWO TACOS (HARD OR SOFT SHELL) WITH YOUR CHOICE OF RICE OR BEANS.$2#gis' index.html
-          perl -0pi -e 's#(<span class="name">SPECIAL LUNCH #12</span>.*?<small class="desc">).*?(</small>)#$1TWO ENCHILADAS WITH YOUR CHOICE OF RICE OR BEANS.$2#gis' index.html
+          perl -0pi -e 's|(<span class="name">SPECIAL LUNCH #11</span>.*?<small class="desc">).*?(</small>)|$1TWO TACOS (HARD OR SOFT SHELL) WITH YOUR CHOICE OF RICE OR BEANS.$2|gis' index.html
+          perl -0pi -e 's|(<span class="name">SPECIAL LUNCH #12</span>.*?<small class="desc">).*?(</small>)|$1TWO ENCHILADAS WITH YOUR CHOICE OF RICE OR BEANS.$2|gis' index.html
 
       # Prettier is advisory for this legacy page. A parser failure must not
       # block the actual GitHub Pages deployment.
