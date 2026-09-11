@@ -60,11 +60,11 @@ html, body { width:100% !important; max-width:100% !important; overflow-x:hidden
   line-height:1.1 !important;
 }
 
-/* Mobile flow fix: make the header a definite block and force main/menu to start immediately after it. */
+/* Mobile flow fix: make the header 200px and force main/menu to start immediately after it. */
 @media screen and (max-width:900px) {
   html, body { margin:0 !important; padding:0 !important; }
-  header { display:block !important; width:100% !important; height:330px !important; min-height:330px !important; max-height:330px !important; margin:0 !important; padding:0 !important; position:relative !important; overflow:hidden !important; }
-  header .header { display:block !important; width:100% !important; height:330px !important; min-height:330px !important; max-height:330px !important; margin:0 !important; padding:0 !important; position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; }
+  header { display:block !important; width:100% !important; height:200px !important; min-height:200px !important; max-height:200px !important; margin:0 !important; padding:0 !important; position:relative !important; overflow:hidden !important; }
+  header .header { display:block !important; width:100% !important; height:200px !important; min-height:200px !important; max-height:200px !important; margin:0 !important; padding:0 !important; position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; }
   main { display:block !important; width:100% !important; height:auto !important; min-height:0 !important; margin:0 !important; padding:0 !important; position:relative !important; clear:both !important; overflow:visible !important; }
   .menu-section { display:flex !important; width:100% !important; height:auto !important; min-height:0 !important; margin:0 !important; padding:0 !important; position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; transform:none !important; overflow:visible !important; }
   .menu-section > h1 { position:relative !important; display:block !important; width:100% !important; height:auto !important; min-height:0 !important; margin:0 !important; padding:16px 0 8px !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; transform:none !important; overflow:visible !important; }
