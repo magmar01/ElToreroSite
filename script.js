@@ -78,6 +78,16 @@ if (rightArrow && img) {
   });
 }
 
+/* Load the menu from the single editable menu.js source of truth. */
+function loadMenuData() {
+  const script = document.createElement('script');
+  script.src = 'menu.js?v=' + Date.now();
+  script.onerror = () => console.error('Unable to load menu.js');
+  document.head.appendChild(script);
+}
+
+loadMenuData();
+
 /* Floating Back to Top: the control is removed from normal document flow and
    appears only after the visitor has scrolled past the entire Hours section. */
 function setupFloatingBackToTop() {
@@ -141,126 +151,12 @@ function setupFloatingBackToTop() {
 
 setupFloatingBackToTop();
 
-function cleanMalformedMenuText(root = document) {
-  root.querySelectorAll('.menu-section .name, .menu-section .price, .menu-section .desc').forEach((el) => {
-    if (!el.textContent) return;
-    const cleaned = el.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
-    if (cleaned !== el.textContent) el.textContent = cleaned;
-  });
-}
-
-/* Apply spelling corrections to the actual rendered menu text. This is
-   intentionally content-based rather than tied to section/row numbers, so
-   the fixes remain correct if menu items are reordered. */
-function correctMenuSpelling() {
-  const replacements = [
-    ['SIIMMERED', 'SIMMERED'],
-    ['MUSHROOOMS', 'MUSHROOMS'],
-    ['CHOIUCE', 'CHOICE'],
-    ['SEPCIAL ORDER ABC', 'SPECIAL ORDER ABC'],
-    ['ANWHERE', 'ANYWHERE']
-  ];
-
-  document.querySelectorAll('.menu-section .name, .menu-section .price, .menu-section .desc').forEach((el) => {
-    if (!el.textContent) return;
-    let text = el.textContent;
-    replacements.forEach(([wrong, right]) => {
-      text = text.replace(new RegExp(wrong, 'gi'), right);
-    });
-    if (text !== el.textContent) el.textContent = text;
-  });
-}
-
-function repairPolloLocoMixed() {
-  document.querySelectorAll('.menu-section li').forEach((li) => {
-    const text = (li.textContent || '').replace(/\s+/g, ' ').trim();
-    if (!text.includes('POLLO LOCO MIXED') || !text.includes('STEAK, CHICKEN & SHRIMP')) return;
-
-    const existingName = li.querySelector('.name');
-    const existingPrice = li.querySelector('.price');
-    const existingDesc = li.querySelector('.desc');
-    const alreadyCorrect = existingName && existingPrice && existingDesc &&
-      normalizeMenuText(existingName.textContent) === 'POLLO LOCO MIXED' &&
-      normalizeMenuText(existingPrice.textContent) === '18.25' &&
-      normalizeMenuText(existingDesc.textContent) === 'STEAK, CHICKEN & SHRIMP';
-
-    if (alreadyCorrect && li.children.length === 3) return;
-
-    li.innerHTML = '';
-    const name = document.createElement('span'); name.className = 'name'; name.textContent = 'POLLO LOCO MIXED';
-    const price = document.createElement('span'); price.className = 'price'; price.textContent = '18.25';
-    const desc = document.createElement('small'); desc.className = 'desc'; desc.textContent = 'STEAK, CHICKEN & SHRIMP';
-    li.appendChild(name); li.appendChild(price); li.appendChild(desc);
-  });
-}
-
-function repairMenuMarkup() {
-  cleanMalformedMenuText();
-  correctMenuSpelling();
-  repairPolloLocoMixed();
-  document.querySelectorAll('.menu-section li').forEach((li) => {
-    const nameEl = li.querySelector('.name');
-    const priceEl = li.querySelector('.price');
-    const descEl = li.querySelector('.desc');
-    if (nameEl) nameEl.textContent = nameEl.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
-    if (priceEl) {
-      if (descEl && priceEl.contains(descEl)) {
-        const priceText = priceEl.childNodes[0]?.textContent || '';
-        priceEl.textContent = priceText.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
-        li.appendChild(descEl);
-      } else priceEl.textContent = priceEl.textContent.replace(/\s*\/span>\s*/gi, ' ').replace(/\s{2,}/g, ' ').trim();
-    }
-  });
-}
-
+/* Expandable Menu submenu. Categories are generated from the actual h2
+   headings in the menu, so the list stays synchronized with the menu. */
 function normalizeMenuText(text) {
   return (text || '').replace(/\s+/g, ' ').trim();
 }
 
-repairMenuMarkup();
-
-function applyMenuPriceOverrides() {
-  const overrides = window.MENU_PRICE_OVERRIDES || {};
-  const sectionCounts = {};
-  document.querySelectorAll('.menu-section .column').forEach((column) => {
-    let currentSection = '';
-    Array.from(column.children).forEach((child) => {
-      if (child.matches('h2')) {
-        currentSection = normalizeMenuText(child.textContent);
-        sectionCounts[currentSection] = sectionCounts[currentSection] || {};
-        return;
-      }
-      if (!child.matches('ul.leaders, ul.drinks')) return;
-      Array.from(child.querySelectorAll('li')).forEach((li) => {
-        const nameEl = li.querySelector('.name');
-        const priceEl = li.querySelector('.price');
-        if (!nameEl || !priceEl || !currentSection) return;
-        const itemName = normalizeMenuText(nameEl.textContent);
-        const key = currentSection + ' > ' + itemName;
-        const override = overrides[key];
-        if (override === undefined) return;
-        sectionCounts[currentSection][itemName] = (sectionCounts[currentSection][itemName] || 0) + 1;
-        const occurrence = sectionCounts[currentSection][itemName] - 1;
-        if (Array.isArray(override)) {
-          if (override[occurrence] !== undefined) priceEl.textContent = override[occurrence];
-        } else priceEl.textContent = override;
-      });
-    });
-  });
-}
-
-function loadCentralizedMenuPrices() {
-  const script = document.createElement('script');
-  script.src = 'menu-prices.js?v=' + Date.now();
-  script.onload = applyMenuPriceOverrides;
-  script.onerror = () => console.error('Unable to load menu-prices.js');
-  document.head.appendChild(script);
-}
-
-loadCentralizedMenuPrices();
-
-/* Expandable Menu submenu. Categories are generated from the actual h2
-   headings in the menu, so the list stays synchronized with the menu. */
 function setupMenuCategorySubmenu() {
   if (!menu) return;
 
@@ -397,93 +293,3 @@ if (document.readyState === 'loading') {
 } else {
   setupLocationMapChooser();
 }
-
-/* SEO + performance pass. These changes are injected from the site's
-   existing script so they do not require a risky rewrite of the large legacy
-   index.html file. */
-(function setupSeoAndPerformance() {
-  const siteUrl = 'https://eltoreroduluth.com/';
-  const title = 'El Torero Mexican Restaurant | Duluth, GA';
-  const description = 'El Torero Mexican Restaurant in Duluth, Georgia. View our Mexican food menu, hours, phone number and location at 3656 Satellite Boulevard.';
-
-  document.title = title;
-
-  const upsertMeta = (selector, attrs) => {
-    let el = document.head.querySelector(selector);
-    if (!el) {
-      el = document.createElement('meta');
-      document.head.appendChild(el);
-    }
-    Object.entries(attrs).forEach(([key, value]) => el.setAttribute(key, value));
-  };
-
-  upsertMeta('meta[name="description"]', { name: 'description', content: description });
-  upsertMeta('meta[name="robots"]', { name: 'robots', content: 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1' });
-  upsertMeta('meta[name="theme-color"]', { name: 'theme-color', content: '#ffffff' });
-  upsertMeta('meta[property="og:title"]', { property: 'og:title', content: title });
-  upsertMeta('meta[property="og:description"]', { property: 'og:description', content: description });
-  upsertMeta('meta[property="og:type"]', { property: 'og:type', content: 'restaurant' });
-  upsertMeta('meta[property="og:url"]', { property: 'og:url', content: siteUrl });
-  upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary' });
-
-  let canonical = document.head.querySelector('link[rel="canonical"]');
-  if (!canonical) {
-    canonical = document.createElement('link');
-    canonical.rel = 'canonical';
-    document.head.appendChild(canonical);
-  }
-  canonical.href = siteUrl;
-
-  if (!document.head.querySelector('script[data-el-torero-schema]')) {
-    const schema = {
-      '@context': 'https://schema.org',
-      '@type': 'Restaurant',
-      name: 'El Torero Mexican Restaurant',
-      url: siteUrl,
-      telephone: '+1-770-476-4320',
-      servesCuisine: ['Mexican'],
-      priceRange: '$$',
-      address: {
-        '@type': 'PostalAddress',
-        streetAddress: '3656 Satellite Boulevard',
-        addressLocality: 'Duluth',
-        addressRegion: 'GA',
-        postalCode: '30043',
-        addressCountry: 'US'
-      },
-      openingHoursSpecification: [
-        { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '11:00', closes: '21:00' }
-      ],
-      menu: siteUrl + '#menu'
-    };
-    const schemaScript = document.createElement('script');
-    schemaScript.type = 'application/ld+json';
-    schemaScript.dataset.elToreroSchema = 'true';
-    schemaScript.textContent = JSON.stringify(schema);
-    document.head.appendChild(schemaScript);
-  }
-
-  /* Images and the embedded map are below the initial viewport on this
-     long menu page, so let the browser defer their network work. */
-  document.querySelectorAll('img').forEach((image) => {
-    if (!image.hasAttribute('loading')) image.setAttribute('loading', 'lazy');
-    if (!image.hasAttribute('decoding')) image.setAttribute('decoding', 'async');
-  });
-  document.querySelectorAll('iframe').forEach((frame) => {
-    if (!frame.hasAttribute('loading')) frame.setAttribute('loading', 'lazy');
-  });
-
-  /* Make the restaurant phone number immediately actionable on phones. */
-  document.querySelectorAll('.contact-section, #contact').forEach((section) => {
-    section.querySelectorAll('p, span, div').forEach((node) => {
-      if (node.children.length) return;
-      const text = normalizeMenuText(node.textContent);
-      if (!text.includes('(770)476-4320')) return;
-      const link = document.createElement('a');
-      link.href = 'tel:+17704764320';
-      link.textContent = text;
-      link.setAttribute('aria-label', 'Call El Torero Mexican Restaurant');
-      node.replaceChildren(link);
-    });
-  });
-})();
