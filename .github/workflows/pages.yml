@@ -34,6 +34,7 @@ jobs:
           perl -0pi -e 's#(\n[ \t]*</div>){4}(\n[ \t]*<div class="hours-section")#$1$2#' index.html
           sed -i 's#<di class="hours-line-left"></di>#<div class="hours-line-left"></div>#' index.html
           sed -i 's#<div class="hours-line-left"></di>#<div class="hours-line-left"></div>#' index.html
+          perl -0pi -e 's#</main>(\s*)<footer>#<footer>#' index.html
 
       # Keep the source HTML clean and consistently formatted. This only
       # changes whitespace/formatting; it does not change menu structure.
