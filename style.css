@@ -54,22 +54,25 @@ html, body { width:100% !important; max-width:100% !important; overflow-x:hidden
   .desc { font-size:.82rem !important; }
 }
 
-/* Main hamburger sections use the same typography as the category submenu; preserve existing link colors. */
 .menu > a {
   font-family:'Josefin Sans', Arial, sans-serif !important;
   font-size:2.3rem !important;
   line-height:1.1 !important;
 }
 
-/* Final mobile stacking layer: keep the menu content above the decorative header/legacy stacking contexts. */
+/* Mobile flow fix: make the header a definite block and force main/menu to start immediately after it. */
 @media screen and (max-width:900px) {
-  .header { position:relative !important; z-index:0 !important; }
-  .menu-section { position:relative !important; z-index:1000 !important; isolation:isolate !important; }
-  .menu-section h1,
-  .menu-section .menu-line,
-  .menu-section .column,
-  .menu-section .column-left,
-  .menu-section .column-middle,
-  .menu-section .column-right,
-  .menu-section .column-new { position:relative !important; z-index:1001 !important; }
+  html, body { margin:0 !important; padding:0 !important; }
+  header { display:block !important; width:100% !important; height:330px !important; min-height:330px !important; max-height:330px !important; margin:0 !important; padding:0 !important; position:relative !important; overflow:hidden !important; }
+  header .header { display:block !important; width:100% !important; height:330px !important; min-height:330px !important; max-height:330px !important; margin:0 !important; padding:0 !important; position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; }
+  main { display:block !important; width:100% !important; height:auto !important; min-height:0 !important; margin:0 !important; padding:0 !important; position:relative !important; clear:both !important; overflow:visible !important; }
+  .menu-section { display:flex !important; width:100% !important; height:auto !important; min-height:0 !important; margin:0 !important; padding:0 !important; position:relative !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; transform:none !important; overflow:visible !important; }
+  .menu-section > h1 { position:relative !important; display:block !important; width:100% !important; height:auto !important; min-height:0 !important; margin:0 !important; padding:16px 0 8px !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; transform:none !important; overflow:visible !important; }
+  .menu-section > .menu-line { position:relative !important; display:block !important; width:60vw !important; height:2px !important; margin:0 auto 18px !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; transform:none !important; }
+  .menu-section > .column-middle,
+  .menu-section > .column-left,
+  .menu-section > .column-right,
+  .menu-section > .column-new { position:relative !important; display:block !important; width:100% !important; height:auto !important; min-height:0 !important; margin:0 !important; padding:0 5% 30px !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; transform:none !important; float:none !important; clear:both !important; overflow:visible !important; }
+  .menu-section .column { position:relative !important; display:flex !important; width:100% !important; height:auto !important; min-height:0 !important; margin:0 auto !important; padding:0 !important; top:auto !important; left:auto !important; right:auto !important; bottom:auto !important; transform:none !important; float:none !important; clear:both !important; overflow:visible !important; }
+  .menu-section .column > h2:first-child { margin-top:4px !important; }
 }
