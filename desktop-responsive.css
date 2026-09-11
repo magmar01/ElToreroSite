@@ -1,8 +1,12 @@
 /* Desktop menu layout — clean two-column presentation.
-   The HTML contains two outer menu wrappers. The first wrapper contains
-   Appetizers, Soups & Salads, and Lunch; the second contains Lunch or Dinner
-   Specialties and A La Carte. Keep those two wrappers side-by-side so the
-   sections do not create a large vertical gap between Lunch and Specialties. */
+   The deployment workflow groups the existing menu wrappers into two desktop
+   columns. Each side flows independently so a tall section on one side cannot
+   create a vertical gap on the other side. */
+
+/* Transparent grouping on smaller screens preserves the original mobile flow. */
+.desktop-menu-column {
+  display: contents;
+}
 
 @media screen and (min-width: 901px) {
   html, body {
@@ -20,7 +24,7 @@
     width: 100% !important;
     max-width: none !important;
     min-width: 0 !important;
-    padding: 0 4vw 90px !important;
+    padding: 0 4vw 20px !important;
     position: relative !important;
     overflow: visible !important;
   }
@@ -52,31 +56,50 @@
     margin: 12px auto 34px !important;
   }
 
-  /* There are two .column-middle wrappers in the HTML. Put them side-by-side. */
-  .menu-section > .column-middle {
+  /* The two desktop columns have independent vertical flow. */
+  .menu-section > .desktop-menu-column {
+    display: flex !important;
+    flex-direction: column !important;
+    align-self: start !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    overflow: visible !important;
+  }
+
+  .menu-section > .desktop-menu-column-left {
+    grid-column: 1 !important;
+    grid-row: 3 !important;
+  }
+
+  .menu-section > .desktop-menu-column-right {
+    grid-column: 2 !important;
+    grid-row: 3 !important;
+  }
+
+  .desktop-menu-column > .column-middle,
+  .desktop-menu-column > .column-right {
     display: block !important;
     width: 100% !important;
     max-width: none !important;
     min-width: 0 !important;
     margin: 0 !important;
-    padding: 0 0 42px !important;
+    padding: 0 !important;
     position: relative !important;
     overflow: visible !important;
     box-sizing: border-box !important;
-    grid-row: 3 !important;
   }
 
-  /* First wrapper: Appetizers, Soups & Salads, Lunch. */
-  .menu-section > .column-middle:nth-child(3) {
-    grid-column: 1 !important;
+  .desktop-menu-column > .column-middle + .column-middle,
+  .desktop-menu-column > .column-right + .column-right {
+    margin-top: 0 !important;
   }
 
-  /* Second wrapper: Lunch or Dinner Specialties, A La Carte. */
-  .menu-section > .column-middle:nth-child(4) {
-    grid-column: 2 !important;
-  }
-
-  .menu-section > .column-middle > .column {
+  .desktop-menu-column > .column-middle > .column,
+  .desktop-menu-column > .column-right > .column {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
