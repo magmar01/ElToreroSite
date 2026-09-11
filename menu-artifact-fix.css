@@ -63,6 +63,12 @@
 .location-address-link:hover,
 .location-address-link:focus { color: #ffffff !important; }
 
+/* Keep menu descriptions visually consistent with the existing menu:
+   uppercase text, matching the established description treatment. */
+.menu-section .desc {
+  text-transform: uppercase !important;
+}
+
 /* Desktop leader rows. Keep menu item content in the HTML rather than
    generating replacement text with CSS pseudo-elements. */
 @media screen and (min-width: 801px) {
