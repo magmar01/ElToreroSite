@@ -244,8 +244,8 @@ const MENU = [
     { name: 'HALF PITCHER (32oz.)', price: '8.00' }, 
     { name: 'JUMBO MUG (32oz.)', price: '8.00' },
     { name: 'GLASS (22oz.)', price: '6.25' },
-    { name: 'GLASS (12oz.)', price: '4.50' }
-    { name: 'MICHELADA', price: '10.25', description: ' CHOICE OF BEER WITH CALAMATO AND LIME JUICE.'},
+    { name: 'GLASS (12oz.)', price: '4.50' },
+    { name: 'MICHELADA', price: '10.25', description: ' CHOICE OF BEER WITH CALAMATO AND LIME JUICE.'}
   ] },
   { title: 'Mixed Drinks', items: [
     { name: 'FROZEN MARGARITA (16oz.)', price: '9.50', description: 'LIME, STRAWBERRY, MANGO OR PEACH' },
@@ -260,7 +260,7 @@ const MENU = [
     { name: 'PITCHER TEXAS MARGARITA (60oz.)', price: '36.75' },
     { name: 'HALF PITCHER TEXAS MARGARITA (32oz.)', price: '21.00' }, 
     { name: 'SMALL TEXAS MARGARITA', price: '9.75' },
-    { name: 'JOSE CUERVO TEQUILA SHOTS (1oz.)', price: '7.00', description: 'GOLD, TRADICIONAL, 1800 REPOSADO' }
+    { name: 'JOSE CUERVO TEQUILA SHOTS (1oz.)', price: '7.00', description: 'GOLD, TRADICIONAL, 1800 REPOSADO' },
     { name: 'PALOMA', price: '11.00', description: '2OZ. OF TEQUILA WITH LIME JUICE, SALT & GRAPEFRUIT SODA' }
   ] },
   { title: 'Wines', items: [
