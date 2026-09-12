@@ -62,11 +62,30 @@
     </footer>
     <script src="script.js?v=20260911-typo-refresh" defer></script>
     <script>
-      /* Desktop only: after menu.js renders, preserve the original MENU order
-         but flow the complete menu through one balanced two-column container.
-         This removes the artificial height mismatch between two independent
-         columns without changing the menu's item/section order or mobile. */
+      /* Desktop only: after menu.js renders, flow the complete menu through
+         one balanced two-column container using a deliberate section order.
+         The order is tuned to keep the two desktop columns close in height
+         while keeping the menu flow logical. Mobile/tablet is untouched. */
       (function () {
+        const DESKTOP_FLOW_ORDER = [
+          'Appetizers',
+          'Soups & Salads',
+          'Lunch',
+          'Lunch or Dinner Specialties',
+          'A La Carte',
+          'Side Orders',
+          'El Torero Special Orders',
+          'El Torero Style Dinners',
+          'Combination Dinners',
+          "Child's Plate",
+          'Dessert',
+          'Mexican Beer',
+          'Draft Beer',
+          'Mixed Drinks',
+          'Wines',
+          'Soft Drinks'
+        ];
+
         function balanceDesktopMenu() {
           if (!window.matchMedia || !window.matchMedia('(min-width: 901px)').matches) return;
 
@@ -76,7 +95,6 @@
           const columns = Array.from(menuSection.querySelectorAll('.desktop-menu-column .column-middle > .column'));
           if (columns.length < 2) return;
 
-          const target = columns[0];
           const sourceNodes = [];
           columns.forEach((column) => {
             Array.from(column.children).forEach((child) => {
@@ -95,11 +113,12 @@
             }
           });
 
+          const target = columns[0];
           target.innerHTML = '';
           columns[1].innerHTML = '';
 
-          MENU.forEach((section) => {
-            const group = groups.get(section.title);
+          DESKTOP_FLOW_ORDER.forEach((title) => {
+            const group = groups.get(title);
             if (!group) return;
             const wrapper = document.createElement('div');
             wrapper.className = 'desktop-menu-section-group';
