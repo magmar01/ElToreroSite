@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Torero Duluth</title>
     <link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive|Josefin+Sans|Kumar+One+Outline|Staatliches" rel="stylesheet" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv21j4cBzQYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
     <link rel="stylesheet" href="style.css" type="text/css" />
     <link href="//db.onlinewebfonts.com/c/7b2e1f84b8737cbfc7cc58cffccfaaa9?family=ITC+Souvenir" rel="stylesheet" type="text/css" />
   </head>
@@ -71,7 +71,7 @@
           if (!window.matchMedia || !window.matchMedia('(min-width: 901px)').matches) return;
 
           const menuSection = document.querySelector('.menu-section');
-          if (!menuSection || !Array.isArray(window.MENU)) return;
+          if (!menuSection || typeof MENU === 'undefined' || !Array.isArray(MENU)) return;
 
           const columns = Array.from(menuSection.querySelectorAll('.desktop-menu-column .column-middle > .column'));
           if (columns.length < 2) return;
@@ -98,7 +98,7 @@
           target.innerHTML = '';
           columns[1].innerHTML = '';
 
-          window.MENU.forEach((section) => {
+          MENU.forEach((section) => {
             const group = groups.get(section.title);
             if (!group) return;
             const wrapper = document.createElement('div');
@@ -114,7 +114,6 @@
         }
 
         window.addEventListener('elToreroMenuRendered', balanceDesktopMenu, { once: true });
-        if (document.readyState !== 'loading') balanceDesktopMenu();
       })();
     </script>
   </body>
