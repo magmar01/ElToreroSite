@@ -62,10 +62,9 @@
     </footer>
     <script src="script.js?v=20260911-typo-refresh" defer></script>
     <script>
-      /* Desktop only: after menu.js renders, flow the complete menu through
-         one balanced two-column container using a deliberate section order.
-         The order is tuned to keep the two desktop columns close in height
-         while keeping the menu flow logical. Mobile/tablet is untouched. */
+      /* Desktop only: use the real rendered height of each menu section to
+         choose the cleanest two-column split. This avoids CSS multicolumn
+         balancing and keeps every section intact. Mobile/tablet is untouched. */
       (function () {
         const DESKTOP_FLOW_ORDER = [
           'Appetizers',
@@ -113,23 +112,59 @@
             }
           });
 
-          const target = columns[0];
-          target.innerHTML = '';
-          columns[1].innerHTML = '';
-
-          DESKTOP_FLOW_ORDER.forEach((title) => {
-            const group = groups.get(title);
-            if (!group) return;
+          const makeGroup = (group) => {
             const wrapper = document.createElement('div');
             wrapper.className = 'desktop-menu-section-group';
             group.nodes.forEach((node) => wrapper.appendChild(node));
-            target.appendChild(wrapper);
+            return wrapper;
+          };
+
+          const left = columns[0];
+          const right = columns[1];
+          left.innerHTML = '';
+          right.innerHTML = '';
+
+          const wrappers = [];
+          DESKTOP_FLOW_ORDER.forEach((title) => {
+            const group = groups.get(title);
+            if (group) wrappers.push(makeGroup(group));
           });
 
-          const leftWrapper = menuSection.querySelector('.desktop-menu-column-left');
-          const rightWrapper = menuSection.querySelector('.desktop-menu-column-right');
-          if (leftWrapper) leftWrapper.classList.add('desktop-menu-flow');
-          if (rightWrapper) rightWrapper.classList.add('desktop-menu-flow-disabled');
+          /* Build the complete sequence in the left column first so the
+             browser gives us the actual wrapped/text-rendered heights. */
+          wrappers.forEach((wrapper) => left.appendChild(wrapper));
+
+          requestAnimationFrame(() => {
+            const heights = wrappers.map((wrapper) => wrapper.getBoundingClientRect().height);
+            const total = heights.reduce((sum, height) => sum + height, 0);
+            const gap = 5 * Math.max(0, wrappers.length - 1);
+            const target = (total + gap) / 2;
+
+            let bestBreak = 1;
+            let bestDifference = Infinity;
+            let running = 0;
+
+            for (let i = 0; i < wrappers.length - 1; i += 1) {
+              running += heights[i] + 5;
+              const difference = Math.abs(running - target);
+              if (difference < bestDifference) {
+                bestDifference = difference;
+                bestBreak = i + 1;
+              }
+            }
+
+            left.innerHTML = '';
+            right.innerHTML = '';
+
+            wrappers.forEach((wrapper, index) => {
+              (index < bestBreak ? left : right).appendChild(wrapper);
+            });
+
+            const leftWrapper = menuSection.querySelector('.desktop-menu-column-left');
+            const rightWrapper = menuSection.querySelector('.desktop-menu-column-right');
+            if (leftWrapper) leftWrapper.classList.add('desktop-menu-flow');
+            if (rightWrapper) rightWrapper.classList.add('desktop-menu-flow');
+          });
         }
 
         window.addEventListener('elToreroMenuRendered', balanceDesktopMenu, { once: true });
