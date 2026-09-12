@@ -83,8 +83,7 @@ const MENU = [
     { name: 'CHILAQUILES CON POLLO', price: '12.85', description: 'CORN TORTILLA STRIPS COOKED WITH CHICKEN AND TOMATO SAUCE, SERVED WITH RICE & BEANS' }
   ] },
   { title: 'A La Carte', items: [
-    { name: 'ORDER OF BEANS', price: '3.00' }, 
-    { name: 'ORDER OF RICE', price: '3.00' },
+    { name: 'ORDER OF BEANS', price: '3.00' }, { name: 'ORDER OF RICE', price: '3.00' },
     { name: 'ORDER OF TACOS (3)', price: '10.25', description: 'BEEF, BEAN, PORK, OR CHICKEN' },
     { name: 'ORDER OF TAMALES (3)', price: '11.00', description: 'BEEF, CHICKEN, PORK OR CHEESE' },
     { name: 'ORDER OF ENCHILADAS (3)', price: '11.00', description: 'BEEF, BEAN, CHICKEN, PORK, OR CHEESE' },
@@ -99,26 +98,19 @@ const MENU = [
     { name: 'ONE FISH TACO', price: '5.50' }
   ] },
   { title: 'Side Orders', items: [
-    { name: 'SMALL SIDE (4oz.)', price: '1.50' }, 
-    { name: 'LARGE SIDE (8oz.)', price: '2.25' }, 
-    { name: 'ORDER OF FRENCH FRIES', price: '3.25' },
-    { name: 'ORDER OF LETTUCE', price: '2.00' }, 
-    { name: 'ORDER OF FLOUR TORTILLAS (2)', price: '2.00' }, 
-    { name: 'ORDER OF CORN TORTILLAS (4)', price: '2.00' },
-    { name: 'SINGLE BURRITO', price: '7.25', description: 'BEEF, BEAN, CHICKEN, PORK OR CHEESE' }, 
+    { name: 'SMALL SIDE (4oz.)', price: '1.50' }, { name: 'LARGE SIDE (8oz.)', price: '2.25' },
+    { name: 'ORDER OF FRENCH FRIES', price: '3.25' }, { name: 'ORDER OF LETTUCE', price: '2.00' },
+    { name: 'ORDER OF FLOUR TORTILLAS (2)', price: '2.00' }, { name: 'ORDER OF CORN TORTILLAS (4)', price: '2.00' },
+    { name: 'SINGLE BURRITO', price: '7.25', description: 'BEEF, BEAN, CHICKEN, PORK OR CHEESE' },
     { name: 'SINGLE CHALUPA', price: '7.25', description: 'FLAT CORN TORTILLA WITH BEANS, SPRINKLED WITH CHEESE & TOPPED WITH LETTUCE AND GUACAMOLE' },
     { name: 'SINGLE CHILE RELLENO', price: '7.25', description: 'BEEF, BEAN, CHICKEN, CHEESE OR PORK' },
     { name: 'SINGLE ENCHILADA', price: '4.25', description: 'BEEF, BEAN, CHICKEN, CHEESE OR PORK' },
     { name: 'SINGLE TACO', price: '3.40', description: 'BEEF, BEAN, CHICKEN OR PORK' },
-    { name: 'SINGLE TAMALE', price: '4.25', description: 'BEEF, CHICKEN, CHEESE OR PORK' }, 
-    { name: 'BEEF TOSTADA', price: '7.25' }, 
-    { name: 'TOSTAGUAC', price: '9.00' },
-    { name: 'SMALL GUACAMOLE DIP (4oz.)', price: '4.50' }, 
-    { name: 'SMALL CHEESE DIP (4oz.)', price: '4.50' },
-    { name: 'SMALL ORDER MUSHROOMS OR SPINACH', price: '3.25' }, 
-    { name: 'GRILLED ONIONS', price: '2.25' }, 
-    { name: 'GRILLED SERRANO PEPPERS', price: '2.25' },
-    { name: 'SAUTEED BELL PEPPERS & ONIONS', price: '4.25' }, 
+    { name: 'SINGLE TAMALE', price: '4.25', description: 'BEEF, CHICKEN, CHEESE OR PORK' },
+    { name: 'BEEF TOSTADA', price: '7.25' }, { name: 'TOSTAGUAC', price: '9.00' },
+    { name: 'SMALL GUACAMOLE DIP (4oz.)', price: '4.50' }, { name: 'SMALL CHEESE DIP (4oz.)', price: '4.50' },
+    { name: 'SMALL ORDER MUSHROOMS OR SPINACH', price: '3.25' }, { name: 'GRILLED ONIONS', price: '2.25' },
+    { name: 'GRILLED SERRANO PEPPERS', price: '2.25' }, { name: 'SAUTEED BELL PEPPERS & ONIONS', price: '4.25' },
     { name: 'SLICED AVOCADO', price: '3.25' }
   ] },
   { title: 'El Torero Style Dinners', items: [
@@ -150,146 +142,117 @@ const MENU = [
     { name: 'NACHOS FRIES', price: '15.50', description: 'YOUR CHOICE OF BEEF, CHICKEN, BEANS OR PORK' }
   ] },
   { title: 'El Torero Special Orders', items: [
-    { name: 'SPECIAL ORDER A', price: '14.50', description: 'ORDER OF TWO TOSTADAS, SERVED WITH BEEF OR CHICKEN, TOPPED WITH LETTUCE, CHEESE, SOUR CREAM, GUACAMOLE, & TOMATOES' }, 
-    { name: 'SINGLE SPECIAL A', price: '9.75' },
-    { name: 'SPECIAL ORDER B', price: '14.50', description: 'ORDER OF TWO BURRITOS WITH NACHO CHEESE SAUCE' }, 
-    { name: 'SINGLE SPECIAL B', price: '9.75' },
-    { name: 'SPECIAL ORDER C', price: '14.50', description: 'ORDER OF TWO BURRITOS TOPPED WITH LETTUCE, TOMATOES, & SOUR CREAM' }, 
-    { name: 'SINGLE SPECIAL C', price: '9.75' },
-    { name: 'SPECIAL ORDER E', price: '14.50', description: 'ORDER OF TWO BURRITOS STUFFED WITH BEANS & CHORIZO' }, 
-    { name: 'SINGLE SPECIAL E', price: '9.75' },
-    { name: 'SPECIAL ORDER F', price: '15.75', description: 'ORDER OF THREE ENCHILADAS, YOUR CHOICE OF STUFFING, TOPPED WITH CHEESE DIP, LETTUCE, GUACAMOLE & SOUR CREAM' },
-    { name: 'SPECIAL ORDER ABC', price: '17.25', description: 'ORDER OF TWO BURRITOS TOPPED WITH NACHO CHEESE SAUCE, LETTUCE, TOMATOES, GUACAMOLE & SOUR CREAM' }, 
-    { name: 'SINGLE SPECIAL ABC', price: '12.75' },
-    { name: 'SPECIAL ORDER G', price: '16.50', description: 'THREE FAJITA TACOS, CRISPY TACO SHELLS STUFFED WITH YOUR CHOICE OF BEEF, CHICKEN, OR SHRIMP FAJITAS, LETTUCE, GUACAMOLE, SOUR CREAM & PICO DE GALLO *CAN NOT BE SUBSTITUTED ANYWHERE ON THE MENU*' },
-    { name: 'SINGLE SPECIAL G', price: '6.00' },
-    { name: 'TACOS DE CARNE AZADA', price: '17.75', description: 'THREE SOFT CORN TORTILLAS STUFFED WITH ONIONS, CILANTRO, TOMATILLO SAUCE YOUR CHOICE OF CHICKEN, BEEF, PORK OR SAUSAGE, SERVED WITH RICE & BEANS' },
-    { name: 'SINGLE TACO DE CARNE AZADA', price: '4.50' }, 
-    { name: 'BURRITOS DE CARNE OR POLLO AZADO', price: '17.75' }, 
-    { name: 'SINGLE AZADA BURRITO', price: '10.75' }
+    { name: 'SPECIAL ORDER A', price: '14.50', description: 'ORDER OF TWO TOSTADAS, SERVED WITH BEEF OR CHICKEN, TOPPED WITH LETTUCE, CHEESE, SOUR CREAM, GUACAMOLE, & TOMATOES' },
+    { name: 'SINGLE SPECIAL A', price: '9.75' }, { name: 'SPECIAL ORDER B', price: '14.50', description: 'ORDER OF TWO BURRITOS WITH NACHO CHEESE SAUCE' },
+    { name: 'SINGLE SPECIAL B', price: '9.75' }, { name: 'SPECIAL ORDER C', price: '14.50', description: 'ORDER OF TWO BURRITOS TOPPED WITH LETTUCE, TOMATOES, & SOUR CREAM' },
+    { name: 'SINGLE SPECIAL C', price: '9.75' }, { name: 'SPECIAL ORDER E', price: '14.50', description: 'ORDER OF TWO BURRITOS STUFFED WITH BEANS & CHORIZO' },
+    { name: 'SINGLE SPECIAL E', price: '9.75' }, { name: 'SPECIAL ORDER F', price: '15.75', description: 'ORDER OF THREE ENCHILADAS, YOUR CHOICE OF STUFFING, TOPPED WITH CHEESE DIP, LETTUCE, GUACAMOLE & SOUR CREAM' },
+    { name: 'SPECIAL ORDER ABC', price: '17.25', description: 'ORDER OF TWO BURRITOS TOPPED WITH NACHO CHEESE SAUCE, LETTUCE, TOMATOES, GUACAMOLE & SOUR CREAM' },
+    { name: 'SINGLE SPECIAL ABC', price: '12.75' }, { name: 'SPECIAL ORDER G', price: '16.50', description: 'THREE FAJITA TACOS, CRISPY TACO SHELLS STUFFED WITH YOUR CHOICE OF BEEF, CHICKEN, OR SHRIMP FAJITAS, LETTUCE, GUACAMOLE, SOUR CREAM & PICO DE GALLO *CAN NOT BE SUBSTITUTED ANYWHERE ON THE MENU*' },
+    { name: 'SINGLE SPECIAL G', price: '6.00' }, { name: 'TACOS DE CARNE AZADA', price: '17.75', description: 'THREE SOFT CORN TORTILLAS STUFFED WITH ONIONS, CILANTRO, TOMATILLO SAUCE YOUR CHOICE OF CHICKEN, BEEF, PORK OR SAUSAGE, SERVED WITH RICE & BEANS' },
+    { name: 'SINGLE TACO DE CARNE AZADA', price: '4.50' }, { name: 'BURRITOS DE CARNE OR POLLO AZADO', price: '17.75' }, { name: 'SINGLE AZADA BURRITO', price: '10.75' }
   ] },
   { title: 'Combination Dinners', items: [
-    { name: '#1', price: '14.75', description: 'ONE TACO, TWO ENCHILADAS & RICE' }, 
-    { name: '#2', price: '14.75', description: 'ONE TACO, ONE ENCHILADA & ONE CHALUPA' },
-    { name: '#3', price: '14.75', description: 'ONE ENCHILADA, ONE TACO & ONE CHILE RELLENO' }, 
-    { name: '#4', price: '14.75', description: 'TWO TACOS, ONE ENCHILADA & NACHO CHEESE TOSTADA' },
-    { name: '#5', price: '14.75', description: 'TWO ENCHILADAS. RICE & BEANS' }, 
-    { name: '#6', price: '14.75', description: 'ONE ENCHILADA, ONE TACO, RICE & BEANS' },
-    { name: '#7', price: '14.75', description: 'ONE CHILE RELLENO, ONE TACO, RICE & BEANS' }, 
-    { name: '#8', price: '14.75', description: 'ONE ENCHILADA, ONE TAMALE, RICE & BEANS' },
-    { name: '#9', price: '13.00', description: 'TWO TACOS, RICE & BEANS' }, 
-    { name: '#10', price: '14.75', description: 'ONE CHALUPA, ONE TACO, RICE & BEANS' },
-    { name: '#11', price: '14.75', description: 'ONE BURRITO, ONE ENCHILADA & ONE TACO' }, 
-    { name: '#12', price: '14.75', description: 'ONE CHALUPA, ONE CHILE RELLENO & BEANS' },
-    { name: '#13', price: '14.75', description: 'ONE ENCHILADA, ONE BURRITO & ONE CHILE RELLENO' }, 
-    { name: '#14', price: '14.75', description: 'ONE TACO, ONE CHILE RELLENO & ONE CHALUPA' },
-    { name: '#15', price: '14.75', description: 'ONE BURRITO, ONE ENCHILADA & ONE TAMALE' }, 
-    { name: '#16', price: '14.75', description: 'ONE CHALUPA, ONE CHILE RELLENO & ONE BURRITO' },
-    { name: '#17', price: '15.40', description: 'ONE BURRITO, ONE ENCHILADA, RICE & BEANS' }, 
-    { name: '#18', price: '15.40', description: 'ONE SPECIAL STUFFED QUESADILLA (CHOICE OF CHICKEN, SIRLOIN STEAK, OR GROUND BEEF) TACO, RICE & BEANS' },
-    { name: '#19', price: '15.40', description: 'ONE CHALUPA, ONE BURRITO & ONE ENCHILADA' }, 
-    { name: '#20', price: '15.40', description: 'ONE ENCHILADA, ONE CHILE RELLENO, RICE & BEANS' },
-    { name: '#21', price: '15.40', description: 'ONE TACO, ONE BURRITO & ONE CHALUPA' }, 
-    { name: '#22', price: '15.40', description: 'ONE BURRITO, ONE CHILE RELLENO & ONE TACO' },
-    { name: '#23', price: '15.40', description: 'ONE TACO, ONE BURRITO, RICE & BEANS' }, 
-    { name: '#24', price: '15.40', description: 'ONE CHILE RELLENO, ONE BURRITO & RICE' },
-    { name: '#25', price: '15.40', description: 'ONE CHALUPA, ONE ENCHILADA, RICE & BEANS' }, 
-    { name: '#26', price: '15.40', description: 'ONE TOSTAGUAC, ONE TACO & ONE ENCHILADA' },
-    { name: '#27', price: '15.40', description: 'TWO BURRITOS, RICE & BEANS' }, 
-    { name: '#28', price: '15.40', description: 'ONE TOSTADA, ONE TAMALE, ONE TACO & ONE ENCHILADA' },
-    { name: '#29', price: '15.40', description: 'ONE CHILE RELLENO, ONE QUESADILLA, ONE TACO & RICE' }, 
-    { name: '#30', price: '16.75', description: 'THREE BURRITOS' },
-    { name: '#31', price: '15.65', description: 'ONE TAMALE, ONE CHILE RELLENO, ONE NACHO CHEESE TOSTADA & ONE ENCHILADA' }, 
-    { name: '#32', price: '15.65', description: 'TWO ENCHILADAS, ONE CHILE RELLENO & ONE TACO' },
-    { name: '#33', price: '15.65', description: 'ONE TOSTAGUAC, RICE, BEANS & ONE TACO' }, 
-    { name: '#34', price: '15.65', description: 'THREE FLAUTAS, RICE & BEANS' },
-    { name: '#35', price: '15.65', description: 'FOUR ENCHILADAS' }, 
-    { name: '#36', price: '15.65', description: 'ONE TOSTAGUAC & THREE FLAUTAS' },
-    { name: '#37', price: '15.65', description: 'ONE TOSTAGUAC, ONE BURRITO & ONE ENCHILADA' }, 
-    { name: '#38', price: '16.75', description: 'ONE CHIMICHANGA WITH CHEESE SAUCE, ONE FLAUTA, RICE & BEANS' },
-    { name: '#39', price: '15.65', description: 'ONE BURRITO, ONE CHILE RELLENO, RICE & BEANS' }, 
-    { name: '#40', price: '15.65', description: 'ONE CHALUPA, ONE ENCHILADA, ONE CHILE RELLENO & BEANS' },
-    { name: '#41', price: '17.75', description: 'TWO CHIMICHANGAS WITH CHEESE SAUCE, RICE & BEANS' }, 
-    { name: '#42', price: '15.65', description: 'TWO ENCHILADAS, ONE CHALUPA & ONE TACO' },
-    { name: '#43', price: '15.65', description: 'ONE BURRITO, ONE NACHO CHEESE TOSTADA, ONE TACO & RICE' }, 
-    { name: '#44', price: '15.65', description: 'ONE CHILE RELLENO, ONE TOSTAGUAC & ONE BURRITO' },
-    { name: '#45', price: '15.65', description: 'TWO CHILE RELLENOS, RICE & BEANS' }, 
-    { name: '#46', price: '15.65', description: 'ONE TAMALE, ONE BURRITO, ONE CHILE RELLENO & ONE TACO' },
-    { name: '#47', price: '15.65', description: 'TWO BURRITOS, ONE CHILE RELLENO' }, 
-    { name: '#48', price: '15.65', description: 'TWO TACOS, ONE BURRITO & RICE' }
+    { name: '#1', price: '14.75', description: 'ONE TACO, TWO ENCHILADAS & RICE' }, { name: '#2', price: '14.75', description: 'ONE TACO, ONE ENCHILADA & ONE CHALUPA' },
+    { name: '#3', price: '14.75', description: 'ONE ENCHILADA, ONE TACO & ONE CHILE RELLENO' }, { name: '#4', price: '14.75', description: 'TWO TACOS, ONE ENCHILADA & NACHO CHEESE TOSTADA' },
+    { name: '#5', price: '14.75', description: 'TWO ENCHILADAS. RICE & BEANS' }, { name: '#6', price: '14.75', description: 'ONE ENCHILADA, ONE TACO, RICE & BEANS' },
+    { name: '#7', price: '14.75', description: 'ONE CHILE RELLENO, ONE TACO, RICE & BEANS' }, { name: '#8', price: '14.75', description: 'ONE ENCHILADA, ONE TAMALE, RICE & BEANS' },
+    { name: '#9', price: '13.00', description: 'TWO TACOS, RICE & BEANS' }, { name: '#10', price: '14.75', description: 'ONE CHALUPA, ONE TACO, RICE & BEANS' },
+    { name: '#11', price: '14.75', description: 'ONE BURRITO, ONE ENCHILADA & ONE TACO' }, { name: '#12', price: '14.75', description: 'ONE CHALUPA, ONE CHILE RELLENO & BEANS' },
+    { name: '#13', price: '14.75', description: 'ONE ENCHILADA, ONE BURRITO & ONE CHILE RELLENO' }, { name: '#14', price: '14.75', description: 'ONE TACO, ONE CHILE RELLENO & ONE CHALUPA' },
+    { name: '#15', price: '14.75', description: 'ONE BURRITO, ONE ENCHILADA & ONE TAMALE' }, { name: '#16', price: '14.75', description: 'ONE CHALUPA, ONE CHILE RELLENO & ONE BURRITO' },
+    { name: '#17', price: '15.40', description: 'ONE BURRITO, ONE ENCHILADA, RICE & BEANS' }, { name: '#18', price: '15.40', description: 'ONE SPECIAL STUFFED QUESADILLA (CHOICE OF CHICKEN, SIRLOIN STEAK, OR GROUND BEEF) TACO, RICE & BEANS' },
+    { name: '#19', price: '15.40', description: 'ONE CHALUPA, ONE BURRITO & ONE ENCHILADA' }, { name: '#20', price: '15.40', description: 'ONE ENCHILADA, ONE CHILE RELLENO, RICE & BEANS' },
+    { name: '#21', price: '15.40', description: 'ONE TACO, ONE BURRITO & ONE CHALUPA' }, { name: '#22', price: '15.40', description: 'ONE BURRITO, ONE CHILE RELLENO & ONE TACO' },
+    { name: '#23', price: '15.40', description: 'ONE TACO, ONE BURRITO, RICE & BEANS' }, { name: '#24', price: '15.40', description: 'ONE CHILE RELLENO, ONE BURRITO & RICE' },
+    { name: '#25', price: '15.40', description: 'ONE CHALUPA, ONE ENCHILADA, RICE & BEANS' }, { name: '#26', price: '15.40', description: 'ONE TOSTAGUAC, ONE TACO & ONE ENCHILADA' },
+    { name: '#27', price: '15.40', description: 'ONE TOSTADA, ONE TACO & ONE ENCHILADA' }, { name: '#28', price: '15.40', description: 'ONE CHALUPA, ONE TACO & ONE ENCHILADA' },
+    { name: '#29', price: '15.40', description: 'ONE CHILE RELLENO, ONE QUESADILLA, ONE TACO & RICE' }, { name: '#30', price: '16.75', description: 'THREE BURRITOS' },
+    { name: '#31', price: '15.65', description: 'ONE TAMALE, ONE CHILE RELLENO, ONE NACHO CHEESE TOSTADA & ONE ENCHILADA' }, { name: '#32', price: '15.65', description: 'TWO ENCHILADAS, ONE CHILE RELLENO & ONE TACO' },
+    { name: '#33', price: '15.65', description: 'ONE TOSTAGUAC, RICE, BEANS & ONE TACO' }, { name: '#34', price: '15.65', description: 'THREE FLAUTAS, RICE & BEANS' },
+    { name: '#35', price: '15.65', description: 'FOUR ENCHILADAS' }, { name: '#36', price: '15.65', description: 'ONE TOSTAGUAC & THREE FLAUTAS' },
+    { name: '#37', price: '15.65', description: 'ONE TOSTAGUAC, ONE BURRITO & ONE ENCHILADA' }, { name: '#38', price: '16.75', description: 'ONE CHIMICHANGA WITH CHEESE SAUCE, ONE FLAUTA, RICE & BEANS' },
+    { name: '#39', price: '15.65', description: 'ONE BURRITO, ONE CHILE RELLENO, RICE & BEANS' }, { name: '#40', price: '15.65', description: 'ONE CHALUPA, ONE ENCHILADA, ONE CHILE RELLENO & BEANS' },
+    { name: '#41', price: '17.75', description: 'TWO CHIMICHANGAS WITH CHEESE SAUCE, RICE & BEANS' }, { name: '#42', price: '15.65', description: 'TWO ENCHILADAS, ONE CHALUPA & ONE TACO' },
+    { name: '#43', price: '15.65', description: 'ONE BURRITO, ONE NACHO CHEESE TOSTADA, ONE TACO & RICE' }, { name: '#44', price: '15.65', description: 'ONE CHILE RELLENO, ONE TOSTAGUAC & ONE BURRITO' },
+    { name: '#45', price: '15.65', description: 'TWO CHILE RELLENOS, RICE & BEANS' }, { name: '#46', price: '15.65', description: 'ONE TAMALE, ONE BURRITO, ONE CHILE RELLENO & ONE TACO' },
+    { name: '#47', price: '15.65', description: 'TWO BURRITOS, ONE CHILE RELLENO' }, { name: '#48', price: '15.65', description: 'TWO TACOS, ONE BURRITO & RICE' }
   ] },
   { title: "Child's Plate", items: [
-    { name: '#1', price: '6.50', description: 'ONE TACO, RICE & BEANS' }, 
-    { name: '#2', price: '6.50', description: 'ONE TACO, ONE ENCHILADA & RICE' },
-    { name: '#3', price: '6.50', description: 'ONE QUESADILLA, RICE & BEANS' }, 
-    { name: '#4', price: '6.50', description: 'ONE BURRITO & RICE' },
-    { name: '#5', price: '6.50', description: 'ONE ENCHILADA, RICE AND BEANS' }, 
-    { name: '#6', price: '6.50', description: 'ONE QUESADILLA, ONE TACO & RICE' },
-    { name: '#7', price: '6.50', description: 'POLLO AZADO & FRENCH FRIES OR RICE' }, 
-    { name: '#8', price: '6.50', description: 'QUESADILLA & FRENCH FRIES' }
+    { name: '#1', price: '6.50', description: 'ONE TACO, RICE & BEANS' }, { name: '#2', price: '6.50', description: 'ONE TACO, ONE ENCHILADA & RICE' },
+    { name: '#3', price: '6.50', description: 'ONE QUESADILLA, RICE & BEANS' }, { name: '#4', price: '6.50', description: 'ONE BURRITO & RICE' },
+    { name: '#5', price: '6.50', description: 'ONE ENCHILADA, RICE AND BEANS' }, { name: '#6', price: '6.50', description: 'ONE QUESADILLA, ONE TACO & RICE' },
+    { name: '#7', price: '6.50', description: 'POLLO AZADO & FRENCH FRIES OR RICE' }, { name: '#8', price: '6.50', description: 'QUESADILLA & FRENCH FRIES' }
   ] },
   { title: 'Dessert', items: [
-    { name: 'SOPAPILLA', price: '3.50' }, 
-    { name: 'SOPAPILLA A LA MODE', price: '5.25' }, 
-    { name: 'FLAN', price: '5.25', description: 'MEXICAN CARAMEL CUSTARD' },
-    { name: 'FRIED ICE CREAM', price: '5.25' }, 
-    { name: 'SCOOP OF ICE CREAM', price: '3.00' }
+    { name: 'SOPAPILLA', price: '3.50' }, { name: 'SOPAPILLA A LA MODE', price: '5.25' }, { name: 'FLAN', price: '5.25', description: 'MEXICAN CARAMEL CUSTARD' },
+    { name: 'FRIED ICE CREAM', price: '5.25' }, { name: 'SCOOP OF ICE CREAM', price: '3.00' }
   ] },
   { title: 'Mexican Beer', items: [
     { name: 'MEXICAN BEER', price: '6.00', description: 'CORONA, DOS EQUIS, TECATE, NEGRA MODELO, MODELO ESPECIAL' },
     { name: 'DOMESTIC BEER', price: '5.75', description: 'BUDWEISER, BUD LIGHT, MILLER LITE, MICHELOB ULTRA' }
   ] },
   { title: 'Draft Beer', note: 'CORONA, BUD LIGHT, DOS EQUIS AMBER, DOS EQUIS LAGER', items: [
-    { name: 'PITCHER (60oz.)', price: '13.75' }, 
-    { name: 'HALF PITCHER (32oz.)', price: '8.00' }, 
-    { name: 'JUMBO MUG (32oz.)', price: '8.00' },
-    { name: 'GLASS (22oz.)', price: '6.25' },
-    { name: 'GLASS (12oz.)', price: '4.50' },
-    { name: 'MICHELADA', price: '10.25', description: 'CHOICE OF BEER WITH CLAMATO AND LIME JUICE.'}
+    { name: 'PITCHER (60oz.)', price: '13.75' }, { name: 'HALF PITCHER (32oz.)', price: '8.00' }, { name: 'JUMBO MUG (32oz.)', price: '8.00' },
+    { name: 'GLASS (22oz.)', price: '6.25' }, { name: 'GLASS (12oz.)', price: '4.50' }, { name: 'MICHELADA', price: '10.25', description: 'CHOICE OF BEER WITH CLAMATO AND LIME JUICE.' }
   ] },
   { title: 'Mixed Drinks', items: [
-    { name: 'FROZEN MARGARITA (16oz.)', price: '9.50', description: 'LIME, STRAWBERRY, MANGO OR PEACH' },
-    { name: 'FROZEN MARGARITA (22oz.)', price: '14.00', description: 'LIME, STRAWBERRY, MANGO OR PEACH' },
-    { name: 'PITCHER FROZEN MARGARITA (60oz.)', price: '27.50' }, 
-    { name: 'HALF PITCHER FROZEN MARGARITA (32oz.)', price: '16.25' },
-    { name: 'CHIQUITA MARGARITA', price: '6.25', description: 'LIME ONLY' }, 
-    { name: 'GOLD MARGARITA (16oz.)', price: '11.00' }, 
-    { name: 'PITCHER GOLD MARGARITA (60oz.)', price: '29.50' },
-    { name: 'HALF PITCHER GOLD MARGARITA (32oz.)', price: '17.00' }, 
-    { name: 'TEXAS MARGARITA (16oz.)', price: '13.25' }, 
-    { name: 'PITCHER TEXAS MARGARITA (60oz.)', price: '36.75' },
-    { name: 'HALF PITCHER TEXAS MARGARITA (32oz.)', price: '21.00' }, 
-    { name: 'SMALL TEXAS MARGARITA', price: '9.75' },
+    { name: 'FROZEN MARGARITA (16oz.)', price: '9.50', description: 'LIME, STRAWBERRY, MANGO OR PEACH' }, { name: 'FROZEN MARGARITA (22oz.)', price: '14.00', description: 'LIME, STRAWBERRY, MANGO OR PEACH' },
+    { name: 'PITCHER FROZEN MARGARITA (60oz.)', price: '27.50' }, { name: 'HALF PITCHER FROZEN MARGARITA (32oz.)', price: '16.25' },
+    { name: 'CHIQUITA MARGARITA', price: '6.25', description: 'LIME ONLY' }, { name: 'GOLD MARGARITA (16oz.)', price: '11.00' },
+    { name: 'PITCHER GOLD MARGARITA (60oz.)', price: '29.50' }, { name: 'HALF PITCHER GOLD MARGARITA (32oz.)', price: '17.00' },
+    { name: 'TEXAS MARGARITA (16oz.)', price: '13.25' }, { name: 'PITCHER TEXAS MARGARITA (60oz.)', price: '36.75' },
+    { name: 'HALF PITCHER TEXAS MARGARITA (32oz.)', price: '21.00' }, { name: 'SMALL TEXAS MARGARITA', price: '9.75' },
     { name: 'JOSE CUERVO TEQUILA SHOTS (1oz.)', price: '7.00', description: 'GOLD, TRADICIONAL, 1800 REPOSADO' },
     { name: 'PALOMA', price: '11.00', description: '2OZ. OF TEQUILA WITH LIME JUICE, SALT & GRAPEFRUIT SODA' }
   ] },
   { title: 'Wines', items: [
-    { name: 'WHITE ZINFANDEL, CHARDONNAY', price: '6.00' }, 
-    { name: 'HOMEMADE SANGRIA (16oz.)', price: '7.75' }, 
-    { name: 'PITCHER SANGRIA (60oz.)', price: '21.25' }, 
-    { name: 'HALF PITCHER SANGRIA (32oz.)', price: '13.25' }
+    { name: 'WHITE ZINFANDEL, CHARDONNAY', price: '6.00' }, { name: 'HOMEMADE SANGRIA (16oz.)', price: '7.75' },
+    { name: 'PITCHER SANGRIA (60oz.)', price: '21.25' }, { name: 'HALF PITCHER SANGRIA (32oz.)', price: '13.25' }
   ] },
   { title: 'Soft Drinks', items: [
     { name: 'SOFT DRINKS', price: '3.25', description: 'COKE, CHERRY COKE, DIET COKE, MR. PIBB, SPRITE, LEMONADE, ICED TEA' },
-    { name: 'JARRITOS', price: '3.25', description: 'VARIETY OF FLAVORS' },
-    { name: 'MILK, COFFEE, GREEN TEA', price: '3.25' }, 
-    { name: 'SHIRLEY TEMPLE', price: '3.25' },  
-    { name: 'AGUAS NATURALES', price: '3.25', description: 'HORCHATA, JAMAICA, & TAMARINDO' },
-    { name: 'BOTTLED WATER', price: '2.00' },
-    { name: 'CAN SODA', price: '2.00', description: '' }
+    { name: 'JARRITOS', price: '3.25', description: 'VARIETY OF FLAVORS' }, { name: 'MILK, COFFEE, GREEN TEA', price: '3.25' },
+    { name: 'SHIRLEY TEMPLE', price: '3.25' }, { name: 'AGUAS NATURALES', price: '3.25', description: 'HORCHATA, JAMAICA, & TAMARINDO' },
+    { name: 'BOTTLED WATER', price: '2.00' }, { name: 'CAN SODA', price: '2.00', description: '' }
   ] }
 ];
 
-/* Render the centralized menu into El Torero's existing menu containers.
-   The HTML/CSS structure remains the site's existing structure; this file
-   only supplies the menu content and populates the existing .column elements. */
+/* Render the centralized menu into the existing desktop containers. Desktop
+   columns are intentionally arranged by menu flow rather than equal section
+   counts: food starts at the top, while dessert and beverages finish the menu. */
 (function () {
+  const DESKTOP_COLUMN_ORDER = [
+    [
+      'Appetizers',
+      'Soups & Salads',
+      'Lunch',
+      'A La Carte',
+      'El Torero Style Dinners',
+      'Combination Dinners',
+      'Dessert'
+    ],
+    [
+      'Lunch or Dinner Specialties',
+      'Side Orders',
+      'El Torero Special Orders',
+      "Child's Plate",
+      'Mexican Beer',
+      'Draft Beer',
+      'Mixed Drinks',
+      'Wines',
+      'Soft Drinks'
+    ]
+  ];
+
   function renderMenu() {
     const menuSection = document.querySelector('.menu-section');
     if (!menuSection || !Array.isArray(MENU)) return;
 
     const columns = Array.from(menuSection.querySelectorAll('.desktop-menu-column .column-middle > .column'));
-    if (!columns.length) return;
+    if (columns.length < 2) return;
+
+    const byTitle = new Map(MENU.map((section) => [section.title, section]));
 
     columns.forEach((column) => {
       Array.from(column.children).forEach((child) => {
@@ -297,42 +260,46 @@ const MENU = [
       });
     });
 
-    const chunkSize = Math.ceil(MENU.length / columns.length);
-    MENU.forEach((section, index) => {
-      const column = columns[Math.min(Math.floor(index / chunkSize), columns.length - 1)];
-      const heading = document.createElement('h2');
-      heading.className = 'menu-h2';
-      heading.textContent = section.title;
-      column.appendChild(heading);
+    DESKTOP_COLUMN_ORDER.forEach((sectionTitles, columnIndex) => {
+      const column = columns[columnIndex];
+      sectionTitles.forEach((title) => {
+        const section = byTitle.get(title);
+        if (!section) return;
 
-      if (section.note) {
-        const note = document.createElement('p');
-        note.className = 'menu-note';
-        note.textContent = section.note;
-        column.appendChild(note);
-      }
+        const heading = document.createElement('h2');
+        heading.className = 'menu-h2';
+        heading.textContent = section.title;
+        column.appendChild(heading);
 
-      const list = document.createElement('ul');
-      list.className = 'leaders';
-      section.items.forEach((item) => {
-        const li = document.createElement('li');
-        const name = document.createElement('span');
-        name.className = 'name';
-        name.textContent = item.name;
-        const price = document.createElement('span');
-        price.className = 'price';
-        price.textContent = item.price;
-        li.appendChild(name);
-        li.appendChild(price);
-        if (item.description) {
-          const desc = document.createElement('small');
-          desc.className = 'desc';
-          desc.textContent = item.description;
-          li.appendChild(desc);
+        if (section.note) {
+          const note = document.createElement('p');
+          note.className = 'menu-note';
+          note.textContent = section.note;
+          column.appendChild(note);
         }
-        list.appendChild(li);
+
+        const list = document.createElement('ul');
+        list.className = 'leaders';
+        section.items.forEach((item) => {
+          const li = document.createElement('li');
+          const name = document.createElement('span');
+          name.className = 'name';
+          name.textContent = item.name;
+          const price = document.createElement('span');
+          price.className = 'price';
+          price.textContent = item.price;
+          li.appendChild(name);
+          li.appendChild(price);
+          if (item.description) {
+            const desc = document.createElement('small');
+            desc.className = 'desc';
+            desc.textContent = item.description;
+            li.appendChild(desc);
+          }
+          list.appendChild(li);
+        });
+        column.appendChild(list);
       });
-      column.appendChild(list);
     });
 
     window.dispatchEvent(new CustomEvent('elToreroMenuRendered'));
