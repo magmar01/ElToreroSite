@@ -1,23 +1,18 @@
-/* Desktop menu layout — clean two-column presentation.
-   The deployment workflow groups the existing menu wrappers into two desktop
-   columns. Each side flows independently so a tall section on one side cannot
-   create a vertical gap on the other side. */
-
-/* Transparent grouping on smaller screens preserves the original mobile flow. */
-.desktop-menu-column {
-  display: contents;
-}
+/* Desktop menu source layout.
+   Desktop only: the mobile/tablet menu is left to responsive.css and the
+   existing mobile source rules. This file fixes the desktop menu at its
+   source instead of adding another override stylesheet. */
 
 @media screen and (min-width: 901px) {
-  html, body {
+  html,
+  body,
+  main {
     width: 100% !important;
     max-width: 100% !important;
+    min-width: 0 !important;
     overflow-x: hidden !important;
   }
 
-  /* Keep the desktop navigation and its fixed menu above the entire menu
-     section while the page scrolls. The old navigation z-index (10) allowed
-     menu headings/content to paint over it. */
   header,
   .header,
   nav {
@@ -29,25 +24,31 @@
     z-index: 100000 !important;
   }
 
-  /* The legacy close icon sits outside the menu and creates the small extra
-     white X beside the hamburger. The hamburger's own open-state X is drawn
-     by style.css and remains untouched. */
   #menu-close {
     display: none !important;
   }
 
+  /*
+   * Use the full browser width for the menu itself. The legacy stylesheet
+   * gives .menu-section an inline/fit-content layout, which can leave the
+   * desktop menu occupying only part of the available page. Full-bleed here
+   * removes that unused side of the page at the source.
+   */
   .menu-section {
     display: grid !important;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) !important;
-    grid-auto-rows: auto !important;
+    grid-template-rows: auto auto auto !important;
     align-items: start !important;
-    column-gap: 48px !important;
-    width: 100% !important;
+    column-gap: clamp(24px, 3vw, 48px) !important;
+    width: 100vw !important;
     max-width: none !important;
     min-width: 0 !important;
-    padding: 0 4vw 20px !important;
+    margin-left: calc(50% - 50vw) !important;
+    margin-right: 0 !important;
+    padding: 0 clamp(20px, 4vw, 64px) 24px !important;
     position: relative !important;
     overflow: visible !important;
+    box-sizing: border-box !important;
     z-index: 1 !important;
   }
 
@@ -55,10 +56,9 @@
     grid-column: 1 / -1 !important;
     grid-row: 1 !important;
     position: relative !important;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
+    inset: auto !important;
     width: 100% !important;
+    height: auto !important;
     margin: 0 !important;
     padding: 32px 0 0 !important;
     text-align: center !important;
@@ -70,15 +70,15 @@
     grid-column: 1 / -1 !important;
     grid-row: 2 !important;
     position: relative !important;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
+    inset: auto !important;
     width: min(450px, 70%) !important;
     height: 4px !important;
     margin: 12px auto 34px !important;
   }
 
-  /* The two desktop columns have independent vertical flow. */
+  /* The existing HTML has two desktop wrappers. Keep both at the top of the
+     menu and let each side flow independently so neither side creates a
+     large vertical gap on the other side. */
   .menu-section > .desktop-menu-column {
     display: flex !important;
     flex-direction: column !important;
@@ -86,10 +86,12 @@
     width: 100% !important;
     max-width: none !important;
     min-width: 0 !important;
+    height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
     position: relative !important;
     overflow: visible !important;
+    box-sizing: border-box !important;
   }
 
   .menu-section > .desktop-menu-column-left {
@@ -108,16 +110,12 @@
     width: 100% !important;
     max-width: none !important;
     min-width: 0 !important;
+    height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
     position: relative !important;
     overflow: visible !important;
     box-sizing: border-box !important;
-  }
-
-  .desktop-menu-column > .column-middle + .column-middle,
-  .desktop-menu-column > .column-right + .column-right {
-    margin-top: 0 !important;
   }
 
   .desktop-menu-column > .column-middle > .column,
@@ -127,10 +125,12 @@
     width: 100% !important;
     max-width: none !important;
     min-width: 0 !important;
+    height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
     position: relative !important;
     overflow: visible !important;
+    box-sizing: border-box !important;
   }
 
   .column h2,
@@ -140,6 +140,7 @@
     display: block !important;
     width: 100% !important;
     max-width: 100% !important;
+    height: auto !important;
     margin: 18px 0 20px !important;
     padding: 0 0 10px !important;
     text-align: center !important;
@@ -176,6 +177,7 @@
     column-rule: none !important;
     overflow: visible !important;
     list-style: none !important;
+    box-sizing: border-box !important;
   }
 
   ul.leaders > p,
@@ -278,6 +280,8 @@
   }
 }
 
+/* Laptop-width desktop: keep both menu areas usable without allowing the
+   legacy fixed widths to force overflow. */
 @media screen and (min-width: 901px) and (max-width: 1150px) {
   .menu-section {
     column-gap: 28px !important;
