@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>El Torero Duluth</title>
     <link href="https://fonts.googleapis.com/css?family=Cedarville+Cursive|Josefin+Sans|Kumar+One+Outline|Staatliches" rel="stylesheet" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv21j4cBzQYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous" />
     <link rel="stylesheet" href="style.css" type="text/css" />
     <link href="//db.onlinewebfonts.com/c/7b2e1f84b8737cbfc7cc58cffccfaaa9?family=ITC+Souvenir" rel="stylesheet" type="text/css" />
   </head>
@@ -61,5 +61,61 @@
       <p class="copyright">© 1985 El Torero Mexican Restaurant | All Rights Reserved</p>
     </footer>
     <script src="script.js?v=20260911-typo-refresh" defer></script>
+    <script>
+      /* Desktop only: after menu.js renders, preserve the original MENU order
+         but flow the complete menu through one balanced two-column container.
+         This removes the artificial height mismatch between two independent
+         columns without changing the menu's item/section order or mobile. */
+      (function () {
+        function balanceDesktopMenu() {
+          if (!window.matchMedia || !window.matchMedia('(min-width: 901px)').matches) return;
+
+          const menuSection = document.querySelector('.menu-section');
+          if (!menuSection || !Array.isArray(window.MENU)) return;
+
+          const columns = Array.from(menuSection.querySelectorAll('.desktop-menu-column .column-middle > .column'));
+          if (columns.length < 2) return;
+
+          const target = columns[0];
+          const sourceNodes = [];
+          columns.forEach((column) => {
+            Array.from(column.children).forEach((child) => {
+              if (child.matches('h2.menu-h2, ul.leaders, ul.drinks, .menu-note')) sourceNodes.push(child);
+            });
+          });
+
+          const groups = new Map();
+          let current = null;
+          sourceNodes.forEach((node) => {
+            if (node.matches('h2.menu-h2')) {
+              current = { title: node.textContent.trim(), nodes: [node] };
+              groups.set(current.title, current);
+            } else if (current) {
+              current.nodes.push(node);
+            }
+          });
+
+          target.innerHTML = '';
+          columns[1].innerHTML = '';
+
+          window.MENU.forEach((section) => {
+            const group = groups.get(section.title);
+            if (!group) return;
+            const wrapper = document.createElement('div');
+            wrapper.className = 'desktop-menu-section-group';
+            group.nodes.forEach((node) => wrapper.appendChild(node));
+            target.appendChild(wrapper);
+          });
+
+          const leftWrapper = menuSection.querySelector('.desktop-menu-column-left');
+          const rightWrapper = menuSection.querySelector('.desktop-menu-column-right');
+          if (leftWrapper) leftWrapper.classList.add('desktop-menu-flow');
+          if (rightWrapper) rightWrapper.classList.add('desktop-menu-flow-disabled');
+        }
+
+        window.addEventListener('elToreroMenuRendered', balanceDesktopMenu, { once: true });
+        if (document.readyState !== 'loading') balanceDesktopMenu();
+      })();
+    </script>
   </body>
 </html>
