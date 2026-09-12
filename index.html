@@ -63,8 +63,9 @@
     <script src="script.js?v=20260911-typo-refresh" defer></script>
     <script>
       /* Desktop only: use the real rendered height of each menu section to
-         choose the cleanest two-column split. This avoids CSS multicolumn
-         balancing and keeps every section intact. Mobile/tablet is untouched. */
+         choose the cleanest two-column split. Draft Beer is intentionally
+         moved earlier in the desktop flow to test it on the left side.
+         Mobile/tablet is untouched. */
       (function () {
         const DESKTOP_FLOW_ORDER = [
           'Appetizers',
@@ -73,13 +74,13 @@
           'Lunch or Dinner Specialties',
           'A La Carte',
           'Side Orders',
+          'Draft Beer',
           'El Torero Special Orders',
           'El Torero Style Dinners',
           'Combination Dinners',
           "Child's Plate",
           'Dessert',
           'Mexican Beer',
-          'Draft Beer',
           'Mixed Drinks',
           'Wines',
           'Soft Drinks'
@@ -130,8 +131,6 @@
             if (group) wrappers.push(makeGroup(group));
           });
 
-          /* Build the complete sequence in the left column first so the
-             browser gives us the actual wrapped/text-rendered heights. */
           wrappers.forEach((wrapper) => left.appendChild(wrapper));
 
           requestAnimationFrame(() => {
